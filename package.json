@@ -16,6 +16,7 @@
     "pg": "^7.3.0"
   },
   "devDependencies": {
+    "dotenv": "^4.0.0",
     "eslint": "^4.7.2",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-plugin-import": "^2.7.0",

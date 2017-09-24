@@ -11,9 +11,11 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.1",
+    "cheerio": "^1.0.0-rc.2",
     "express": "^4.15.4",
     "knex": "^0.13.0",
-    "pg": "^7.3.0"
+    "pg": "^7.3.0",
+    "request": "^2.82.0"
   },
   "devDependencies": {
     "dotenv": "^4.0.0",

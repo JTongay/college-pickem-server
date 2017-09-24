@@ -3,8 +3,6 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 const environment = process.env.NODE_ENV || 'development';
-const config = require('./knexfile')[environment];
-const knex = require('knex')(config);
 require('dotenv').config();
 
 // Middleware

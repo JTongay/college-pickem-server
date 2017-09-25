@@ -8,15 +8,22 @@ require('dotenv').config();
 // Middleware
 const bodyParser = require('body-parser');
 
+// Routes
+const football = require('./routes/football')
+
 // Use Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.user((req, res, next) => {
+app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
 
+// Use Routes
+app.use('/api', football);
+
+// Start the server
 app.listen(port, () => {
   // eslint-disable no-alert, no-console
   console.log('Hello from port ', port);

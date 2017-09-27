@@ -16,7 +16,8 @@
     "express": "^4.15.4",
     "knex": "^0.13.0",
     "pg": "^7.3.0",
-    "request": "^2.82.0"
+    "request": "^2.82.0",
+    "tinyreq": "^3.2.6"
   },
   "devDependencies": {
     "dotenv": "^4.0.0",

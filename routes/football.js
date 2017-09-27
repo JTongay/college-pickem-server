@@ -3,31 +3,54 @@ const express = require('express');
 const router = express.Router({
   mergeParams: true
 });
-const request = require('request');
+const request = require('tinyreq');
 const cheerio = require('cheerio');
 
-router.get('/football', (req, res) => {
-  request('https://github.com/', (error, response, html) => {
-    console.log('booyah');
-    if (!error) {
-      // const $ = cheerio.load(html, {
-      //   normalizeWhitespace: false
-      // });
-      let $ = cheerio.load("<h2 class='title'>Hello world</h2>");
-      console.log($("h2.title").text());
-      let lists = [];
-      // console.log($('body').children().text());
-      // console.log($('span[class="team-name"]', '.list-matchup-row-team').toArray());
-      // console.log($('span[class=\'team-name away\']', this).length);
-      // $('.team-name').each((i, ele) => {
-      //   lists[i] = $(this).text();
-      //   console.log($(this).text());
-      // });
-      // console.log(lists)
-      // console.log($("h2.title").text());
-      // console.log($('.shelf-title', '.shelf-content').text());
-      res.json({ yo: lists });
+const getCollegeSchedule = (url, data, cb) => {
+  request(url, (err, body) => {
+    if (err) {
+      return cb(err);
     }
+    const $ = cheerio.load(body);
+    const pageData = {};
+
+    Object.keys(data).forEach((k) => {
+      pageData[k] = $(data[k]).text();
+    });
+
+    return cb(null, pageData);
+  });
+};
+
+router.get('/cb', (req, res) => {
+  request('http://www.foxsports.com/college-football/schedule?season=2017&seasonType=1&week=5&group=0', (err, body) => {
+    if (err) {
+      res.json(err);
+    }
+    let teamName;
+    const $ = cheerio.load(body);
+    const homeTeams = $('.wisbb_fullTeamStacked').filter((i, ele) =>{
+      const data = $(this);
+      console.log(data.children().first().children().text())
+      teamName = data.children().first().children().first().next().text();
+    });
+    res.json({
+      home: teamName
+    });
+  });
+});
+
+
+router.get('/football', (req, res) => {
+  const teams = {
+    awayTeams: '.wisbb_firstTeam a',
+    homeTeams: '.wisbb_secondTeam a'
+  };
+
+  const url = 'http://www.foxsports.com/college-football/schedule?season=2017&seasonType=1&week=5&group=0';
+
+  getCollegeSchedule(url, teams, (err, data) => {
+    res.json(data)
   });
 });
 

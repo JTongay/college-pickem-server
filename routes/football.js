@@ -31,6 +31,7 @@ router.get('/cb', (req, res) => {
     const $ = cheerio.load(body);
     const homeTeams = $('.wisbb_fullTeamStacked').filter((i, ele) =>{
       const data = $(this);
+      console.log(data)
       console.log(data.children().first().children().text())
       teamName = data.children().first().children().first().next().text();
     });

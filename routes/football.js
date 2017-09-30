@@ -23,8 +23,11 @@ const getCollegeSchedule = (url, data, cb) => {
   });
 };
 
-router.get('/cb', (req, res) => {
-  request('http://www.foxsports.com/college-football/schedule?season=2017&seasonType=1&week=5&group=0', (err, body) => {
+router.get('/ncaa/:year/:week', (req, res) => {
+  const reqWeek = req.params.week;
+  const reqYear = req.params.year;
+
+  request(`http://www.foxsports.com/college-football/schedule?season=${reqYear}&seasonType=1&week=${reqWeek}&group=0`, (err, body) => {
     if (err) {
       res.json(err);
     }
@@ -47,7 +50,7 @@ router.get('/cb', (req, res) => {
       schedule[i] = game;
     });
     res.json({
-      home: schedule
+      schedule
     });
   });
 });

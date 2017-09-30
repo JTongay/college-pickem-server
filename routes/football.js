@@ -31,7 +31,10 @@ router.get('/ncaa/:year/:week', (req, res) => {
     if (err) {
       res.json(err);
     }
-    const $ = cheerio.load(body);
+    const $ = cheerio.load(body, {
+      normalizeWhitespace: true,
+      xmlMode: true
+    });
     const teams = [];
     // Get the text of every span inside of each a tag in the schedule table
     $('.wisbb_scheduleTable a').each((i, table) => {
@@ -42,13 +45,22 @@ router.get('/ncaa/:year/:week', (req, res) => {
     const teamsFiltered = teams.filter(str => str !== '');
     // loop through the array and create object every 3 elements
     const schedule = _.chunk(teamsFiltered, 3);
+    // create an object is awayTeam, location, and homeTeam
+    // TODO create score property if the game is over? Maybe have it look for the word 'final'
     schedule.forEach((match, i) => {
       const game = {};
-      game.awayTeam = match[0];
+      const splitAway = match[0].split(' ').filter(el => el !== '');
+      const splitHome = match[2].split(' ').filter(el => el !== '');
+      console.log(splitAway);
+      console.log(splitHome);
+      game.away = {};
+      game.home = {};
+      game.away.team = splitAway;
       game.location = match[1];
-      game.homeTeam = match[2];
+      game.home.team = splitHome;
       schedule[i] = game;
     });
+    // Send it out
     res.json({
       schedule
     });

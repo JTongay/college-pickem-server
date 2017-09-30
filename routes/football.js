@@ -51,13 +51,17 @@ router.get('/ncaa/:year/:week', (req, res) => {
       const game = {};
       const splitAway = match[0].split(' ').filter(el => el !== '');
       const splitHome = match[2].split(' ').filter(el => el !== '');
-      console.log(splitAway);
-      console.log(splitHome);
       game.away = {};
       game.home = {};
-      game.away.team = splitAway;
+      // Rank property
+      game.away.rank = +splitAway[0] ? +splitAway[0] : 'unranked';
+      game.home.rank = +splitHome[0] ? +splitHome[0] : 'unranked';
+
+      // Abbrev property
+
+      game.away.team = match[0];
       game.location = match[1];
-      game.home.team = splitHome;
+      game.home.team = match[2];
       schedule[i] = game;
     });
     // Send it out

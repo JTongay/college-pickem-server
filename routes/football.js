@@ -58,6 +58,21 @@ router.get('/ncaa/:year/:week', (req, res) => {
       game.home.rank = +splitHome[0] ? +splitHome[0] : 'unranked';
 
       // Abbrev property
+      game.away.abbrev = (game.away.rank === 'unranked') ? splitAway[0] : splitAway[1];
+      game.home.abbrev = (game.home.rank === 'unranked') ? splitHome[0] : splitHome[1];
+
+      // Record property
+      game.away.record = splitAway[splitAway.length - 1].match(/\(([^)]+)\)/)[1];
+      game.home.record = splitHome[splitHome.length - 1].match(/\(([^)]+)\)/)[1];
+
+      // Team Name property
+      game.away.team_name = splitAway[splitAway.length - 1].replace(/[^a-zA-Z\s!?]+/g, '');
+      game.home.team_name = splitHome[splitHome.length - 1].replace(/[^a-zA-Z\s!?]+/g, '');
+
+      // Team Location property
+      game.away.team_location = (game.away.rank === 'unranked') ? splitAway.slice(1, splitAway.length - 1) : splitAway.slice(2, splitAway.length - 1);
+      game.home.team_location = (game.home.rank === 'unranked') ? splitHome.slice(1, splitHome.length - 1) : splitHome.slice(2, splitHome.length - 1);
+
 
       game.away.team = match[0];
       game.location = match[1];

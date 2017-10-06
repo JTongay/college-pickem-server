@@ -59,7 +59,7 @@ router.get('/ncaa/:year/:week', (req, res) => {
       const game = {};
       const splitAway = match[0].split(' ').filter(el => el !== '');
       const splitHome = match[2].split(' ').filter(el => el !== '');
-      const splitLocation = match[1].split(' ');
+      const splitTime = match[1].split(' ');
       game.away = {};
       game.home = {};
       // Rank property
@@ -82,11 +82,21 @@ router.get('/ncaa/:year/:week', (req, res) => {
       game.away.team_location = (game.away.rank === 'unranked') ? splitAway.slice(1, splitAway.length - 1) : splitAway.slice(2, splitAway.length - 1);
       game.home.team_location = (game.home.rank === 'unranked') ? splitHome.slice(1, splitHome.length - 1) : splitHome.slice(2, splitHome.length - 1);
 
-      // Date/Time/Location property
-      game.location = splitLocation;
+      if (splitTime[0].includes('FINAL')) {
+        const awayScore = +splitTime[0].split('').map(Number).filter((el => !isNaN(el))).join('');
+        const homeScore = splitTime[2]
+        game.away.score = awayScore;
+        game.home.score = homeScore;
+        game.time = 'final';
+      } else {
+        // Date/Time/Location property
+        game.time = splitTime;
+      }
+
       // Stadium Property
       game.stadium = stadiumsFiltered[i];
       // Assign game object to each row
+      game.doIt = match[1];
       schedule[i] = game;
     });
 

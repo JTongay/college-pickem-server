@@ -36,13 +36,21 @@ router.get('/ncaa/:year/:week', (req, res) => {
       xmlMode: true
     });
     const teams = [];
+    const stadiums = [];
     // Get the text of every span inside of each a tag in the schedule table
     $('.wisbb_scheduleTable a').each((i, table) => {
       const team = $(table).find('span').text();
       teams.push(team.trim());
     });
+
+    $('.wisbb_scheduleTable td').each((i, table) => {
+      const stadium = $(table).find('div.wisbb_location').text();
+      stadiums.push(stadium.trim());
+    });
+
     // filter out empty strings
     const teamsFiltered = teams.filter(str => str !== '');
+    const stadiumsFiltered = stadiums.filter(str => str !== '');
     // loop through the array and create object every 3 elements
     const schedule = _.chunk(teamsFiltered, 3);
     // create an object is awayTeam, location, and homeTeam
@@ -51,6 +59,7 @@ router.get('/ncaa/:year/:week', (req, res) => {
       const game = {};
       const splitAway = match[0].split(' ').filter(el => el !== '');
       const splitHome = match[2].split(' ').filter(el => el !== '');
+      const splitLocation = match[1].split(' ');
       game.away = {};
       game.home = {};
       // Rank property
@@ -73,12 +82,14 @@ router.get('/ncaa/:year/:week', (req, res) => {
       game.away.team_location = (game.away.rank === 'unranked') ? splitAway.slice(1, splitAway.length - 1) : splitAway.slice(2, splitAway.length - 1);
       game.home.team_location = (game.home.rank === 'unranked') ? splitHome.slice(1, splitHome.length - 1) : splitHome.slice(2, splitHome.length - 1);
 
-
-      game.away.team = match[0];
-      game.location = match[1];
-      game.home.team = match[2];
+      // Date/Time/Location property
+      game.location = splitLocation;
+      // Stadium Property
+      game.stadium = stadiumsFiltered[i];
+      // Assign game object to each row
       schedule[i] = game;
     });
+
     // Send it out
     res.json({
       schedule

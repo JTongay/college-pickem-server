@@ -11,9 +11,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "body-parser": "^1.18.1",
     "cheerio": "^1.0.0-rc.2",
     "express": "^4.15.4",
+    "jsonwebtoken": "^8.0.1",
     "knex": "^0.13.0",
     "lodash": "^4.17.4",
     "pg": "^7.3.0",

@@ -84,7 +84,8 @@ router.get('/ncaa/:year/:week', (req, res) => {
 
       if (splitTime[0].includes('FINAL')) {
         const awayScore = +splitTime[0].split('').map(Number).filter((el => !isNaN(el))).join('');
-        const homeScore = splitTime[2]
+        const homeScoreFormat = splitTime[2].replace(awayScore.toString(), '');
+        const homeScore = +homeScoreFormat.substr(0, homeScoreFormat.length / 2);
         game.away.score = awayScore;
         game.home.score = homeScore;
         game.time = 'final';
@@ -96,7 +97,6 @@ router.get('/ncaa/:year/:week', (req, res) => {
       // Stadium Property
       game.stadium = stadiumsFiltered[i];
       // Assign game object to each row
-      game.doIt = match[1];
       schedule[i] = game;
     });
 

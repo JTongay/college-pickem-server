@@ -35,12 +35,14 @@ const login = (user, pass) => {
     });
   });
 };
-
+// Sign/Check Tokens
 const signToken = id => jwt.sign({ id }, process.env.JWT_SECRET);
+const checkToken = token => jwt.verify(token, process.env.JWT_SECRET);
 
 const Session = {
   login,
-  signToken
+  signToken,
+  checkToken
 };
 
 module.exports = Session;

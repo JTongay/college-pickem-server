@@ -9,7 +9,8 @@ require('dotenv').config();
 const bodyParser = require('body-parser');
 
 // Routes
-const football = require('./routes/football')
+const football = require('./routes/football');
+const users = require('./routes/users');
 
 // Use Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -22,6 +23,7 @@ app.use((req, res, next) => {
 
 // Use Routes
 app.use('/api', football);
+app.user('/api/users', users);
 
 // Start the server
 app.listen(port, () => {

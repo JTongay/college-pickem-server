@@ -23,7 +23,7 @@ app.use((req, res, next) => {
 
 // Use Routes
 app.use('/api', football);
-app.user('/api/users', users);
+app.use('/api/users', users);
 
 // Start the server
 app.listen(port, () => {

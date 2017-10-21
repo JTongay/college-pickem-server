@@ -127,17 +127,17 @@ module.exports = router;
 
 //matchups
 
-| id | week | match | Hometeam | Awayteam | homerank  |  awayrank | place  |
-| 1  |  5   | 1     | booty    | me       | 20        |           | 'away' |
-| 2  |  5   | 2     | Warrior  | you      | null      |           | 'home' |
-| 3  |  5   | 3     | wtf      | pee      | null      |           | 'away' |
-| 4  |  5   | 4     | doIt     | poop     | 23        |           | 'home' |
+// | id | week | match | Hometeam | Awayteam | homerank  |  awayrank | place  |
+// | 1  |  5   | 1     | booty    | me       | 20        |           | 'away' |
+// | 2  |  5   | 2     | Warrior  | you      | null      |           | 'home' |
+// | 3  |  5   | 3     | wtf      | pee      | null      |           | 'away' |
+// | 4  |  5   | 4     | doIt     | poop     | 23        |           | 'home' |
 
 // teams tables
 
 
 // users_picks
 
-| id | user_id | match_id | team_id |
-| 1  |   2     |    2     |   1     |
-| 2  |   2     |    3     |   3     |
+// | id | user_id | match_id | team_id |
+// | 1  |   2     |    2     |   1     |
+// | 2  |   2     |    3     |   3     |

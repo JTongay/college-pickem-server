@@ -17,4 +17,18 @@ router.get('/', (req, res) => {
   res.json(users);
 });
 
+router.post('/new', (req, res) => {
+  const requestBody = {
+    userName: req.body.userName,
+    password: req.body.password,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email
+  };
+  console.log(requestBody);
+  const createdUser = User.createUser(requestBody);
+  console.log(createdUser);
+  res.json(createdUser);
+});
+
 module.exports = router;

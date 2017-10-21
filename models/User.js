@@ -13,28 +13,28 @@ const getAllUsers = () => {
   knex('users').then(user => user).catch(err => err);
 };
 
-const createUser = (firstName, lastName, username, password, email) => {
-  knex('users').where('username', username).first().then((result) => {
+const createUser = (request) => {
+  knex('users').where('username', request.userName).first().then((result) => {
     // go ahead and create the user if nothing returned
     if (!result) {
-      const hashPass = bcrypt.hashSync(password, 12);
+      const hashPass = bcrypt.hashSync(request.password, 12);
       knex('users').insert({
-        first_name: firstName,
-        last_name: lastName,
-        username,
+        first_name: request.firstName,
+        last_name: request.lastName,
+        username: request.userName,
         password: hashPass,
-        email
-      }).returning('*')
-        .then((user) => {
-          // sign a token and send it to the FE
-          const token = Session.signToken(user.id);
-          return {
-            status: 200,
-            message: 'success',
-            response: user,
-            token
-          };
-        })
+        email: request.email
+      }).then((user) => {
+        console.log(user, 'getting in here');
+        // sign a token and send it to the FE
+        const token = Session.signToken(user.id);
+        return {
+          status: 200,
+          message: 'success',
+          response: user,
+          token
+        };
+      })
         .catch(err => ({
           // catch an error if it happens. Maybe a different status code?
           status: 404,

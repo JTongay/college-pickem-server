@@ -6,43 +6,38 @@ const supertest = require('supertest');
 
 const request = supertest.agent(app);
 const knex = require('../db/conf');
+const bcrypt = require('bcrypt');
 
-// beforeEach((done) => {
-//   const joey = {
-//     username: 'jtongay',
-//     first_name: 'joey',
-//     last_name: 'tongay',
-//     password: 'password',
-//     email: 'jtongay@netspend.com'
-//   };
-//   knex('users').insert(joey).then(() => {
-//     done();
-//   });
-// });
-afterEach((done) => {
+const hashedPassword = bcrypt.hashSync('password', 12);
+
+before((done) => {
+  const joey = {
+    username: 'jtongay',
+    first_name: 'joey',
+    last_name: 'tongay',
+    password: hashedPassword,
+    email: 'jtongay@netspend.com'
+  };
+  knex('users').insert(joey).then(() => {
+    done();
+  });
+});
+after((done) => {
   console.log('truncating users');
-  knex.raw('TRUNCATE TABLE users RESTART IDENTITY');
-  done();
+  knex.raw('truncate table users RESTART IDENTITY;').then(() => {
+    done();
+  });
 });
 describe('Booyah test', () => {
   it('should return me', (done) => {
-    const joey = {
-      username: 'jtongay',
-      first_name: 'joey',
-      last_name: 'tongay',
-      password: 'password',
-      email: 'jtongay@netspend.com'
-    };
-    knex('users').insert(joey).then(() => {});
     request.get('/api/users/me')
       .expect(200)
       .end((err, res) => {
         if (err) {
           return done(err);
         }
-        console.log(res.body, 'body in test');
-        expect(res.body).to.exist;
         expect(res.body).to.have.property('username');
+        expect(res.status).to.equal(200);
         return done();
       });
   });
@@ -67,8 +62,53 @@ describe('Users', () => {
           if (err) {
             return done(err);
           }
-          console.log(res.body);
-          expect(res.body).to.exist;
+          expect(res.body.status).to.equal(200);
+          expect(res.body.message).to.equal('success');
+          expect(res.body).to.have.property('token');
+          return done();
+        });
+    });
+    it('should not create a new user if the username already exists', (done) => {
+      const sampleRequest = {
+        userName: 'jtongay',
+        firstName: 'joey',
+        lastName: 'tongay',
+        password: 'password',
+        email: 'someEmail@netspend.com'
+      };
+      request.post('/api/users/new')
+        .send(sampleRequest)
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+          expect(res.body.status).to.equal(404);
+          expect(res.body.message).to.equal('username or email already exists');
+          expect(res.body.token).to.equal(null);
+          return done();
+        });
+    });
+    it('should not create a new user if the email already exists', (done) => {
+      const sampleRequest = {
+        userName: 'someUsername',
+        firstName: 'joey',
+        lastName: 'tongay',
+        password: 'password',
+        email: 'jtongay@netspend.com'
+      };
+      request.post('/api/users/new')
+        .send(sampleRequest)
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+          expect(res.body.status).to.equal(404);
+          expect(res.body.message).to.equal('username or email already exists');
+          expect(res.body.token).to.equal(null);
           return done();
         });
     });

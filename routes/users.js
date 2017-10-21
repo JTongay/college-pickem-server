@@ -36,7 +36,7 @@ router.post('/new', (req, res) => {
     lastName: req.body.lastName,
     email: req.body.email
   };
-  knex('users').where('username', request.userName).first().then((result) => {
+  knex('users').where('username', request.userName).orWhere('email', request.email).first().then((result) => {
     // go ahead and create the user if nothing returned
     if (!result) {
       const hashPass = bcrypt.hashSync(request.password, 12);
@@ -46,16 +46,17 @@ router.post('/new', (req, res) => {
         username: request.userName,
         password: hashPass,
         email: request.email
-      }).then((user) => {
-        // sign a token and send it to the FE
-        const token = Session.signToken(user.id);
-        res.json({
-          status: 200,
-          message: 'success',
-          response: user,
-          token
-        });
-      })
+      }).returning('*')
+        .then((user) => {
+          // sign a token and send it to the FE
+          const token = Session.signToken(user.id);
+          res.json({
+            status: 200,
+            message: 'success',
+            response: user,
+            token
+          });
+        })
         .catch((err) => {
           // catch an error if it happens. Maybe a different status code?
           res.json({
@@ -69,7 +70,7 @@ router.post('/new', (req, res) => {
       // throw an error if the username already exists
       res.json({
         status: 404,
-        message: 'username already exists',
+        message: 'username or email already exists',
         response: 'error',
         token: null
       });

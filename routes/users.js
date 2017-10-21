@@ -18,9 +18,14 @@ router.get('/me', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-  const id = req.body.id;
-  const user = User.getUser(id);
-  res.json(user);
+  const id = req.params.id;
+  knex('users').where('id', id).first().then((user) => {
+    res.status(200).json({
+      status: 200,
+      response: user,
+      message: 'success'
+    });
+  });
 });
 
 router.get('/', (req, res) => {

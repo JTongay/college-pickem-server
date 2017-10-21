@@ -201,4 +201,19 @@ describe('Users', () => {
         });
     });
   });
+  describe('GET /:id', () => {
+    it('Grabs a user with valid ID', (done) => {
+      request.get('/api/users/1')
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+          expect(res.body.status).to.equal(200);
+          expect(res.body.response).to.have.property('username');
+          return done();
+        });
+    });
+  });
 });

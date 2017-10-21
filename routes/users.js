@@ -36,6 +36,15 @@ router.post('/new', (req, res) => {
     lastName: req.body.lastName,
     email: req.body.email
   };
+  if (!request.password || !request.firstName || !request.lastName) {
+    res.status(404).json({
+      status: 404,
+      message: 'missing required field',
+      response: 'error',
+      token: null
+    });
+    return;
+  }
   knex('users').where('username', request.userName).orWhere('email', request.email).first().then((result) => {
     // go ahead and create the user if nothing returned
     if (!result) {

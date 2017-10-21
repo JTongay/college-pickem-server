@@ -112,5 +112,93 @@ describe('Users', () => {
           return done();
         });
     });
+    it('returns a server error with a null password', (done) => {
+      const sampleRequest = {
+        userName: 'someUsername',
+        firstName: 'joey',
+        lastName: 'tongay',
+        password: null,
+        email: 'someEmail@netspend.com'
+      };
+      request.post('/api/users/new')
+        .send(sampleRequest)
+        .expect(404)
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+          expect(res.body.status).to.equal(404);
+          expect(res.body.message).to.equal('missing required field');
+          expect(res.body.response).to.equal('error');
+          return done(err);
+        });
+    });
+    it('returns a server error with a null first name', (done) => {
+      const sampleRequest = {
+        userName: 'someUsername',
+        firstName: null,
+        lastName: 'tongay',
+        password: 'password',
+        email: 'someEmail@netspend.com'
+      };
+      request.post('/api/users/new')
+        .send(sampleRequest)
+        .expect(404)
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+          expect(res.body.status).to.equal(404);
+          expect(res.body.message).to.equal('missing required field');
+          expect(res.body.response).to.equal('error');
+          return done(err);
+        });
+    });
+    it('returns a server error with a null last name', (done) => {
+      const sampleRequest = {
+        userName: 'someUsername',
+        firstName: 'joey',
+        lastName: null,
+        password: 'password',
+        email: 'someEmail@netspend.com'
+      };
+      request.post('/api/users/new')
+        .send(sampleRequest)
+        .expect(404)
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+          expect(res.body.status).to.equal(404);
+          expect(res.body.message).to.equal('missing required field');
+          expect(res.body.response).to.equal('error');
+          return done(err);
+        });
+    });
+    it('returns a server error with a null first and last name', (done) => {
+      const sampleRequest = {
+        userName: 'someUsername',
+        firstName: null,
+        lastName: null,
+        password: 'password',
+        email: 'someEmail@netspend.com'
+      };
+      request.post('/api/users/new')
+        .send(sampleRequest)
+        .expect(404)
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+          expect(res.body.status).to.equal(404);
+          expect(res.body.message).to.equal('missing required field');
+          expect(res.body.response).to.equal('error');
+          return done(err);
+        });
+    });
   });
 });

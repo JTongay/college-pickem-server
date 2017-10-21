@@ -5,6 +5,17 @@ const router = express.Router({
 });
 // const Session = require('../models/Session');
 const User = require('../models/User');
+const Session = require('../models/Session');
+const knex = require('../db/conf');
+const bcrypt = require('bcrypt');
+
+router.get('/me', (req, res) => {
+  // const me = User.getJoey();
+  // res.json(me);
+  knex('users').where('username', 'jtongay').first().then((user) => {
+    res.json(user);
+  });
+});
 
 router.get('/:id', (req, res) => {
   const id = req.body.id;
@@ -18,17 +29,52 @@ router.get('/', (req, res) => {
 });
 
 router.post('/new', (req, res) => {
-  const requestBody = {
+  const request = {
     userName: req.body.userName,
     password: req.body.password,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email
   };
-  console.log(requestBody);
-  const createdUser = User.createUser(requestBody);
-  console.log(createdUser);
-  res.json(createdUser);
+  knex('users').where('username', request.userName).first().then((result) => {
+    // go ahead and create the user if nothing returned
+    if (!result) {
+      const hashPass = bcrypt.hashSync(request.password, 12);
+      knex('users').insert({
+        first_name: request.firstName,
+        last_name: request.lastName,
+        username: request.userName,
+        password: hashPass,
+        email: request.email
+      }).then((user) => {
+        // sign a token and send it to the FE
+        const token = Session.signToken(user.id);
+        res.json({
+          status: 200,
+          message: 'success',
+          response: user,
+          token
+        });
+      })
+        .catch((err) => {
+          // catch an error if it happens. Maybe a different status code?
+          res.json({
+            status: 404,
+            message: 'failure',
+            response: err,
+            token: null
+          });
+        });
+    } else {
+      // throw an error if the username already exists
+      res.json({
+        status: 404,
+        message: 'username already exists',
+        response: 'error',
+        token: null
+      });
+    }
+  });
 });
 
 module.exports = router;

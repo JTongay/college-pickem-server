@@ -65,6 +65,38 @@ const editUser = (id, username, password) => {
     .then(user => user);
 };
 
+const createTestUser = (request) => {
+  let test;
+  knex('users').where('username', request.userName).first().then((user) => {
+    console.log(user);
+    if (!user) {
+      const hashPass = bcrypt.hashSync(request.password, 12);
+      knex('users')
+        .returning('*')
+        .insert({
+          first_name: request.firstName,
+          last_name: request.lastName,
+          username: request.userName,
+          password: hashPass,
+          email: request.email
+        })
+        .then((createdUser) => {
+          console.log(createUser, 'createdUser');
+          test = createdUser;
+          return test;
+        });
+    }
+  });
+  return test;
+};
+
+const getJoey = () => {
+  knex('users').where('username', 'jtongay').first().then((user) => {
+    // console.log(user);
+    return user;
+  });
+};
+
 // const deleteUser = (id) => {
 //   knex('users').where('id', id).first().del()
 // }
@@ -73,7 +105,9 @@ const User = {
   getUser,
   getAllUsers,
   createUser,
-  editUser
+  editUser,
+  createTestUser,
+  getJoey
 };
 
 module.exports = User;

@@ -11,7 +11,7 @@ const bodyParser = require('body-parser');
 // Routes
 const football = require('./routes/football');
 const users = require('./routes/users');
-const session = require('./routes/session');
+const session = require('./routes/sessions');
 
 // Use Middleware
 app.use(bodyParser.urlencoded({ extended: false }));

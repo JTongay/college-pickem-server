@@ -11,6 +11,7 @@ const bodyParser = require('body-parser');
 // Routes
 const football = require('./routes/football');
 const users = require('./routes/users');
+const session = require('./routes/session');
 
 // Use Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -24,6 +25,7 @@ app.use((req, res, next) => {
 // Use Routes
 app.use('/api', football);
 app.use('/api/users', users);
+app.use('/api/session', session);
 
 // Start the server
 app.listen(port, () => {

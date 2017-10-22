@@ -202,7 +202,7 @@ describe('Users', () => {
     });
   });
   describe('GET /:id', () => {
-    it('Grabs a user with valid ID', (done) => {
+    it('grabs a user with valid ID', (done) => {
       request.get('/api/users/1')
         .expect(200)
         .expect('Content-Type', /json/)
@@ -212,6 +212,40 @@ describe('Users', () => {
           }
           expect(res.body.status).to.equal(200);
           expect(res.body.response).to.have.property('username');
+          expect(res.body.response).to.have.property('first_name');
+          expect(res.body.response).to.have.property('last_name');
+          return done();
+        });
+    });
+    it('does not grab a user with an invalid ID', (done) => {
+      request.get('/api/users/1344')
+        .expect(404)
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+          expect(res.body.status).to.equal(404);
+          expect(res.body.response).to.not.have.property('username');
+          expect(res.body.response).to.not.have.property('first_name');
+          expect(res.body.response).to.not.have.property('last_name');
+          expect(res.body.response).to.equal('no user found with id: 1344');
+          return done();
+        });
+    });
+  });
+  describe('Get /', () => {
+    it('should grab a list of all users', (done) => {
+      request.get('/api/users')
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+          expect(res.body.status).to.equal(200);
+          expect(res.body.response).to.be.an('array');
+          expect(res.body.response[0].username).to.equal('jtongay');
           return done();
         });
     });

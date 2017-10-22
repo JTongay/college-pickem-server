@@ -4,7 +4,7 @@ const router = express.Router({
   mergeParams: true
 });
 // const Session = require('../models/Session');
-const User = require('../models/User');
+// const User = require('../models/User');
 const Session = require('../models/Session');
 const knex = require('../db/conf');
 const bcrypt = require('bcrypt');
@@ -20,17 +20,30 @@ router.get('/me', (req, res) => {
 router.get('/:id', (req, res) => {
   const id = req.params.id;
   knex('users').where('id', id).first().then((user) => {
-    res.status(200).json({
-      status: 200,
-      response: user,
-      message: 'success'
-    });
+    if (!user) {
+      res.status(404).json({
+        status: 404,
+        response: `no user found with id: ${id}`,
+        message: 'error'
+      });
+    } else {
+      res.status(200).json({
+        status: 200,
+        response: user,
+        message: 'success'
+      });
+    }
   });
 });
 
 router.get('/', (req, res) => {
-  const users = User.getAllUsers();
-  res.json(users);
+  knex('users').then((users) => {
+    res.status(200).json({
+      response: users,
+      status: 200,
+      message: 'success'
+    });
+  });
 });
 
 router.post('/new', (req, res) => {

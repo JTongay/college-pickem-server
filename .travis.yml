@@ -3,6 +3,8 @@ node_js:
   - 7
 env:
   NODE_ENV = test
+scripts:
+  npm test  
 deploy:
   provider: heroku
   api_key:

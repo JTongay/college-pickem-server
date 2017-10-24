@@ -34,11 +34,11 @@ describe('Booyah test', () => {
       .expect(200)
       .end((err, res) => {
         if (err) {
-          return done(err);
+          done(err);
         }
         expect(res.body).to.have.property('username');
         expect(res.status).to.equal(200);
-        return done();
+        done();
       });
   });
 });
@@ -60,12 +60,12 @@ describe('Users', () => {
         .expect('Content-Type', /json/)
         .end((err, res) => {
           if (err) {
-            return done(err);
+            done(err);
           }
           expect(res.body.status).to.equal(200);
           expect(res.body.message).to.equal('success');
           expect(res.body).to.have.property('token');
-          return done();
+          done();
         });
     });
     it('should not create a new user if the username already exists', (done) => {
@@ -82,12 +82,12 @@ describe('Users', () => {
         .expect('Content-Type', /json/)
         .end((err, res) => {
           if (err) {
-            return done(err);
+            done(err);
           }
           expect(res.body.status).to.equal(404);
           expect(res.body.message).to.equal('username or email already exists');
           expect(res.body.token).to.equal(null);
-          return done();
+          done();
         });
     });
     it('should not create a new user if the email already exists', (done) => {
@@ -104,12 +104,12 @@ describe('Users', () => {
         .expect('Content-Type', /json/)
         .end((err, res) => {
           if (err) {
-            return done(err);
+            done(err);
           }
           expect(res.body.status).to.equal(404);
           expect(res.body.message).to.equal('username or email already exists');
           expect(res.body.token).to.equal(null);
-          return done();
+          done();
         });
     });
     it('returns a server error with a null password', (done) => {
@@ -126,12 +126,12 @@ describe('Users', () => {
         .expect('Content-Type', /json/)
         .end((err, res) => {
           if (err) {
-            return done(err);
+            done(err);
           }
           expect(res.body.status).to.equal(404);
           expect(res.body.message).to.equal('missing required field');
           expect(res.body.response).to.equal('error');
-          return done(err);
+          done(err);
         });
     });
     it('returns a server error with a null first name', (done) => {
@@ -148,12 +148,12 @@ describe('Users', () => {
         .expect('Content-Type', /json/)
         .end((err, res) => {
           if (err) {
-            return done(err);
+            done(err);
           }
           expect(res.body.status).to.equal(404);
           expect(res.body.message).to.equal('missing required field');
           expect(res.body.response).to.equal('error');
-          return done(err);
+          done(err);
         });
     });
     it('returns a server error with a null last name', (done) => {
@@ -170,12 +170,12 @@ describe('Users', () => {
         .expect('Content-Type', /json/)
         .end((err, res) => {
           if (err) {
-            return done(err);
+            done(err);
           }
           expect(res.body.status).to.equal(404);
           expect(res.body.message).to.equal('missing required field');
           expect(res.body.response).to.equal('error');
-          return done(err);
+          done(err);
         });
     });
     it('returns a server error with a null first and last name', (done) => {
@@ -192,12 +192,12 @@ describe('Users', () => {
         .expect('Content-Type', /json/)
         .end((err, res) => {
           if (err) {
-            return done(err);
+            done(err);
           }
           expect(res.body.status).to.equal(404);
           expect(res.body.message).to.equal('missing required field');
           expect(res.body.response).to.equal('error');
-          return done(err);
+          done(err);
         });
     });
   });
@@ -214,7 +214,7 @@ describe('Users', () => {
           expect(res.body.response).to.have.property('username');
           expect(res.body.response).to.have.property('first_name');
           expect(res.body.response).to.have.property('last_name');
-          return done();
+          done();
         });
     });
     it('does not grab a user with an invalid ID', (done) => {
@@ -230,7 +230,7 @@ describe('Users', () => {
           expect(res.body.response).to.not.have.property('first_name');
           expect(res.body.response).to.not.have.property('last_name');
           expect(res.body.response).to.equal('no user found with id: 1344');
-          return done();
+          done();
         });
     });
   });
@@ -241,12 +241,12 @@ describe('Users', () => {
         .expect('Content-Type', /json/)
         .end((err, res) => {
           if (err) {
-            return done(err);
+            done(err);
           }
           expect(res.body.status).to.equal(200);
           expect(res.body.response).to.be.an('array');
           expect(res.body.response[0].username).to.equal('jtongay');
-          return done();
+          done();
         });
     });
   });

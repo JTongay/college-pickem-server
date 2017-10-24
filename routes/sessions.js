@@ -10,12 +10,20 @@ const bcrypt = require('bcrypt');
 router.post('/login', (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
+  if (!username || !password) {
+    res.status(400).json({
+      status: 400,
+      message: 'you must enter a username and password',
+      token: null
+    });
+    return;
+  }
   knex('users').where('username', username).first().then((result) => {
     // if there is no one with that username, don't do a password check and present a server error
     if (!result) {
       res.status(404).json({
         status: 404,
-        messsage: 'incorrect username/password',
+        message: 'incorrect username/password',
         token: null
       });
       return;
@@ -26,7 +34,7 @@ router.post('/login', (req, res) => {
       if (!match) {
         res.status(404).json({
           status: 404,
-          messsage: 'incorrect username/password',
+          message: 'incorrect username/password',
           token: null
         });
         return;

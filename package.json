@@ -15,12 +15,13 @@
     "postinstall": "./node_modules/.bin/knex migrate:latest --env=production"
   },
   "keywords": [],
-  "author": "",
+  "author": "https://github.com/JTongay",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.1",
     "cheerio": "^1.0.0-rc.2",
+    "dotenv": "^4.0.0",
     "express": "^4.15.4",
     "jsonwebtoken": "^8.0.1",
     "knex": "^0.13.0",

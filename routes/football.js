@@ -6,6 +6,7 @@ const router = express.Router({
 const request = require('tinyreq');
 const cheerio = require('cheerio');
 const _ = require('lodash');
+const knex = require('../db/conf');
 
 const getCollegeSchedule = (url, data, cb) => {
   request(url, (err, body) => {
@@ -96,6 +97,18 @@ router.get('/ncaa/:year/:week', (req, res) => {
 
       // Stadium Property
       game.stadium = stadiumsFiltered[i];
+
+      // Insert information to database
+      knex('teams').where('abbr_name', game.away.abbrev).first().then((team) => {
+        // If there are no teams with that name, create it
+        if (!team) {
+          knex('teams').insert({
+            team_name: game.away.team_name,
+            abbr_name: game.away.abbrev
+          }).then(t => t);
+        }
+        return team;
+      });
       // Assign game object to each row
       schedule[i] = game;
     });
@@ -125,7 +138,7 @@ module.exports = router;
 
 
 
-//matchups
+// matchups
 
 // | id | week | match | Hometeam | Awayteam | homerank  |  awayrank | place  |
 // | 1  |  5   | 1     | booty    | me       | 20        |           | 'away' |

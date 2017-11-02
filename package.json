@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "The Backend for the two football games",
   "main": "server.js",
-  "version": "1.0.0",
   "engines": {
     "node": "7.0.0",
     "npm": "5.4.2"
@@ -27,6 +26,8 @@
     "jsonwebtoken": "^8.0.1",
     "knex": "^0.13.0",
     "lodash": "^4.17.4",
+    "node-cron": "^1.2.1",
+    "nodemailer": "^4.3.1",
     "pg": "^7.3.0",
     "request": "^2.82.0",
     "tinyreq": "^3.2.6"

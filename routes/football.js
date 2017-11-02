@@ -98,17 +98,6 @@ router.get('/ncaa/:year/:week', (req, res) => {
       // Stadium Property
       game.stadium = stadiumsFiltered[i];
 
-      // Insert information to database
-      knex('teams').where('abbr_name', game.away.abbrev).first().then((team) => {
-        // If there are no teams with that name, create it
-        if (!team) {
-          knex('teams').insert({
-            team_name: game.away.team_name,
-            abbr_name: game.away.abbrev
-          }).then(t => t);
-        }
-        return team;
-      });
       // Assign game object to each row
       schedule[i] = game;
     });

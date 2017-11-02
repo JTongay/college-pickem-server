@@ -155,7 +155,7 @@ request(`http://www.foxsports.com/college-football/schedule?season=${reqYear}&se
     });
 
     // Insert the matchup
-    knex('matchups')
+    // knex('matchups').where('week', )
 
     // Assign game object to each row
     schedule[i] = game;

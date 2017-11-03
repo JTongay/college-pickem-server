@@ -14,6 +14,7 @@ const bodyParser = require('body-parser');
 const football = require('./routes/football');
 const users = require('./routes/users');
 const session = require('./routes/sessions');
+const season = require('./routes/seasons');
 
 
 // Use Middleware
@@ -29,6 +30,7 @@ app.use((req, res, next) => {
 app.use('/api', football);
 app.use('/api/users', users);
 app.use('/api/session', session);
+app.use('/api/season', season);
 
 // Start the server
 app.listen(port, () => {

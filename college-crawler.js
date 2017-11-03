@@ -2,6 +2,7 @@ const request = require('tinyreq');
 const cheerio = require('cheerio');
 const _ = require('lodash');
 const knex = require('./db/conf');
+const moment = require('moment');
 
 
 const reqWeek = req.params.week;

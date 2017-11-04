@@ -8,9 +8,18 @@ const router = express.Router({
 const knex = require('../db/conf');
 
 router.get('/', (req, res) => {
-  knex('seasons').then((match) => {
-    res.json(match);
+  knex('seasons').then((season) => {
+    res.status(200).json(season);
   });
+});
+
+router.get('/:id', (req, res) => {
+  const paramsID = req.params.id;
+  knex('seasons').where('id', paramsID)
+    .first()
+    .then((season) => {
+      res.status(200).json(season);
+    });
 });
 
 router.post('/create', (req, res) => {
@@ -19,16 +28,60 @@ router.post('/create', (req, res) => {
     start_date: req.body.startDate,
     end_date: req.body.endDate,
     active_season: true
-  }).then((result) => {
-    res.json(result);
+  }).then((season) => {
+    res.json(season);
   });
 });
 
-router.patch('/activate', (req, res) => {
+router.put('/edit', (req, res) => {
   const requestID = req.body.id;
-  // knex('seasons').where('id', requestID).first().then((season) => {
-  //   res
-  // });
+  knex('seasons').where('id', requestID)
+    .first()
+    .update({
+      league: req.body.league,
+      start_date: req.body.startDate,
+      end_date: req.body.endDate,
+      active_season: req.body.activated
+    })
+    .then((season) => {
+      res.json(season);
+    });
+});
+
+router.put('/activate', (req, res) => {
+  const requestID = req.body.id;
+  knex('seasons').where('id', requestID)
+    .first()
+    .update({
+      active_season: true
+    })
+    .then((season) => {
+      res.json(season);
+    });
+});
+
+router.put('/deactivate', (req, res) => {
+  const requestID = req.body.id;
+  knex('seasons').where('id', requestID)
+    .first()
+    .update({
+      active_season: false
+    })
+    .then((season) => {
+      res.json(season);
+    });
+});
+
+router.delete('/destroy', (req, res) => {
+  const requestID = req.body.id;
+  knex('seasons').where('id', requestID)
+    .first()
+    .del()
+    .then(() => {
+      res.json({
+        message: 'success'
+      });
+    });
 });
 
 module.exports = router;

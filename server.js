@@ -40,4 +40,11 @@ app.listen(port, () => {
   // eslint-enable no-alert
 });
 
+cron.schedule('* * * Feb,Aug Sun', () => {
+  /*
+  Send an email out every sunday from February to August
+  reminding me to set the start dates for each league
+    */
+});
+
 module.exports = app;

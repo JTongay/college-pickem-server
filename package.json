@@ -22,7 +22,7 @@
     "body-parser": "^1.18.1",
     "cheerio": "^1.0.0-rc.2",
     "dotenv": "^4.0.0",
-    "ejs": "^2.5.7",
+    "email-templates": "^3.1.6",
     "express": "^4.15.4",
     "jsonwebtoken": "^8.0.1",
     "knex": "^0.13.0",
@@ -31,6 +31,7 @@
     "node-cron": "^1.2.1",
     "nodemailer": "^4.3.1",
     "pg": "^7.3.0",
+    "pug": "^2.0.0-rc.4",
     "request": "^2.82.0",
     "tinyreq": "^3.2.6"
   },

@@ -1,9 +1,9 @@
 const nodeMailer = require('nodemailer');
-const reminder = require('./templates/reminder.ejs');
-const ejs = require('ejs');
+const Email = require('email-templates');
 require('dotenv').config();
+const path = require('path');
 
-nodeMailer.use('compile', ejs)
+const templates = path.join('templates');
 
 const transporter = nodeMailer.createTransport({
   service: 'gmail',
@@ -13,14 +13,39 @@ const transporter = nodeMailer.createTransport({
   }
 });
 
-const mailOptions = {
-  from: process.env.APP_EMAIL,
-  to: process.env.APP_EMAIL,
-  subject: 'Test Email',
-  html: ejs.renderFile(__dirname + 'templates/reminder.ejs', (templ)=> {
-    console.log(templ);
-  })
-};
+// const sendTemplate = transporter.templateSender(
+//   new Email({
+//     views: { root: templates }
+//   })
+// );
+
+const email = new Email({
+  message: {
+    from: 'footballpick.app@gmail.com'
+  },
+  // uncomment below to send emails in development/test env:
+  send: true,
+  transport: {
+    jsonTransport: true
+  }
+});
+
+email.send({
+  template: 'test',
+  message: {
+    to: 'footballpick.app@gmail.com'
+  },
+  locals: {
+    name: 'Elon'
+  }
+}).then(console.log).catch(console.error);
+
+// const mailOptions = {
+//   from: process.env.APP_EMAIL,
+//   to: process.env.APP_EMAIL,
+//   subject: 'Test Email',
+//   html: sendTemplate
+// };
 
 // transporter.sendMail(mailOptions, (err, info) => {
 //   if (err) {
@@ -29,7 +54,3 @@ const mailOptions = {
 //     console.log(info);
 //   }
 // });
-
-const something = ejs.render(__dirname + 'templates/reminder.ejs');
-
-console.log(something)

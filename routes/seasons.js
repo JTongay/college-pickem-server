@@ -9,7 +9,19 @@ const knex = require('../db/conf');
 
 router.get('/', (req, res) => {
   knex('seasons').then((season) => {
-    res.status(200).json(season);
+    if (!season) {
+      res.status(404).json({
+        status: 404,
+        response: 'unexpected error occured',
+        message: 'error'
+      });
+      return;
+    }
+    res.status(200).json({
+      status: 200,
+      response: season,
+      message: 'success'
+    });
   });
 });
 
@@ -18,7 +30,19 @@ router.get('/:id', (req, res) => {
   knex('seasons').where('id', paramsID)
     .first()
     .then((season) => {
-      res.status(200).json(season);
+      if (!season) {
+        res.status(404).json({
+          status: 404,
+          response: `no season found with id ${paramsID}`,
+          message: 'error'
+        });
+        return;
+      }
+      res.status(200).json({
+        status: 200,
+        response: season,
+        message: 'success'
+      });
     });
 });
 
@@ -28,9 +52,21 @@ router.post('/create', (req, res) => {
     start_date: req.body.startDate,
     end_date: req.body.endDate,
     active_season: true
-  }).then((season) => {
-    res.json(season);
-  });
+  }).returning('*')
+    .first()
+    .then((season) => {
+      res.status(200).json({
+        status: 200,
+        response: season,
+        message: 'success'
+      });
+    }).catch((err) => {
+      res.status(404).json({
+        status: 404,
+        response: err,
+        message: 'success'
+      });
+    });
 });
 
 router.put('/edit', (req, res) => {

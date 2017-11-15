@@ -37,6 +37,65 @@ describe.only('Seasons', () => {
             return done(err);
           }
           expect(res.status).to.equal(200);
+          expect(res.body.response).to.be.an('array');
+          expect(res.body.response[0]).to.have.property('start_date');
+          expect(res.body.response[0]).to.have.property('end_date');
+          done();
+        });
+    });
+  });
+  describe('/:id GET', () => {
+    it('Returns a season', (done) => {
+      request.get('/api/season/1')
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+          expect(res.status).to.equal(200);
+          expect(res.body.response).to.be.an('object');
+          expect(res.body.response).to.have.property('start_date');
+          expect(res.body.response).to.have.property('end_date');
+          done();
+        });
+    });
+    it('fails to return a season if it doesn\'t exist', (done) => {
+      request.get('/api/season/12')
+        .expect(404)
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+          expect(res.status).to.equal(404);
+          expect(res.body.response).to.be.an('string');
+          expect(res.body.response).to.equal('no season found with id 12');
+          done();
+        });
+    });
+  });
+  describe('/create POST', () => {
+    it('creates a new NCAA season and is active by default', (done) => {
+      const sampleRequest = {
+        league: 'NCAA',
+        start_date: moment().year('2017').month('10').date('12'),
+        end_date: moment().year('2018').month('02').date('13')
+      };
+      request.post('/api/season/create')
+        .send(sampleRequest)
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+          expect(res.status).to.equal(200);
+          expect(res.body.response).to.have.property('league');
+          expect(res.body.response).to.have.property('start_date');
+          expect(res.body.response).to.have.property('end_date');
+          expect(res.body.response).to.have.property('active_season');
+          expect(res.body.response.active_season).to.equal(true);
           done();
         });
     });

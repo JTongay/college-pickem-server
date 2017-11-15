@@ -47,6 +47,14 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/create', (req, res) => {
+  if (!req.body.league) {
+    res.status(404).json({
+      status: 404,
+      response: 'you must send NFL or NCAA',
+      message: 'error'
+    });
+    return;
+  }
   knex('seasons').insert({
     league: req.body.league,
     start_date: req.body.startDate,
@@ -60,11 +68,12 @@ router.post('/create', (req, res) => {
         response: season,
         message: 'success'
       });
-    }).catch((err) => {
+    })
+    .catch((err) => {
       res.status(404).json({
         status: 404,
         response: err,
-        message: 'success'
+        message: 'error'
       });
     });
 });

@@ -92,10 +92,55 @@ describe.only('Seasons', () => {
           }
           expect(res.status).to.equal(200);
           expect(res.body.response).to.have.property('league');
+          expect(res.body.response.league).to.equal('NCAA');
           expect(res.body.response).to.have.property('start_date');
           expect(res.body.response).to.have.property('end_date');
           expect(res.body.response).to.have.property('active_season');
           expect(res.body.response.active_season).to.equal(true);
+          done();
+        });
+    });
+    it('creates a new NFL season and is active by default', (done) => {
+      const sampleRequest2 = {
+        league: 'NFL',
+        start_date: moment().year('2017').month('11').date('12'),
+        end_date: moment().year('2018').month('01').date('13')
+      };
+      request.post('/api/season/create')
+        .send(sampleRequest2)
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+          console.log(res.body.response);
+          expect(res.status).to.equal(200);
+          expect(res.body.response).to.have.property('league');
+          expect(res.body.response.league).to.equal('NFL');
+          expect(res.body.response).to.have.property('start_date');
+          expect(res.body.response).to.have.property('end_date');
+          expect(res.body.response).to.have.property('active_season');
+          expect(res.body.response.active_season).to.equal(true);
+          done();
+        });
+    });
+    it('sends an error when no league is sent', (done) => {
+      const sampleRequest = {
+        start_date: moment().year('2017').month('10').date('12'),
+        end_date: moment().year('2018').month('02').date('13')
+      };
+      request.post('/api/season/create')
+        .send(sampleRequest)
+        .expect(404)
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+          expect(res.status).to.equal(404);
+          expect(res.body.response).to.equal('you must send NFL or NCAA');
+          expect(res.body.status).to.equal(404);
           done();
         });
     });

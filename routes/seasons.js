@@ -61,11 +61,10 @@ router.post('/create', (req, res) => {
     end_date: req.body.endDate,
     active_season: true
   }).returning('*')
-    .first()
     .then((season) => {
       res.status(200).json({
         status: 200,
-        response: season,
+        response: season[0],
         message: 'success'
       });
     })
@@ -78,19 +77,34 @@ router.post('/create', (req, res) => {
     });
 });
 
-router.put('/edit', (req, res) => {
-  const requestID = req.body.id;
-  knex('seasons').where('id', requestID)
-    .first()
-    .update({
-      league: req.body.league,
-      start_date: req.body.startDate,
-      end_date: req.body.endDate,
-      active_season: req.body.activated
-    })
-    .then((season) => {
-      res.json(season);
-    });
+router.put('/:id', (req, res) => {
+  const requestID = req.params.id;
+  knex('seasons').where('id', requestID).first().then((season) => {
+    if (!season) {
+      res.status(404).json({
+        status: 404,
+        response: 'ya done goofed',
+        message: 'error'
+      });
+    } else {
+      knex('seasons')
+        .where('id', requestID)
+        .update({
+          league: req.body.league,
+          start_date: req.body.startDate,
+          end_date: req.body.endDate,
+          active_season: req.body.activated
+        })
+        .returning('*')
+        .then((seasonFound) => {
+          res.status(200).json({
+            status: 200,
+            response: seasonFound[0],
+            message: 'success'
+          });
+        });
+    }
+  });
 });
 
 router.put('/activate', (req, res) => {

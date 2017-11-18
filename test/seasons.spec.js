@@ -190,5 +190,107 @@ describe.only('Seasons', () => {
           done();
         });
     });
+    it('should not edit a season if it doesn\'t exist', (done) => {
+      const sampleRequest = {
+        league: 'NFL',
+        startDate: moment().year('2017').month('11').date('12'),
+        endDate: moment().year('2018').month('01').date('13'),
+        activated: false
+      };
+      request.put('/api/season/12')
+        .send(sampleRequest)
+        .expect(404)
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+          expect(res.status).to.equal(404);
+          expect(res.body.status).to.equal(404);
+          expect(res.body).to.be.an('object');
+          expect(res.body.response).to.equal('no season found with id: 12');
+          done();
+        });
+    });
+  });
+  describe('/activate PUT', () => {
+    it('should set a season as active', (done) => {
+      const sampleRequest = {
+        id: '1'
+      };
+      request.put('/api/season/activate')
+        .send(sampleRequest)
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+          expect(res.status).to.equal(200);
+          expect(res.body.response.active_season).to.equal(true);
+          expect(res.body.message).to.equal('season is now active');
+          expect(res.body.status).to.equal(200);
+          done();
+        });
+    });
+    it('should not set a season as active if it isn\'t found', (done) => {
+      const sampleRequest = {
+        id: '12'
+      };
+      request.put('/api/season/activate')
+        .send(sampleRequest)
+        .expect(404)
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+          expect(res.status).to.equal(404);
+          expect(res.body.response).to.equal('no season found with id: 12');
+          expect(res.body.message).to.equal('error');
+          expect(res.body.status).to.equal(404);
+          done();
+        });
+    });
+  });
+  describe('/deactivate PUT', () => {
+    it('should set a season as inactive', (done) => {
+      const sampleRequest = {
+        id: '1'
+      };
+      request.put('/api/season/deactivate')
+        .send(sampleRequest)
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+          expect(res.status).to.equal(200);
+          expect(res.body.response.active_season).to.equal(false);
+          expect(res.body.message).to.equal('season is now inactive');
+          expect(res.body.status).to.equal(200);
+          done();
+        });
+    });
+    it('should not set a season as inactive if it isn\'t found', (done) => {
+      const sampleRequest = {
+        id: '12'
+      };
+      request.put('/api/season/deactivate')
+        .send(sampleRequest)
+        .expect(404)
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+          expect(res.status).to.equal(404);
+          expect(res.body.response).to.equal('no season found with id: 12');
+          expect(res.body.message).to.equal('error');
+          expect(res.body.status).to.equal(404);
+          done();
+        });
+    });
   });
 });

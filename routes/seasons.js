@@ -77,13 +77,70 @@ router.post('/create', (req, res) => {
     });
 });
 
+router.put('/activate', (req, res) => {
+  const requestID = req.body.id;
+  knex('seasons').where('id', requestID).first().then((seas) => {
+    if (!seas) {
+      res.status(404).json({
+        status: 404,
+        response: `no season found with id: ${requestID}`,
+        message: 'error'
+      });
+      return;
+    }
+    knex('seasons').where('id', requestID)
+      .first()
+      .update({
+        active_season: true
+      })
+      .returning('*')
+      .then((season) => {
+        res.status(200).json({
+          status: 200,
+          response: season[0],
+          message: 'season is now active'
+        });
+      });
+  });
+});
+
+router.put('/deactivate', (req, res) => {
+  const requestID = req.body.id;
+  knex('seasons').where('id', requestID).first().then((seas) => {
+    if (!seas) {
+      res.status(404).json({
+        status: 404,
+        response: `no season found with id: ${requestID}`,
+        message: 'error'
+      });
+      return;
+    }
+    knex('seasons').where('id', requestID)
+      .first()
+      .update({
+        active_season: false
+      })
+      .returning('*')
+      .then((season) => {
+        res.status(200).json({
+          status: 200,
+          response: season[0],
+          message: 'season is now inactive'
+        });
+      });
+  });
+});
+
+/*
+@Params id of season
+*/
 router.put('/:id', (req, res) => {
   const requestID = req.params.id;
   knex('seasons').where('id', requestID).first().then((season) => {
     if (!season) {
       res.status(404).json({
         status: 404,
-        response: 'ya done goofed',
+        response: `no season found with id: ${requestID}`,
         message: 'error'
       });
     } else {
@@ -105,30 +162,6 @@ router.put('/:id', (req, res) => {
         });
     }
   });
-});
-
-router.put('/activate', (req, res) => {
-  const requestID = req.body.id;
-  knex('seasons').where('id', requestID)
-    .first()
-    .update({
-      active_season: true
-    })
-    .then((season) => {
-      res.json(season);
-    });
-});
-
-router.put('/deactivate', (req, res) => {
-  const requestID = req.body.id;
-  knex('seasons').where('id', requestID)
-    .first()
-    .update({
-      active_season: false
-    })
-    .then((season) => {
-      res.json(season);
-    });
 });
 
 router.delete('/destroy', (req, res) => {

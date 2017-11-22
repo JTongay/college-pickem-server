@@ -143,3 +143,6 @@ module.exports = router;
 // | id | user_id | match_id | team_id |
 // | 1  |   2     |    2     |   1     |
 // | 2  |   2     |    3     |   3     |
+
+// | id | season_id | week | match | Hometeam_id  | Awayteam_id | place       |
+// | 1  |   2       |  1   | 1     | 1   (join)   | 2 (join)    | somestadium |

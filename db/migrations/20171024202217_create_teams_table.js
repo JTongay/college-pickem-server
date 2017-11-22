@@ -9,4 +9,4 @@ exports.up = knex => knex.schema.createTableIfNotExists('teams', (table) => {
   table.timestamps(true, true);
 });
 
-exports.down = knex => knex.dropTableIfExists('teams');
+exports.down = knex => knex.schema.dropTableIfExists('teams');

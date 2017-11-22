@@ -1,4 +1,6 @@
-exports.up = (knex, Promise) => {
+exports.up = knex => knex.schema.dropTableIfExists('matchups');
+
+exports.down = (knex, Promise) => {
   return knex.schema.createTableIfNotExists('matchups', (table) => {
     table.increments();
     table.string('week');
@@ -6,5 +8,3 @@ exports.up = (knex, Promise) => {
     table.timestamps(true, true);
   });
 };
-
-exports.down = knex => knex.schema.dropTableIfExists('matchups');

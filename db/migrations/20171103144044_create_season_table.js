@@ -9,4 +9,4 @@ exports.up = (knex, Promise) => {
   });
 };
 
-exports.down = knex => knex.dropTableIfExists('seasons');
+exports.down = knex => knex.schema.dropTableIfExists('seasons');

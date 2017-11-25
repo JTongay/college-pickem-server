@@ -15,6 +15,7 @@ const football = require('./routes/football');
 const users = require('./routes/users');
 const session = require('./routes/sessions');
 const season = require('./routes/seasons');
+const matchups = require('./routes/matchups');
 
 
 // Use Middleware
@@ -31,6 +32,15 @@ app.use('/api', football);
 app.use('/api/users', users);
 app.use('/api/session', session);
 app.use('/api/season', season);
+app.use('/api/season/:season_id/matchup', matchups);
+
+// Crons
+cron.schedule('* * * Feb,Aug Sun', () => {
+  /*
+  Send an email out every sunday from February to August
+  reminding me to set the start dates for each league
+  */
+});
 
 // Start the server
 app.listen(port, () => {
@@ -40,11 +50,5 @@ app.listen(port, () => {
   // eslint-enable no-alert
 });
 
-cron.schedule('* * * Feb,Aug Sun', () => {
-  /*
-  Send an email out every sunday from February to August
-  reminding me to set the start dates for each league
-    */
-});
 
 module.exports = app;

@@ -24,7 +24,7 @@ before((done) => {
 });
 after((done) => {
   console.log('truncating users');
-  knex.raw('truncate table users RESTART IDENTITY;').then(() => {
+  knex.raw('truncate table users RESTART IDENTITY CASCADE;').then(() => {
     done();
   });
 });

@@ -21,12 +21,12 @@ before((done) => {
 
 after((done) => {
   console.log('truncating seasons');
-  knex.raw('truncate table seasons RESTART IDENTITY;').then(() => {
+  knex.raw('truncate table seasons RESTART IDENTITY CASCADE;').then(() => {
     done();
   });
 });
 
-describe.only('Seasons', () => {
+describe('Seasons', () => {
   describe('/ GET', () => {
     it('Returns a list of seasons', (done) => {
       request.get('/api/season/')

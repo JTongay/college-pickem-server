@@ -16,8 +16,22 @@ router.get('/', (req, res) => {
           knex('teams').innerJoin('matchups', 'teams.id', 'matchups.away_team_id')
             .then((awayTeam) => {
               const showMatches = match.map((game, index) => {
-                game.away_team = awayTeam[index]; // eslint-disable-line no-param-reassign
-                game.home_team = homeTeam[index]; // eslint-disable-line no-param-reassign
+                const away = {
+                  team_name: awayTeam[index].team_name,
+                  abbr_name: awayTeam[index].abbr_name,
+                  league: awayTeam[index].league,
+                  record: awayTeam[index].record,
+                  rank: awayTeam[index].rank
+                };
+                const home = {
+                  team_name: homeTeam[index].team_name,
+                  abbr_name: homeTeam[index].abbr_name,
+                  league: homeTeam[index].league,
+                  record: homeTeam[index].record,
+                  rank: homeTeam[index].rank
+                };
+                game.away_team = away; // eslint-disable-line no-param-reassign
+                game.home_team = home; // eslint-disable-line no-param-reassign
                 return game;
               });
               res.status(200).json({

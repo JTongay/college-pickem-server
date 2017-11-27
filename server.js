@@ -16,6 +16,7 @@ const users = require('./routes/users');
 const session = require('./routes/sessions');
 const season = require('./routes/seasons');
 const matchups = require('./routes/matchups');
+const scores = require('./routes/scores');
 
 
 // Use Middleware
@@ -32,6 +33,7 @@ app.use('/api', football);
 app.use('/api/users', users);
 app.use('/api/session', session);
 app.use('/api/season', season);
+app.use('/api/season/:season_id', scores);
 app.use('/api/season/:season_id/matchup', matchups);
 
 // Crons

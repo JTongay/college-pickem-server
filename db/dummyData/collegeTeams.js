@@ -34,7 +34,7 @@ const collegeTeams = [
   {
     team_name: 'Broncos',
     abbr_name: 'BSU',
-    locale: 'Texas',
+    locale: 'Boise State',
     league: 'NCAA',
     record: '2-0',
     rank: 3

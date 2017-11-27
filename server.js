@@ -33,7 +33,7 @@ app.use('/api', football);
 app.use('/api/users', users);
 app.use('/api/session', session);
 app.use('/api/season', season);
-app.use('/api/season/:season_id', scores);
+app.use('/api/season/:season_id/score', scores);
 app.use('/api/season/:season_id/matchup', matchups);
 
 // Crons

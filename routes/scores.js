@@ -76,4 +76,21 @@ router.get('/:id', (req, res) => {
     });
 });
 
+/*
+@Params season_id, week
+- Returns a leaderboard for a given season
+*/
+router.get('/:id/leaderboard', (req, res) => {
+  const weekId = +req.params.id;
+  const seasonId = +req.params.season_id;
+  knex('user_score')
+    .where('season_id', seasonId)
+    .andWhere('week', weekId)
+    .orderBy('total_score', 'desc')
+    .join('users', 'user_score.user_id', 'users.id')
+    .then((scores) => {
+      res.status(200).json(scores);
+    });
+});
+
 module.exports = router;

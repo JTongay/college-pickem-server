@@ -44,6 +44,22 @@ cron.schedule('* * * Feb,Aug Sun', () => {
   */
 });
 
+// College Scoring
+cron.schedule('* * * Aug,Dec Mon', () => {
+  /*
+  Do the scoring for college every monday from August to December. Make sure you have it
+  check if the season is active or not.
+  */
+});
+
+// NFL scoring
+cron.schedule('* * * Sept,Jan Tue', () => {
+  /*
+  Do the scoring for nfl game every tuesday from September to January. Make sure you
+  have it check if the season is active or not.
+  */
+});
+
 // Start the server
 app.listen(port, () => {
   // eslint-disable no-alert, no-console

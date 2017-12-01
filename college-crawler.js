@@ -5,8 +5,8 @@ const knex = require('./db/conf');
 const moment = require('moment');
 
 
-const reqWeek = req.params.week;
-const reqYear = req.params.year;
+const reqWeek = 5;
+const reqYear = 2017;
 
 request(`http://www.foxsports.com/college-football/schedule?season=${reqYear}&seasonType=1&week=${reqWeek}&group=0`, (err, body) => {
   if (err) {
@@ -88,15 +88,17 @@ request(`http://www.foxsports.com/college-football/schedule?season=${reqYear}&se
           knex('teams').insert({
             team_name: game.away.team_name,
             abbr_name: game.away.abbrev,
-            location: game.away.team_location.join(' '),
+            league: 'NCAA',
+            locale: game.away.team_location.join(' '),
             record: game.away.record
           }).then(t => t);
         } else {
           knex('teams').insert({
             team_name: game.away.team_name,
             abbr_name: game.away.abbrev,
+            league: 'NCAA',
             record: game.away.record,
-            location: game.away.team_location.join(' '),
+            locale: game.away.team_location.join(' '),
             rank: game.away.rank
           }).then(t => t);
         }
@@ -126,15 +128,17 @@ request(`http://www.foxsports.com/college-football/schedule?season=${reqYear}&se
           knex('teams').insert({
             team_name: game.home.team_name,
             abbr_name: game.home.abbrev,
-            location: game.home.team_location.join(' '),
+            league: 'NCAA',
+            locale: game.home.team_location.join(' '),
             record: game.home.record
           }).then(t => t);
         } else {
           knex('teams').insert({
             team_name: game.home.team_name,
             abbr_name: game.home.abbrev,
+            league: 'NCAA',
             record: game.home.record,
-            location: game.home.team_location.join(' '),
+            locale: game.home.team_location.join(' '),
             rank: game.home.rank
           }).then(t => t);
         }
@@ -162,3 +166,5 @@ request(`http://www.foxsports.com/college-football/schedule?season=${reqYear}&se
     schedule[i] = game;
   });
 });
+
+console.log('success');

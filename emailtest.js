@@ -17,7 +17,12 @@ const testData = {
   name: 'Joey'
 }
 
-ejs.renderFile(emailPath, testData, (err, html) => {
+ejs.renderFile(emailPath, testData, (error, html) => {
+
+  if (error) {
+    console.log(error);
+    return error;
+  }
 
   const mailOpts = {
     from: 'footballpick.app@gmail.com',

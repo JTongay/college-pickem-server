@@ -4,6 +4,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 const environment = process.env.NODE_ENV || 'development';
 const cron = require('node-cron');
+const ejs = require('ejs');
 const nodeMailer = require('nodemailer');
 require('dotenv').config();
 

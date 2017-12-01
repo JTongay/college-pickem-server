@@ -42,6 +42,26 @@ cron.schedule('* * * Feb,Aug Sun', () => {
   Send an email out every sunday from February to August
   reminding me to set the start dates for each league
   */
+  const transporter = nodeMailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: process.env.APP_EMAIL,
+      pass: process.env.APP_PASSWORD
+    }
+  });
+  const mailOptions = {
+    from: process.env.APP_EMAIL,
+    to: process.env.APP_EMAIL,
+    subject: 'Test Email',
+    html: '<h1>Heres a friendly reminder</h1>'
+  };
+  transporter.sendMail(mailOptions, (err, info) => {
+    if (err) {
+      console.log(err); // eslint-disable-line
+    } else {
+      console.log(info); // eslint-disable-line
+    }
+  });
 });
 
 // College Scoring
@@ -50,22 +70,60 @@ cron.schedule('* * * Aug,Dec Mon', () => {
   Do the scoring for college every monday from August to December. Make sure you have it
   check if the season is active or not.
   */
+  const transporter = nodeMailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: process.env.APP_EMAIL,
+      pass: process.env.APP_PASSWORD
+    }
+  });
+  const mailOptions = {
+    from: process.env.APP_EMAIL,
+    to: process.env.APP_EMAIL,
+    subject: 'Test Email',
+    html: '<h1>Heres an email for scoring NCAA</h1>'
+  };
+  transporter.sendMail(mailOptions, (err, info) => {
+    if (err) {
+      console.log(err); // eslint-disable-line
+    } else {
+      console.log(info); // eslint-disable-line
+    }
+  });
 });
 
 // NFL scoring
-cron.schedule('* * * Sept,Jan Tue', () => {
+cron.schedule('* * * Sep,Jan Tue', () => {
   /*
   Do the scoring for nfl game every tuesday from September to January. Make sure you
   have it check if the season is active or not.
   */
+  const transporter = nodeMailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: process.env.APP_EMAIL,
+      pass: process.env.APP_PASSWORD
+    }
+  });
+  const mailOptions = {
+    from: process.env.APP_EMAIL,
+    to: process.env.APP_EMAIL,
+    subject: 'Test Email',
+    html: '<h1>Heres an email for scoring NFLr</h1>'
+  };
+  transporter.sendMail(mailOptions, (err, info) => {
+    if (err) {
+      console.log(err); // eslint-disable-line
+    } else {
+      console.log(info); // eslint-disable-line
+    }
+  });
 });
 
 // Start the server
 app.listen(port, () => {
-  // eslint-disable no-alert, no-console
-  console.log('Hello from port ', port);
-  console.log('Starting in mode ', environment);
-  // eslint-enable no-alert
+  console.log('Hello from port ', port); //eslint-disable-line
+  console.log('Starting in mode ', environment); //eslint-disable-line
 });
 
 

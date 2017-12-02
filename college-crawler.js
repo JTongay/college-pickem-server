@@ -3,6 +3,7 @@ const cheerio = require('cheerio');
 const _ = require('lodash');
 const knex = require('./db/conf');
 // const moment = require('moment');
+const memwatch = require('memwatch-next');
 
 function scrapeCollege(year, week, seasonId) {
   request(`http://www.foxsports.com/college-football/schedule?season=${year}&seasonType=1&week=${week}&group=0`, (err, body) => {
@@ -222,7 +223,11 @@ function scrapeCollege(year, week, seasonId) {
       schedule[i] = game;
     });
   });
-  console.log('done'); // eslint-disable-line
+  return 'done i think';
 }
+
+memwatch.on('leak', (info) => {
+  console.error('Memory leak detected:\n', info);
+});
 
 scrapeCollege(2017, 2, 2);

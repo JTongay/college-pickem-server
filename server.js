@@ -8,6 +8,7 @@ const ejs = require('ejs');
 const nodeMailer = require('nodemailer');
 const collegeCrawler = require('./college-crawler');
 const insertTeams = require('./scripts/insertTeams');
+const insertMatchups = require('./scripts/insertMatchups');
 const moment = require('moment');
 const fs = require('fs');
 const knex = require('./db/conf');
@@ -115,7 +116,7 @@ cron.schedule('* * * Sep,Jan Tue', () => {
     from: process.env.APP_EMAIL,
     to: process.env.APP_EMAIL,
     subject: 'Test Email',
-    html: '<h1>Heres an email for scoring NFLr</h1>'
+    html: '<h1>Heres an email for scoring NFL</h1>'
   };
   transporter.sendMail(mailOptions, (err, info) => {
     if (err) {
@@ -135,7 +136,7 @@ cron.schedule('* * 12 Aug,Dec Tue', () => {
   const currentYear = moment().year();
   const mainData = fs.readFileSync(`${__dirname}/json/dates.json`, 'utf-8');
   const parsed = JSON.parse(mainData);
-  collegeCrawler(currentYear, parsed.currentWeek, parsed.collegeSeasonId);
+  collegeCrawler(currentYear, parsed.collegeWeek, parsed.collegeSeasonId);
 });
 
 // Insert each new json file into db
@@ -147,7 +148,8 @@ cron.schedule('* * 13 Aug,Dec Tue', () => {
   const currentYear = moment().year();
   const mainData = fs.readFileSync(`${__dirname}/json/dates.json`, 'utf-8');
   const parsed = JSON.parse(mainData);
-  insertTeams('ncaa', parsed.currentWeek, currentYear);
+  insertTeams('ncaa', parsed.collegeWeek, currentYear);
+  insertMatchups('ncaa', parsed.collegeWeek, currentYear, parsed.collegeSeasonId);
 });
 
 // Start the server

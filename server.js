@@ -9,6 +9,7 @@ const nodeMailer = require('nodemailer');
 const collegeCrawler = require('./college-crawler');
 const moment = require('moment');
 const fs = require('fs');
+const knex = require('./db/conf');
 require('dotenv').config();
 
 // Middleware
@@ -131,10 +132,21 @@ cron.schedule('* * 12 Aug,Dec Tue', () => {
   have it check if the season is active or not.
   */
   const currentYear = moment().year();
-  const currentWeek = fs.readFile(`${__dirname}/json/dates.json`, 'utf-8', (err, data) => {
-    if (err) throw err;
-    return data.currentWeek;
-  });
+  const mainData = fs.readFileSync(`${__dirname}/json/dates.json`, 'utf-8');
+  const parsed = JSON.parse(mainData);
+  collegeCrawler(currentYear, parsed.currentWeek, parsed.collegeSeasonId);
+});
+
+// Insert each json file into db
+cron.schedule('* * 13 Aug,Dec Tue', () => {
+  /*
+  Do the DB stuff for each game every tuesday at 1pm from September to January. Make sure you
+  have it check if the season is active or not.
+  */
+  const currentYear = moment().year();
+  const mainData = fs.readFileSync(`${__dirname}/json/dates.json`, 'utf-8');
+  const parsed = JSON.parse(mainData);
+  collegeCrawler(currentYear, parsed.currentWeek, parsed.collegeSeasonId);
 });
 
 // Start the server

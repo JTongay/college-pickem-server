@@ -4,7 +4,6 @@ const fs = require('fs');
 function insertTeams(league, week, year) {
   fs.readFile(`json/week_${week}_year_${year}_${league.toLowerCase()}.json`, 'utf-8', (err, data) => {
     if (err) throw err;
-    console.log(JSON.parse(data));
     const games = JSON.parse(data);
     games.forEach((game) => {
       // AWAY TEAM

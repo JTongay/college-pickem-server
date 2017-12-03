@@ -7,6 +7,7 @@ const cron = require('node-cron');
 const ejs = require('ejs');
 const nodeMailer = require('nodemailer');
 const collegeCrawler = require('./college-crawler');
+const insertTeams = require('./scripts/insertTeams');
 const moment = require('moment');
 const fs = require('fs');
 const knex = require('./db/conf');
@@ -137,7 +138,7 @@ cron.schedule('* * 12 Aug,Dec Tue', () => {
   collegeCrawler(currentYear, parsed.currentWeek, parsed.collegeSeasonId);
 });
 
-// Insert each json file into db
+// Insert each new json file into db
 cron.schedule('* * 13 Aug,Dec Tue', () => {
   /*
   Do the DB stuff for each game every tuesday at 1pm from September to January. Make sure you
@@ -146,7 +147,7 @@ cron.schedule('* * 13 Aug,Dec Tue', () => {
   const currentYear = moment().year();
   const mainData = fs.readFileSync(`${__dirname}/json/dates.json`, 'utf-8');
   const parsed = JSON.parse(mainData);
-  collegeCrawler(currentYear, parsed.currentWeek, parsed.collegeSeasonId);
+  insertTeams('ncaa', parsed.currentWeek, currentYear);
 });
 
 // Start the server

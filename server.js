@@ -6,6 +6,9 @@ const environment = process.env.NODE_ENV || 'development';
 const cron = require('node-cron');
 const ejs = require('ejs');
 const nodeMailer = require('nodemailer');
+const collegeCrawler = require('./college-crawler');
+const moment = require('moment');
+const fs = require('fs');
 require('dotenv').config();
 
 // Middleware
@@ -118,6 +121,19 @@ cron.schedule('* * * Sep,Jan Tue', () => {
     } else {
       console.log(info); // eslint-disable-line
     }
+  });
+});
+
+// College scraping
+cron.schedule('* * 12 Aug,Dec Tue', () => {
+  /*
+  Do the scraping for ncaa game every tuesday at noon from September to January. Make sure you
+  have it check if the season is active or not.
+  */
+  const currentYear = moment().year();
+  const currentWeek = fs.readFile(`${__dirname}/json/dates.json`, 'utf-8', (err, data) => {
+    if (err) throw err;
+    return data.currentWeek;
   });
 });
 

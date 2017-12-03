@@ -2,8 +2,10 @@ const request = require('tinyreq');
 const cheerio = require('cheerio');
 const _ = require('lodash');
 const knex = require('./db/conf');
-// const moment = require('moment');
+const moment = require('moment');
 const memwatch = require('memwatch-next');
+const fs = require('fs');
+const currentYear = moment().year()
 
 function scrapeCollege(year, week, seasonId) {
   request(`http://www.foxsports.com/college-football/schedule?season=${year}&seasonType=1&week=${week}&group=0`, (err, body) => {
@@ -39,12 +41,11 @@ function scrapeCollege(year, week, seasonId) {
     // loop through the array and create object every 3 elements
     const schedule = _.chunk(teamsFiltered, 3);
     // create an object is awayTeam, location, and homeTeam
-    // TODO create score property if the game is over? Maybe have it look for the word 'final'
-    schedule.forEach((match, i) => {
+    for (let i = 0; i < schedule.length; i += 1) {
       const game = {};
-      const splitAway = match[0].split(' ').filter(el => el !== '');
-      const splitHome = match[2].split(' ').filter(el => el !== '');
-      const splitTime = match[1].split(' ');
+      const splitAway = schedule[i][0].split(' ').filter(el => el !== '');
+      const splitHome = schedule[i][2].split(' ').filter(el => el !== '');
+      const splitTime = schedule[i][1].split(' ');
       let matchNumber = 1;
       game.away = {};
       game.home = {};
@@ -85,149 +86,16 @@ function scrapeCollege(year, week, seasonId) {
 
       // Stadium Property
       game.stadium = stadiumsFiltered[i];
-
-      // ---------- Insert information to database -----------------
-      // AWAY TEAM
-      knex('teams')
-        .where('abbr_name', game.away.abbrev)
-        .first()
-        .then((team) => {
-          // If there are no teams with that name, create it
-          if (!team) {
-            // check to see if the team is ranked or not first before entering in DB
-            if (game.away.rank === 'unranked') {
-              knex('teams')
-                .insert({
-                  team_name: game.away.team_name,
-                  abbr_name: game.away.abbrev,
-                  league: 'NCAA',
-                  locale: game.away.team_location.join(' '),
-                  record: game.away.record
-                })
-                .then(t => t);
-            } else {
-              knex('teams')
-                .insert({
-                  team_name: game.away.team_name,
-                  abbr_name: game.away.abbrev,
-                  league: 'NCAA',
-                  record: game.away.record,
-                  locale: game.away.team_location.join(' '),
-                  rank: game.away.rank
-                })
-                .then(t => t);
-            }
-          } else {
-            // update existing teams rank and record if they exist
-            if (game.away.rank === 'unranked') {
-              // make their rank null and update record
-              knex('teams')
-                .where('abbr_name', team.abbr_name)
-                .andWhere('league', 'NCAA')
-                .first()
-                .update({
-                  rank: null,
-                  record: game.away.record
-                });
-              return;
-            }
-            knex('teams')
-              .where('abbr_name', team.abbr_name)
-              .andWhere('league', 'NCAA')
-              .first()
-              .update({
-                rank: game.away.rank,
-                record: game.away.record
-              });
-          }
-        });
-
-      // HOME TEAM
-      knex('teams')
-        .where('abbr_name', game.home.abbrev)
-        .first()
-        .then((team) => {
-          // If there are no teams with that name, create it
-          if (!team) {
-            // check to see if the team is ranked or not first before entering in DB
-            if (game.home.rank === 'unranked') {
-              knex('teams')
-                .insert({
-                  team_name: game.home.team_name,
-                  abbr_name: game.home.abbrev,
-                  league: 'NCAA',
-                  locale: game.home.team_location.join(' '),
-                  record: game.home.record
-                })
-                .then(t => t);
-            } else {
-              knex('teams')
-                .insert({
-                  team_name: game.home.team_name,
-                  abbr_name: game.home.abbrev,
-                  league: 'NCAA',
-                  record: game.home.record,
-                  locale: game.home.team_location.join(' '),
-                  rank: game.home.rank
-                })
-                .then(t => t);
-            }
-          } else {
-            // update existing teams rank and record if they exist
-            if (game.home.rank === 'unranked') {
-              // make their rank null and update record
-              knex('teams')
-                .where('abbr_name', team.abbr_name)
-                .andWhere('league', 'NCAA')
-                .first()
-                .update({
-                  rank: null,
-                  record: game.home.record
-                })
-                .then(res => res);
-              return;
-            }
-            knex('teams')
-              .where('abbr_name', team.abbr_name)
-              .andWhere('league', 'NCAA')
-              .first()
-              .update({
-                rank: game.home.rank,
-                record: game.home.record
-              })
-              .then(res => res);
-          }
-        });
-
-      // Add the matchups
-      knex('teams').where('abbr_name', game.away.abbrev).andWhere('league', 'NCAA').first().then((awayTeam) => {
-        knex('teams').where('abbr_name', game.home.abbrev).andWhere('league', 'NCAA').first().then((homeTeam) => {
-          if(!awayTeam || !homeTeam) {
-            console.log(`problem with ${game.away.abbrev} or ${game.home.abbrev}`);
-          } else {
-            knex('matchups')
-              .insert({
-                season_id: seasonId,
-                home_team_id: homeTeam.id,
-                away_team_id: awayTeam.id,
-                week,
-                match: matchNumber += 1,
-                location: game.stadium
-              })
-              .then(res => res)
-              .catch(mis => mis);
-          }
-        });
-      });
-      // Assign game object to each row
       schedule[i] = game;
+    }
+    console.log(schedule);
+    fs.writeFile(`${__dirname}/json/week_${week}_year_${year}_ncaa.json`, JSON.stringify(schedule), 'utf-8', (errorMessage) => {
+      console.log(errorMessage);
     });
+    return schedule;
   });
-  return 'done i think';
 }
 
-memwatch.on('leak', (info) => {
-  console.error('Memory leak detected:\n', info);
-});
+scrapeCollege(currentYear, 1, 2);
 
-scrapeCollege(2017, 2, 2);
+module.exports = scrapeCollege;

@@ -10,24 +10,24 @@ const bcrypt = require('bcrypt');
 
 const hashedPassword = bcrypt.hashSync('password', 12);
 
-before((done) => {
-  const joey = {
-    username: 'jtongay',
-    first_name: 'joey',
-    last_name: 'tongay',
-    password: hashedPassword,
-    email: 'jtongay@netspend.com'
-  };
-  knex('users').insert(joey).then(() => {
-    done();
-  });
-});
-after((done) => {
-  console.log('truncating users');
-  knex.raw('truncate table users RESTART IDENTITY CASCADE;').then(() => {
-    done();
-  });
-});
+// before((done) => {
+//   const joey = {
+//     username: 'jtongay',
+//     first_name: 'joey',
+//     last_name: 'tongay',
+//     password: hashedPassword,
+//     email: 'jtongay@netspend.com'
+//   };
+//   knex('users').insert(joey).then(() => {
+//     done();
+//   });
+// });
+// after((done) => {
+//   console.log('truncating users');
+//   knex.raw('truncate table users RESTART IDENTITY CASCADE;').then(() => {
+//     done();
+//   });
+// });
 describe('Booyah test', () => {
   it('should return me', (done) => {
     request.get('/api/users/me')

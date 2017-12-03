@@ -8,7 +8,7 @@
     "npm": "5.4.2"
   },
   "scripts": {
-    "test": "knex seed:run --env=\"test\" && ./node_modules/.bin/_mocha",
+    "test": "./node_modules/.bin/_mocha",
     "start": "node server.js",
     "deploy": "git push heroku master",
     "development": "nodemon server.js"

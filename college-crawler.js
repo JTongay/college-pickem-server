@@ -96,6 +96,6 @@ function scrapeCollege(year, week, seasonId) {
   });
 }
 
-scrapeCollege(currentYear, 1, 2);
+// scrapeCollege(currentYear, 1, 2);
 
 module.exports = scrapeCollege;

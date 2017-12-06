@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="339694e6-c83e-436c-b0fa-49883069b422" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -49,7 +49,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ncaa.ejs" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ncaa.ejs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/emails/reminders/ncaa.ejs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="15">
@@ -79,11 +79,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="765">
-              <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+            <state relative-caret-position="105">
+              <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -119,13 +119,13 @@
         <option value="$PROJECT_DIR$/test/users.spec.js" />
         <option value="$PROJECT_DIR$/test/matchups.spec.js" />
         <option value="$PROJECT_DIR$/college-crawler.js" />
-        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/dateTest.js" />
         <option value="$PROJECT_DIR$/scripts/insertTeams.js" />
         <option value="$PROJECT_DIR$/json/dates.json" />
         <option value="$PROJECT_DIR$/scripts/insertMatchups.js" />
         <option value="$PROJECT_DIR$/server.js" />
         <option value="$PROJECT_DIR$/emails/reminders/ncaa.ejs" />
+        <option value="$PROJECT_DIR$/package.json" />
       </list>
     </option>
   </component>
@@ -241,12 +241,12 @@
       <workItem from="1512095290219" duration="12838000" />
       <workItem from="1512264478741" duration="200000" />
       <workItem from="1512266385674" duration="2558000" />
-      <workItem from="1512328261794" duration="7300000" />
+      <workItem from="1512328261794" duration="7510000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23262000" />
+    <option name="totallyTimeSpent" value="23472000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -555,14 +555,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/json/dates.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
@@ -599,6 +591,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
           <folding />
         </state>
       </provider>

@@ -24,6 +24,7 @@ const session = require('./routes/sessions');
 const season = require('./routes/seasons');
 const matchups = require('./routes/matchups');
 const scores = require('./routes/scores');
+const picks = require('./routes/picks');
 
 
 // Use Middleware
@@ -38,6 +39,7 @@ app.use((req, res, next) => {
 // Use Routes
 app.use('/api', football);
 app.use('/api/users', users);
+app.use('/api/users/:user_id/seasons/:season_id/picks', picks);
 app.use('/api/session', session);
 app.use('/api/season', season);
 app.use('/api/season/:season_id/score', scores);

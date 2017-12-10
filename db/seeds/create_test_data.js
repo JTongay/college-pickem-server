@@ -4,6 +4,7 @@ const collegeTeams = require('../dummyData/collegeTeams');
 const matchups = require('../dummyData/matchups');
 const users = require('../dummyData/users');
 const userScores = require('../dummyData/userScores');
+const picksData = require('../dummyData/picks');
 
 exports.seed = (knex, Promise) =>
   // Deletes ALL existing entries
@@ -24,6 +25,7 @@ exports.seed = (knex, Promise) =>
                         knex('teams').insert(nflTeams).then(res => res),
                         knex('teams').insert(collegeTeams).then(res => res),
                         knex('matchups').insert(matchups).then(res => res),
+                        knex('user_pick').insert(picksData).then(res => res),
                         knex('user_score').insert(userScores).then(res => res)
                       ]).then(() => {
                         console.log('success'); //eslint-disable-line

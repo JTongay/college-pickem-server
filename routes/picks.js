@@ -8,12 +8,20 @@ const router = express.Router({
 const knex = require('../db/conf');
 
 router.post('/', (req, res) => {
-  const userId = req.params.user_id;
-  const seasonId = req.params.season_id;
-  knex('user_pick').where('user_id', userId).andWhere('season_id', seasonId)
-    .innerJoin('users', 'user_pick.user_id', 'users.id')
-    .then((user) => {
-      res.json(user);
+  // const userId = req.params.user_id;
+  // const seasonId = req.params.season_id;
+  const requestBody = req.body;
+  knex('user_pick')
+    .insert(requestBody)
+    .then(() => {
+      res.status(200).json({
+        message: 'success'
+      });
+    })
+    .catch((err) => {
+      res.status(400).json({
+        message: `something went wrong: ${err}`
+      });
     });
 });
 

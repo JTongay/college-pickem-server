@@ -99,6 +99,7 @@ cron.schedule('* * * Aug,Dec Mon', () => {
       console.log(info); // eslint-disable-line
     }
   });
+
 });
 
 // NFL scoring
@@ -152,6 +153,12 @@ cron.schedule('* * 13 Aug,Dec Tue', () => {
   const parsed = JSON.parse(mainData);
   insertTeams('ncaa', parsed.collegeWeek, currentYear);
   insertMatchups('ncaa', parsed.collegeWeek, currentYear, parsed.collegeSeasonId);
+});
+
+cron.schedule('* * 12 Aug,Dec Thu', () => {
+  /*
+  Send out a reminder if the user hasn't made any picks.
+   */
 });
 
 // Start the server

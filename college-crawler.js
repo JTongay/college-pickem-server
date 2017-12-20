@@ -3,7 +3,6 @@ const cheerio = require('cheerio');
 const _ = require('lodash');
 const knex = require('./db/conf');
 const moment = require('moment');
-const memwatch = require('memwatch-next');
 const fs = require('fs');
 const currentYear = moment().year()
 

@@ -106,6 +106,8 @@ router.put('/activate', (req, res) => {
 
 router.put('/deactivate', (req, res) => {
   const requestID = req.body.id;
+  console.log(req.body);
+  // console.log(requestID);
   knex('seasons').where('id', requestID).first().then((seas) => {
     if (!seas) {
       res.status(404).json({

@@ -7,6 +7,9 @@ const router = express.Router({
 // const Session = require('../models/Session');
 const knex = require('../db/conf');
 
+/*
+- Returns a list of all seasons
+*/
 router.get('/', (req, res) => {
   knex('seasons').then((season) => {
     if (!season) {
@@ -24,6 +27,42 @@ router.get('/', (req, res) => {
     });
   });
 });
+
+/*
+- Returns the current college season
+*/
+router.get('/college', (req, res) => {
+  knex('seasons')
+    .where('league', 'NCAA')
+    .andWhere('active_season', true)
+    .first()
+    .then((season) => {
+      res.status(200).json(season);
+    })
+    .catch((e) => {
+      res.status(500).json(e);
+    });
+});
+
+/*
+- Returns the current NFL season
+*/
+router.get('/nfl', (req, res) => {
+  knex('seasons')
+    .where('league', 'NFL')
+    .andWhere('active_season', true)
+    .first()
+    .then((season) => {
+      res.status(200).json(season);
+    })
+    .catch((e) => {
+      res.status(500).json(e);
+    });
+});
+
+/*
+- Returns a season by id
+*/
 
 router.get('/:id', (req, res) => {
   const paramsID = req.params.id;

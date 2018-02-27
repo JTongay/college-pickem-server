@@ -23,3 +23,8 @@
 - Building a web scraper due to a non-existent free sports schedule API.
 - Utilizing multiple Cron Jobs for scraping, scoring, and sending email reminders.
 - Strategy of data structure.
+
+### Features Done
+- Creating Account
+- Login
+- Scraping college football schedule and returning results

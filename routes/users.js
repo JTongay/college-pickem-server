@@ -9,6 +9,13 @@ const Session = require('../models/Session');
 const knex = require('../db/conf');
 const bcrypt = require('bcrypt');
 
+//apd-example
+/**
+ * @api {get} /url [title]
+ * @apiName uniqueName
+ * @apiGroup group
+ *
+ */
 router.get('/me', (req, res) => {
   // const me = User.getJoey();
   // res.json(me);
@@ -16,6 +23,7 @@ router.get('/me', (req, res) => {
     res.json(user);
   });
 });
+
 
 router.get('/:id', (req, res) => {
   const id = req.params.id;

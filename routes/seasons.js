@@ -60,6 +60,18 @@ router.get('/nfl', (req, res) => {
     });
 });
 
+router.get('/active-seasons', (req, res) => {
+  knex('seasons')
+    .where('active_season', true)
+    .first()
+    .then((season) => {
+      res.status(200).json(season);
+    })
+    .catch((e) => {
+      res.status(500).json(e);
+    });
+});
+
 /*
 - Returns a season by id
 */

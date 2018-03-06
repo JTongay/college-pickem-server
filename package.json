@@ -11,7 +11,14 @@
     "test": "./node_modules/.bin/_mocha --exit",
     "start": "node server.js",
     "deploy": "git push heroku master",
-    "development": "nodemon server.js"
+    "development": "nodemon server.js",
+    "doc": "apidoc -i football-pickem-be/**/*.js -o apidoc/"
+  },
+  "apidoc": {
+    "title": "Football Picks API Documentation",
+    "url": "localhost:3000/api",
+    "name": "Football Picks API",
+    "description": "A web scraper/API that generates the football schedule for top 25 NCAA teams and all NFL teams",
   },
   "keywords": [],
   "author": "https://github.com/JTongay",

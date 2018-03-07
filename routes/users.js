@@ -11,9 +11,9 @@ const bcrypt = require('bcrypt');
 
 //apd-example
 /**
- * @api {get} /url [title]
- * @apiName uniqueName
- * @apiGroup group
+ * @api {get} users/me Request main test user
+ * @apiName GetJoey
+ * @apiGroup testing
  *
  */
 router.get('/me', (req, res) => {
@@ -24,6 +24,49 @@ router.get('/me', (req, res) => {
   });
 });
 
+/**
+ * @api {get} users/:id Request single user by id
+ * @apiName GetUser
+ * @apiGroup Users
+ *
+ * @apiParam {Number} id Users unique ID.
+ *
+ * @apiSuccess {Number} status Status code
+ * @apiSuccess {Object} response Successful response object with user data
+ * @apiSuccess {Number} response.id Users unique id
+ * @apiSuccess {String} response.first_name Users first name
+ * @apiSuccess {String} response.last_name Users last name
+ * @apiSuccess {String} response.username Users user name
+ * @apiSuccess {String} response.email Users email
+ * @apiSuccess {String} response.password Users hashed password
+ * @apiSuccess {Date} response.created_at Date of users account creation
+ * @apiSuccess {Date} response.updated_at Date of users last update
+ * @apiSuccess {String} message Success Message
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       status: 200,
+ *       response: {
+ *        id: 1,
+ *        first_name: "firstName",
+ *        last_name: "lastName",
+ *        username: "userName",
+ *        email: "someEmail@email.com",
+ *        password: "hashed password",
+ *        created_at: "2017-12-10T02:33:07.444Z",
+ *        updated_at: "2017-12-10T02:33:07.444Z"
+ *       },
+ *       message: "success"
+ *     }
+ * @apiError UserNotFound The id of the User was not found.
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       status: 404,
+ *       response: "no user found with id: 100",
+ *       message: "error"
+ *     }
+ */
 
 router.get('/:id', (req, res) => {
   const id = req.params.id;

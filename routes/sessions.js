@@ -7,6 +7,43 @@ const Session = require('../models/Session');
 const knex = require('../db/conf');
 const bcrypt = require('bcrypt');
 
+/**
+ * @api {post} /session/login Logs a user in
+ * @apiName Login
+ * @apiGroup Auth
+
+ * @apiParam {Object} request The payload of the request.
+ * @apiParam {String} request.userName The username of a given user
+ * @apiParam {String} request.password The users password
+
+ * @apiSuccess {Number} status Status code
+ * @apiSuccess {String} message Success Message
+ * @apiSuccess {String} token Access token
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       status: 200,
+ *       message: "success",
+ *       token: "access token"
+ *      }
+ * @apiError MissingRequiredField The required fields of userName or password are empty
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 400 Not Found
+ *     {
+ *       status: 400,
+ *       message: "you must enter a username and password",
+ *       token: null
+ *     }
+ * @apiError IncorrectUsername/Password The username or password were incorrect
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       status: 404,
+ *       message: 'incorrect username/password',
+ *       token: null
+ *     }
+ */
+
 router.post('/login', (req, res) => {
   const username = req.body.username;
   const password = req.body.password;

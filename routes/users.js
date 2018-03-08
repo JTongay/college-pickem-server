@@ -9,13 +9,7 @@ const Session = require('../models/Session');
 const knex = require('../db/conf');
 const bcrypt = require('bcrypt');
 
-//apd-example
-/**
- * @api {get} users/me Request main test user
- * @apiName GetJoey
- * @apiGroup testing
- *
- */
+// apd-example
 router.get('/me', (req, res) => {
   // const me = User.getJoey();
   // res.json(me);
@@ -25,7 +19,7 @@ router.get('/me', (req, res) => {
 });
 
 /**
- * @api {get} users/:id Request single user by id
+ * @api {get} /users/:id Request single user by id
  * @apiName GetUser
  * @apiGroup Users
  *
@@ -87,6 +81,60 @@ router.get('/:id', (req, res) => {
   });
 });
 
+/**
+ * @api {get} /users/ Request all users
+ * @apiName GetUsers
+ * @apiGroup Users
+ *
+ * @apiSuccess {Number} status Status code
+ * @apiSuccess {Object[]} response Successful response object with user data
+ * @apiSuccess {Number} response.id Users unique id
+ * @apiSuccess {String} response.first_name Users first name
+ * @apiSuccess {String} response.last_name Users last name
+ * @apiSuccess {String} response.username Users user name
+ * @apiSuccess {String} response.email Users email
+ * @apiSuccess {String} response.password Users hashed password
+ * @apiSuccess {Date} response.created_at Date of users account creation
+ * @apiSuccess {Date} response.updated_at Date of users last update
+ * @apiSuccess {String} message Success Message
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       response: [
+ *                  {
+ *                    id: 1,
+ *                    first_name: "Joey",
+ *                    last_name: "Tongay",
+ *                    username: "jtongay",
+ *                    email: "joseph.tongay@gmail.com",
+ *                    password: "hashedPassword",
+ *                    created_at: "2017-12-10T02:33:07.444Z",
+ *                    updated_at: "2017-12-10T02:33:07.444Z"
+ *                  },
+ *                  {
+ *                    id: 2,
+ *                    first_name: "Erin",
+ *                    last_name: "Miller",
+ *                    username: "emiller",
+ *                    email: "erin.miller@junkmail.gmail.com",
+ *                    password: "hashedPassword",
+ *                    created_at: "2017-12-10T02:33:07.444Z",
+ *                    updated_at: "2017-12-10T02:33:07.444Z"
+ *                  }
+ *                ],
+ *                status: 200,
+ *                message: "success"
+ *               }
+ * @apiError UsersNotFound The response of no users found or an error grabbing them.
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       status: 404,
+ *       response: "e",
+ *       message: "Had a hard time finding users"
+ *     }
+ */
+
 router.get('/', (req, res) => {
   knex('users').then((users) => {
     res.status(200).json({
@@ -94,8 +142,78 @@ router.get('/', (req, res) => {
       status: 200,
       message: 'success'
     });
-  });
+  })
+    .catch((e) => {
+      res.status(404).json({
+        response: e,
+        status: 200,
+        message: 'Had a hard time finding users'
+      });
+    });
 });
+
+/**
+ * @api {post} /users/new Creates a new user
+ * @apiName CreateUser
+ * @apiGroup Users
+
+ * @apiParam {Object} request The payload of the request.
+ * @apiParam {String} request.firstName The desired first name of the new user
+ * @apiParam {String} request.lastName The desired last name of the new user
+ * @apiParam {String} request.userName The desired username of the new user
+ * @apiParam {String} request.password The desired password of the new user to be hashed
+ * @apiParam {String} request.email The users email address
+
+ * @apiSuccess {Number} status Status code
+ * @apiSuccess {Object} response Successful response object with user data
+ * @apiSuccess {Number} response.id Users unique id
+ * @apiSuccess {String} response.first_name Users first name
+ * @apiSuccess {String} response.last_name Users last name
+ * @apiSuccess {String} response.username Users user name
+ * @apiSuccess {String} response.email Users email
+ * @apiSuccess {String} response.password Users hashed password
+ * @apiSuccess {Date} response.created_at Date of users account creation
+ * @apiSuccess {Date} response.updated_at Date of users last update
+ * @apiSuccess {String} message Success Message
+ * @apiSuccess {String} token Access token
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       response: {
+ *                    id: 1,
+ *                    first_name: "firstName",
+ *                    last_name: "lastName",
+ *                    username: "userName",
+ *                    email: "someEmail@email.com",
+ *                    password: "hashedPassword",
+ *                    created_at: "2017-12-10T02:33:07.444Z",
+ *                    updated_at: "2017-12-10T02:33:07.444Z"
+ *                  },
+ *       status: 200,
+ *       message: "success",
+ *       token: "access token"
+ *      }
+ * @apiError MissingRequiredField The required fields of userName,
+ * firstName, lastName, password, or email are empty
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       status: 404,
+ *       response: "error",
+ *       message: "missing required field",
+ *       token: null
+ *     }
+ * @apiError UsernameOrEmailExists The username or email already exists
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       status: 404,
+ *       message: 'username or email already exists',
+ *       response: 'error',
+ *       token: null
+ *     }
+ */
 
 router.post('/new', (req, res) => {
   const request = {

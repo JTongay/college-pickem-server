@@ -100,7 +100,6 @@ cron.schedule('* * * Aug,Dec Mon', () => {
       console.log(info); // eslint-disable-line
     }
   });
-
 });
 
 // NFL scoring

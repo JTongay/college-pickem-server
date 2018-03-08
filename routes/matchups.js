@@ -51,17 +51,6 @@ router.get('/', (req, res) => {
     });
 });
 
-/**
-* @api {get} /user/:id Request User information
-* @apiName GetUser
-* @apiGroup User
-*
-* @apiParam {Number} id Users unique ID.
-*
-* @apiSuccess {String} firstname Firstname of the User.
-* @apiSuccess {String} lastname  Lastname of the User.
-*/
-
 router.get('/:id', (req, res) => {
   const seasonId = req.params.season_id;
   const weekId = req.params.id;

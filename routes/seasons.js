@@ -193,12 +193,67 @@ router.get('/nfl', (req, res) => {
     });
 });
 
+/**
+ * @api {get} /season Request all active seasons
+ * @apiName GetActiveSeasons
+ * @apiGroup Seasons
+ *
+ * @apiSuccess {Number} status Status code
+ * @apiSuccess {Object[]} response Successful response object with season data
+ * @apiSuccess {Number} response.id Seasons unique id
+ * @apiSuccess {String} response.league Seasons league (NFL or NCAA only)
+ * @apiSuccess {Date} response.start_date Date of seasons start
+ * @apiSuccess {Date} response.end_date Date of seasons end
+ * @apiSuccess {Boolean} response.active_seasons Seasons active or inactive
+ * @apiSuccess {Date} response.created_at Date of users account creation
+ * @apiSuccess {Date} response.updated_at Date of users last update
+ * @apiSuccess {String} message Success Message
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       response: [
+ *                  {
+ *                    id: 2,
+ *                    league: "NFL",
+ *                    start_date: "2017-10-15T05:00:00.000Z",
+ *                    end_date: "2018-02-25T06:00:00.000Z",
+ *                    active_season: true,
+ *                    created_at: "2017-12-10T02:33:07.447Z",
+ *                    updated_at: "2017-12-10T02:33:07.447Z"
+ *                  },
+ *                  {
+ *                    id: 1,
+ *                    league: "NCAA",
+ *                    start_date: "2017-10-06T05:00:00.000Z",
+ *                    end_date: "2018-02-11T06:00:00.000Z",
+ *                    active_season: true,
+ *                    created_at: "2017-12-10T02:33:07.447Z",
+ *                    updated_at: "2017-12-10T02:33:07.447Z"
+ *                  }
+ *                ],
+ *                status: 200,
+ *                message: "success"
+ *               }
+ * @apiError SeasonsNotFound The response of no seasons found or an error grabbing them.
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       status: 404,
+ *       response: "unexpected error occured",
+ *       message: "error"
+ *     }
+ */
+
 router.get('/active-seasons', (req, res) => {
   knex('seasons')
     .where('active_season', true)
     .first()
     .then((season) => {
-      res.status(200).json(season);
+      res.status(200).json({
+        status: 200,
+        response: season,
+        message: 'success'
+      });
     })
     .catch((e) => {
       res.status(500).json(e);

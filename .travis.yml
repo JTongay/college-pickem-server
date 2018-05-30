@@ -9,7 +9,7 @@ before_script:
   psql -c 'create database football_game_test;' -U postgres
 scripts:
   npm test
-deploy:
-  provider: heroku
-  api_key:
-    secure: process.env.HEROKU_SECRET
+#deploy:
+#  provider: heroku
+#  api_key:
+#    secure: process.env.HEROKU_SECRET

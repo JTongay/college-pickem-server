@@ -26,7 +26,7 @@ const moment = require('moment');
 //   });
 // });
 
-describe('Seasons', () => {
+xdescribe('Seasons', () => {
   describe('/ GET', () => {
     it('Returns a list of seasons', (done) => {
       request.get('/api/season/')

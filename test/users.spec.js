@@ -28,7 +28,7 @@ const hashedPassword = bcrypt.hashSync('password', 12);
 //     done();
 //   });
 // });
-describe('Booyah test', () => {
+xdescribe('Booyah test', () => {
   it('should return me', (done) => {
     request.get('/api/users/me')
       .expect(200)
@@ -44,7 +44,7 @@ describe('Booyah test', () => {
 });
 
 
-describe('Users', () => {
+xdescribe('Users', () => {
   describe('POST /new', () => {
     it('should create a new user', (done) => {
       const sampleRequest = {

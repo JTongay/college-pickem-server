@@ -91,9 +91,10 @@ const createTestUser = (request) => {
 };
 
 const getJoey = () => {
-  knex('users').where('username', 'jtongay').first().then((user) => {
-    // console.log(user);
-    return user;
+  return new Promise((resolve, reject) => {
+    knex('users').where('username', 'jtongay').first()
+      .then(user => resolve(user))
+      .catch(e => reject(e));
   });
 };
 

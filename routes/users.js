@@ -4,18 +4,18 @@ const router = express.Router({
   mergeParams: true
 });
 // const Session = require('../models/Session');
-// const User = require('../models/User');
+const User = require('../models/User');
 const Session = require('../models/Session');
 const knex = require('../db/conf');
 const bcrypt = require('bcrypt');
 
 // apd-example
 router.get('/me', (req, res) => {
-  // const me = User.getJoey();
-  // res.json(me);
-  knex('users').where('username', 'jtongay').first().then((user) => {
-    res.json(user);
-  });
+  User.getJoey()
+    .then((data) => {
+      res.json(data);
+    })
+    .catch(e => res.json(e));
 });
 
 /**

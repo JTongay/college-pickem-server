@@ -8,7 +8,7 @@ const request = supertest.agent(app);
 // const knex = require('../db/conf');
 // const bcrypt = require('bcrypt');
 
-describe('Session', () => {
+xdescribe('Session', () => {
   describe('POST /login', () => {
     it('should log a user in', (done) => {
       const sampleRequest = {

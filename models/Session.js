@@ -38,10 +38,17 @@ const login = (user, pass) => {
 const signToken = id => jwt.sign({ id }, process.env.JWT_SECRET);
 const checkToken = token => jwt.verify(token, process.env.JWT_SECRET);
 
+const missingUsernamePass = () => ({
+  status: 400,
+  message: 'you must enter a username and password',
+  token: null
+});
+
 const Session = {
   login,
   signToken,
-  checkToken
+  checkToken,
+  missingUsernamePass
 };
 
 module.exports = Session;

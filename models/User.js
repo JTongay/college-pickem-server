@@ -4,52 +4,58 @@ const bcrypt = require('bcrypt');
 const Session = require('./Session');
 
 const getUser = (id) => {
-  knex('users').where('id', id).first()
-    .then(user => user)
-    .catch(err => err);
+  return new Promise((resolve, reject) => {
+    knex('users').where('id', id).first()
+      .then(user => resolve(user))
+      .catch(err => reject(err));
+  });
 };
 
 const getAllUsers = () => {
-  knex('users').then(user => user).catch(err => err);
+  return new Promise((resolve, reject) => {
+    knex('users').then(user => resolve(user)).catch(err => reject(err));
+  });
 };
 
 const createUser = (request) => {
-  knex('users').where('username', request.userName).first().then((result) => {
-    // go ahead and create the user if nothing returned
-    if (!result) {
-      const hashPass = bcrypt.hashSync(request.password, 12);
-      knex('users').insert({
-        first_name: request.firstName,
-        last_name: request.lastName,
-        username: request.userName,
-        password: hashPass,
-        email: request.email
-      }).then((user) => {
-        console.log(user, 'getting in here');
-        // sign a token and send it to the FE
-        const token = Session.signToken(user.id);
-        return {
-          status: 200,
-          message: 'success',
-          response: user,
-          token
-        };
-      })
-        .catch(err => ({
-          // catch an error if it happens. Maybe a different status code?
-          status: 404,
-          message: 'failure',
-          response: err,
-          token: null
-        }));
-    }
-    // throw an error if the username already exists
-    return {
-      status: 404,
-      message: 'username already exists',
-      response: 'error',
-      token: null
-    };
+  return new Promise((resolve, reject) => {
+    knex('users').where('username', request.userName).first().then((result) => {
+      // go ahead and create the user if nothing returned
+      if (!result) {
+        const hashPass = bcrypt.hashSync(request.password, 12);
+        knex('users').insert({
+          first_name: request.firstName,
+          last_name: request.lastName,
+          username: request.userName,
+          password: hashPass,
+          email: request.email
+        }).then((user) => {
+          console.log(user, 'getting in here');
+          // sign a token and send it to the FE
+          const token = Session.signToken(user.id);
+          resolve({
+            status: 200,
+            message: 'success',
+            response: user,
+            token
+          });
+        })
+          .catch(err => reject({
+            // catch an error if it happens. Maybe a different status code?
+            status: 404,
+            message: 'failure',
+            response: err,
+            token: null
+          }));
+      }
+      // throw an error if the username already exists
+      reject({
+        status: 404,
+        message: 'username already exists',
+        response: 'error',
+        token: null
+      });
+    });
   });
 };
 
@@ -95,7 +101,7 @@ const getJoey = () => {
     knex('users').where('username', 'jtongay').first()
       .then(user => resolve(user))
       .catch(e => reject(e));
-  });
+  })
 };
 
 // const deleteUser = (id) => {

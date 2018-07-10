@@ -12,8 +12,8 @@ describe.only('Just pass already', () => {
   it('should make travis happy', (done) => {
     expect(true).to.equal(true);
     done();
-  })
-})
+  });
+});
 
 xdescribe('Matchups', () => {
   describe('/ GET', () => {

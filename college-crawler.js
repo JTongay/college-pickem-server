@@ -4,7 +4,7 @@ const _ = require('lodash');
 const knex = require('./db/conf');
 const moment = require('moment');
 const fs = require('fs');
-const currentYear = moment().year()
+const currentYear = moment().year();
 
 function scrapeCollege(year, week, seasonId) {
   request(`http://www.foxsports.com/college-football/schedule?season=${year}&seasonType=1&week=${week}&group=0`, (err, body) => {

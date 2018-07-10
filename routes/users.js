@@ -8,6 +8,7 @@ const User = require('../models/User');
 const Session = require('../models/Session');
 const knex = require('../db/conf');
 const bcrypt = require('bcrypt');
+const request = require('request-promise');
 
 // apd-example
 router.get('/me', (req, res) => {
@@ -16,6 +17,29 @@ router.get('/me', (req, res) => {
       res.json(data);
     })
     .catch(e => res.json(e));
+});
+
+router.get('/test', (req, res) => {
+  const options = {
+    uri: 'https://api.foxsports.com/sportsdata/v1/football/cfb/events.json',
+    qs: {
+      season: '2018',
+      seasonType: 'reg',
+      top: '25',
+      week: '1',
+      enable: 'teamdetails'
+    },
+    headers: {
+      'User-Agent': 'Request-Promise',
+      'X-Api-Key': process.env.NEWS_API_KEY
+    }
+  };
+  console.log(process.env.NEWS_API_KEY);
+  request(options).then((data) => {
+    res.send(data);
+  }).catch((e) => {
+    res.send(e)
+  });
 });
 
 /**

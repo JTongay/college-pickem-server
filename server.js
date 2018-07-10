@@ -47,119 +47,119 @@ app.use('/api/season/:season_id/score', scores);
 app.use('/api/season/:season_id/matchup', matchups);
 
 // Crons
-cron.schedule('* * * Feb,Aug Sun', () => {
-  /*
-  Send an email out every sunday from February to August
-  reminding me to set the start dates for each league
-  */
-  const transporter = nodeMailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: process.env.APP_EMAIL,
-      pass: process.env.APP_PASSWORD
-    }
-  });
-  const mailOptions = {
-    from: process.env.APP_EMAIL,
-    to: process.env.APP_EMAIL,
-    subject: 'Test Email',
-    html: '<h1>Heres a friendly reminder</h1>'
-  };
-  transporter.sendMail(mailOptions, (err, info) => {
-    if (err) {
-      console.log(err); // eslint-disable-line
-    } else {
-      console.log(info); // eslint-disable-line
-    }
-  });
-});
-
-// College Scoring
-cron.schedule('* * * Aug,Dec Mon', () => {
-  /*
-  Do the scoring for college every monday from August to December. Make sure you have it
-  check if the season is active or not.
-  */
-  const transporter = nodeMailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: process.env.APP_EMAIL,
-      pass: process.env.APP_PASSWORD
-    }
-  });
-  const mailOptions = {
-    from: process.env.APP_EMAIL,
-    to: process.env.APP_EMAIL,
-    subject: 'Test Email',
-    html: '<h1>Heres an email for scoring NCAA</h1>'
-  };
-  transporter.sendMail(mailOptions, (err, info) => {
-    if (err) {
-      console.log(err); // eslint-disable-line
-    } else {
-      console.log(info); // eslint-disable-line
-    }
-  });
-});
-
-// NFL scoring
-cron.schedule('* * * Sep,Jan Tue', () => {
-  /*
-  Do the scoring for nfl game every tuesday from September to January. Make sure you
-  have it check if the season is active or not.
-  */
-  const transporter = nodeMailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: process.env.APP_EMAIL,
-      pass: process.env.APP_PASSWORD
-    }
-  });
-  const mailOptions = {
-    from: process.env.APP_EMAIL,
-    to: process.env.APP_EMAIL,
-    subject: 'Test Email',
-    html: '<h1>Heres an email for scoring NFL</h1>'
-  };
-  transporter.sendMail(mailOptions, (err, info) => {
-    if (err) {
-      console.log(err); // eslint-disable-line
-    } else {
-      console.log(info); // eslint-disable-line
-    }
-  });
-});
-
-// College scraping
-cron.schedule('* * 12 Aug,Dec Tue', () => {
-  /*
-  Do the scraping for ncaa game every tuesday at noon from September to January. Make sure you
-  have it check if the season is active or not.
-  */
-  const currentYear = moment().year();
-  const mainData = fs.readFileSync(`${__dirname}/json/dates.json`, 'utf-8');
-  const parsed = JSON.parse(mainData);
-  collegeCrawler(currentYear, parsed.collegeWeek, parsed.collegeSeasonId);
-});
-
-// Insert each new json file into db
-cron.schedule('* * 13 Aug,Dec Tue', () => {
-  /*
-  Do the DB stuff for each game every tuesday at 1pm from September to January. Make sure you
-  have it check if the season is active or not.
-  */
-  const currentYear = moment().year();
-  const mainData = fs.readFileSync(`${__dirname}/json/dates.json`, 'utf-8');
-  const parsed = JSON.parse(mainData);
-  insertTeams('ncaa', parsed.collegeWeek, currentYear);
-  insertMatchups('ncaa', parsed.collegeWeek, currentYear, parsed.collegeSeasonId);
-});
-
-cron.schedule('* * 12 Aug,Dec Thu', () => {
-  /*
-  Send out a reminder if the user hasn't made any picks.
-   */
-});
+// cron.schedule('* * * Feb,Aug Sun', () => {
+//   /*
+//   Send an email out every sunday from February to August
+//   reminding me to set the start dates for each league
+//   */
+//   const transporter = nodeMailer.createTransport({
+//     service: 'gmail',
+//     auth: {
+//       user: process.env.APP_EMAIL,
+//       pass: process.env.APP_PASSWORD
+//     }
+//   });
+//   const mailOptions = {
+//     from: process.env.APP_EMAIL,
+//     to: process.env.APP_EMAIL,
+//     subject: 'Test Email',
+//     html: '<h1>Heres a friendly reminder</h1>'
+//   };
+//   transporter.sendMail(mailOptions, (err, info) => {
+//     if (err) {
+//       console.log(err); // eslint-disable-line
+//     } else {
+//       console.log(info); // eslint-disable-line
+//     }
+//   });
+// });
+//
+// // College Scoring
+// cron.schedule('* * * Aug,Dec Mon', () => {
+//   /*
+//   Do the scoring for college every monday from August to December. Make sure you have it
+//   check if the season is active or not.
+//   */
+//   const transporter = nodeMailer.createTransport({
+//     service: 'gmail',
+//     auth: {
+//       user: process.env.APP_EMAIL,
+//       pass: process.env.APP_PASSWORD
+//     }
+//   });
+//   const mailOptions = {
+//     from: process.env.APP_EMAIL,
+//     to: process.env.APP_EMAIL,
+//     subject: 'Test Email',
+//     html: '<h1>Heres an email for scoring NCAA</h1>'
+//   };
+//   transporter.sendMail(mailOptions, (err, info) => {
+//     if (err) {
+//       console.log(err); // eslint-disable-line
+//     } else {
+//       console.log(info); // eslint-disable-line
+//     }
+//   });
+// });
+//
+// // NFL scoring
+// cron.schedule('* * * Sep,Jan Tue', () => {
+//   /*
+//   Do the scoring for nfl game every tuesday from September to January. Make sure you
+//   have it check if the season is active or not.
+//   */
+//   const transporter = nodeMailer.createTransport({
+//     service: 'gmail',
+//     auth: {
+//       user: process.env.APP_EMAIL,
+//       pass: process.env.APP_PASSWORD
+//     }
+//   });
+//   const mailOptions = {
+//     from: process.env.APP_EMAIL,
+//     to: process.env.APP_EMAIL,
+//     subject: 'Test Email',
+//     html: '<h1>Heres an email for scoring NFL</h1>'
+//   };
+//   transporter.sendMail(mailOptions, (err, info) => {
+//     if (err) {
+//       console.log(err); // eslint-disable-line
+//     } else {
+//       console.log(info); // eslint-disable-line
+//     }
+//   });
+// });
+//
+// // College scraping
+// cron.schedule('* * 12 Aug,Dec Tue', () => {
+//   /*
+//   Do the scraping for ncaa game every tuesday at noon from September to January. Make sure you
+//   have it check if the season is active or not.
+//   */
+//   const currentYear = moment().year();
+//   const mainData = fs.readFileSync(`${__dirname}/json/dates.json`, 'utf-8');
+//   const parsed = JSON.parse(mainData);
+//   collegeCrawler(currentYear, parsed.collegeWeek, parsed.collegeSeasonId);
+// });
+//
+// // Insert each new json file into db
+// cron.schedule('* * 13 Aug,Dec Tue', () => {
+//   /*
+//   Do the DB stuff for each game every tuesday at 1pm from September to January. Make sure you
+//   have it check if the season is active or not.
+//   */
+//   const currentYear = moment().year();
+//   const mainData = fs.readFileSync(`${__dirname}/json/dates.json`, 'utf-8');
+//   const parsed = JSON.parse(mainData);
+//   insertTeams('ncaa', parsed.collegeWeek, currentYear);
+//   insertMatchups('ncaa', parsed.collegeWeek, currentYear, parsed.collegeSeasonId);
+// });
+//
+// cron.schedule('* * 12 Aug,Dec Thu', () => {
+//   /*
+//   Send out a reminder if the user hasn't made any picks.
+//    */
+// });
 
 // Start the server
 app.listen(port, () => {

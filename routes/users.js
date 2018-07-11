@@ -21,24 +21,29 @@ router.get('/me', (req, res) => {
 
 router.get('/test', (req, res) => {
   const options = {
-    uri: 'https://api.foxsports.com/sportsdata/v1/football/cfb/events.json',
-    qs: {
-      season: '2018',
-      seasonType: 'reg',
-      top: '25',
-      week: '1',
-      enable: 'teamdetails'
-    },
+    uri: `https://api.sportradar.us/nfl-t1/2017/reg/1/schedule.json?api_key=${process.env.NFL_API_KEY}`,
     headers: {
-      'User-Agent': 'Request-Promise',
-      'X-Api-Key': process.env.NEWS_API_KEY
+      'User-Agent': 'Request-Promise'
     }
   };
-  console.log(process.env.NEWS_API_KEY);
   request(options).then((data) => {
     res.send(data);
   }).catch((e) => {
-    res.send(e)
+    res.send(e);
+  });
+});
+
+router.get('/yo', (req, res) => {
+  const options = {
+    uri: `https://api.sportradar.us/ncaafb-t1/2017/REG/1/schedule.json?api_key=${process.env.COLLEGE_API_KEY}`,
+    headers: {
+      'User-Agent': 'Request-Promise'
+    }
+  };
+  request(options).then((data) => {
+    res.send(data);
+  }).catch((e) => {
+    res.send(e);
   });
 });
 

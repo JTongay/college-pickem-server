@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="339694e6-c83e-436c-b0fa-49883069b422" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/package-lock.json" afterPath="$PROJECT_DIR$/package-lock.json" />
-      <change beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -20,6 +20,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="picks.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/picks.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1219">
+              <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="users.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/users.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -60,7 +70,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="20180710211645_create_team_season_table.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="20180710211645_create_team_season_table.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/db/migrations/20180710211645_create_team_season_table.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="184">
@@ -70,11 +80,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="package-lock.json" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/package-lock.json">
+      <file leaf-file-name="matchups.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/matchups.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="397">
-              <caret line="29" column="26" lean-forward="false" selection-start-line="29" selection-start-column="26" selection-end-line="29" selection-end-column="26" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="7" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -85,16 +95,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="73">
               <caret line="7" column="25" lean-forward="false" selection-start-line="4" selection-start-column="4" selection-end-line="7" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="insertMatchups.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scripts/insertMatchups.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="381">
-              <caret line="20" column="28" lean-forward="false" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -177,6 +177,7 @@
         <option value="$PROJECT_DIR$/models/Nfl.js" />
         <option value="$PROJECT_DIR$/db/migrations/20180710211645_create_team_season_table.js" />
         <option value="$PROJECT_DIR$/package-lock.json" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -224,12 +225,6 @@
               <item name="football-pickem-be" type="b2602c69:ProjectViewProjectNode" />
               <item name="football-pickem-be" type="462c0819:PsiDirectoryNode" />
               <item name="db" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="football-pickem-be" type="b2602c69:ProjectViewProjectNode" />
-              <item name="football-pickem-be" type="462c0819:PsiDirectoryNode" />
-              <item name="db" type="462c0819:PsiDirectoryNode" />
-              <item name="migrations" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="football-pickem-be" type="b2602c69:ProjectViewProjectNode" />
@@ -307,12 +302,12 @@
       <workItem from="1526858759536" duration="721000" />
       <workItem from="1527642961907" duration="2168000" />
       <workItem from="1527792181779" duration="1487000" />
-      <workItem from="1531098196623" duration="5411000" />
+      <workItem from="1531098196623" duration="6124000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40856000" />
+    <option name="totallyTimeSpent" value="41569000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -455,14 +450,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/picks.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1219">
-          <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/users.spec.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="92">
@@ -511,17 +498,6 @@
         <state relative-caret-position="483">
           <caret line="21" column="42" lean-forward="false" selection-start-line="21" selection-start-column="42" selection-end-line="21" selection-end-column="42" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="-236">
-            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-            <folding />
-          </first_editor>
-          <second_editor />
         </state>
       </provider>
     </entry>
@@ -577,14 +553,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/matchups.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="7" selection-end-column="35" />
           <folding />
         </state>
       </provider>
@@ -709,18 +677,91 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/db/migrations/20180710211645_create_team_season_table.js">
+    <entry file="file://$PROJECT_DIR$/package-lock.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="8" column="28" lean-forward="false" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
+        <state relative-caret-position="115">
+          <caret line="5" column="18" lean-forward="false" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
+          <folding>
+            <element signature="n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#@ladjs/i18n#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#@types/node#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#es-to-primitive#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#escape-html#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#escape-string-regexp#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#eslint#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#eslint-config-airbnb#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#eslint-config-airbnb-base#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#eslint-import-resolver-node#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#eslint-module-utils#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#eslint-plugin-import#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#eslint-plugin-jsx-a11y#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#eslint-plugin-node#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#eslint-plugin-react#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#eslint-restricted-globals#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#eslint-scope#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#espree#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#esprima#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#esquery#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#esrecurse#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#estraverse#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#esutils#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#get-paths#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#getpass#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#glob#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#requires#0;n#!!block;n#glob#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#glob-base#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#glob-parent#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#global-modules#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#global-prefix#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#globals#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#globby#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#graceful-fs#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#graceful-readlink#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#growl#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#har-schema#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#har-validator#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#has#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#has-ansi#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#has-flag#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#has-unicode#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#hawk#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#he#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#hoek#0;n#!!block;n#dependencies#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="506">
+            <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/matchups.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="7" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package-lock.json">
+    <entry file="file://$PROJECT_DIR$/routes/picks.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="29" column="26" lean-forward="false" selection-start-line="29" selection-start-column="26" selection-end-line="29" selection-end-column="26" />
+        <state relative-caret-position="1219">
+          <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/migrations/20180710211645_create_team_season_table.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="8" column="28" lean-forward="false" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
           <folding />
         </state>
       </provider>

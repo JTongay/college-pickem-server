@@ -28,3 +28,6 @@
 - Creating Account
 - Login
 - Scraping college football schedule and returning results
+
+### Link to Docs
+[https://jtongay.github.io/college-pickem-server-docs/index.html]

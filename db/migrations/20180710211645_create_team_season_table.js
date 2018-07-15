@@ -1,4 +1,4 @@
-exports.up = knex => knex.createTableIfNotExists('teams_season', (table) => {
+exports.up = knex => knex.schema.createTableIfNotExists('team_season', (table) => {
   table.increments();
   table.integer('team_id')
     .unsigned()
@@ -18,4 +18,4 @@ exports.up = knex => knex.createTableIfNotExists('teams_season', (table) => {
 });
 
 
-exports.down = knex => knex.dropTableIfExists('teams_season');
+exports.down = knex => knex.schema.dropTableIfExists('team_season');

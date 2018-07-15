@@ -11,12 +11,28 @@ const bcrypt = require('bcrypt');
 const request = require('request-promise');
 
 // apd-example
-router.get('/me', (req, res) => {
-  User.getJoey()
-    .then((data) => {
-      res.json(data);
-    })
-    .catch(e => res.json(e));
+// router.get('/me', (req, res) => {
+//   User.getJoey()
+//     .then((data) => {
+//       res.json(data);
+//     })
+//     .catch(e => res.json(e));
+// });
+
+// router.get('/me', async (req, res) => {
+//   let response;
+//   response = await User.getTest();
+//   !response ? res.status(500).send() : res.json(response);
+// });
+
+router.get('/me', async (req, res) => {
+  let response;
+  try {
+    response = await User.getTest();
+    res.json(response)
+  } catch (e) {
+    res.json(e);
+  }
 });
 
 router.get('/test', (req, res) => {

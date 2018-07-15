@@ -3,6 +3,25 @@ const knex = require('../db/conf');
 const bcrypt = require('bcrypt');
 const Session = require('./Session');
 
+async function getTest() {
+  let result;
+  try {
+   result = await knex.select().from('users').where('id', 1).first();
+   return result;
+  } catch (e) {
+    console.log(e, 'getting error in model');
+    throw e;
+  }
+}
+
+// function getTest() {
+//   return new Promise((resolve, reject) => {
+//     knex('users').where('id', 1).first()
+//       .then(user => resolve(user))
+//       .catch(err => reject(err));
+//   });
+// }
+
 const getUser = (id) => {
   return new Promise((resolve, reject) => {
     knex('users').where('id', id).first()
@@ -114,6 +133,7 @@ const User = {
   createUser,
   editUser,
   createTestUser,
+  getTest,
   getJoey
 };
 

@@ -1,5 +1,4 @@
 const knex = require('../db/conf');
-// const knex = require('knex')(config);
 const bcrypt = require('bcrypt');
 const Session = require('./Session');
 
@@ -14,21 +13,16 @@ async function getTest() {
   }
 }
 
-// function getTest() {
-//   return new Promise((resolve, reject) => {
-//     knex('users').where('id', 1).first()
-//       .then(user => resolve(user))
-//       .catch(err => reject(err));
-//   });
-// }
-
-const getUser = (id) => {
-  return new Promise((resolve, reject) => {
-    knex('users').where('id', id).first()
-      .then(user => resolve(user))
-      .catch(err => reject(err));
-  });
-};
+async function getUser(id) {
+  let result;
+  try {
+    result = knex.select().from('users').where('id', id).first();
+    return result;
+  } catch (e) {
+    console.error(e, `error retrieving user with id: ${id}`);
+    throw e;
+  }
+}
 
 const getAllUsers = () => {
   return new Promise((resolve, reject) => {

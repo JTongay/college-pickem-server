@@ -8,7 +8,7 @@ const request = supertest.agent(app);
 // const knex = require('../db/conf');
 // const moment = require('moment');
 
-describe.only('Just pass already', () => {
+describe('Just pass already', () => {
   it('should make travis happy', (done) => {
     expect(true).to.equal(true);
     done();

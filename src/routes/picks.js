@@ -5,7 +5,7 @@ const router = express.Router({
 });
 // const User = require('../models/User');
 // const Session = require('../models/Session');
-const knex = require('../db/conf');
+const knex = require('../../db/conf');
 
 /*
 @Params user_id, season_id

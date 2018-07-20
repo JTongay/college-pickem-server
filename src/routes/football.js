@@ -6,7 +6,7 @@ const router = express.Router({
 const request = require('tinyreq');
 const cheerio = require('cheerio');
 const _ = require('lodash');
-const knex = require('../db/conf');
+const knex = require('../../db/conf');
 
 const getCollegeSchedule = (url, data, cb) => {
   request(url, (err, body) => {

@@ -1,7 +1,7 @@
 process.env.NODE_ENV = 'test';
 
 const expect = require('chai').expect;
-const app = require('../server');
+const app = require('../src/server');
 const supertest = require('supertest');
 
 const request = supertest.agent(app);

@@ -6,7 +6,7 @@ const router = express.Router({
 // const Session = require('../models/Session');
 const User = require('../models/User');
 const Session = require('../models/Session');
-const knex = require('../db/conf');
+const knex = require('../../db/conf');
 const bcrypt = require('bcrypt');
 const request = require('request-promise');
 

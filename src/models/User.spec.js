@@ -4,7 +4,7 @@ const chai = require('chai');
 
 const expect = chai.expect;
 const User = require('./User');
-const knex = require('../db/conf');
+const knex = require('../../db/conf');
 
 describe('User model', () => {
 

@@ -1,4 +1,4 @@
-const knex = require('../db/conf');
+const knex = require('../../db/conf');
 const bcrypt = require('bcrypt');
 const Session = require('./Session');
 

@@ -1,4 +1,4 @@
-const knex = require('../db/conf');
+const knex = require('../../db/conf');
 const fs = require('fs');
 
 function insertMatchups (league, week, year, seasonId) {

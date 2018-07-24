@@ -6,7 +6,7 @@ const expect = chai.expect;
 const User = require('./User');
 const knex = require('../../db/conf');
 
-describe('User model', () => {
+describe('IUserController model', () => {
 
   beforeEach((done) => {
     knex.migrate.latest().then(() => {

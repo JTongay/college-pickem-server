@@ -1,4 +1,5 @@
 // Update with your config settings.
+import { Config } from 'knex';
 
 module.exports = {
 
@@ -9,10 +10,10 @@ module.exports = {
       host: 'localhost',
     },
     migrations: {
-      directory: `${__dirname}/db/migrations`
+      directory: `${__dirname}/src/db/migrations`
     },
     seeds: {
-      directory: `${__dirname}/db/seeds`
+      directory: `${__dirname}/src/db/seeds`
     }
   },
 
@@ -23,10 +24,10 @@ module.exports = {
       host: 'localhost',
     },
     migrations: {
-      directory: `${__dirname}/db/migrations`
+      directory: `${__dirname}/src/db/migrations`
     },
     seeds: {
-      directory: `${__dirname}/db/seeds`
+      directory: `${__dirname}/src/db/seeds`
     }
   },
 
@@ -34,10 +35,10 @@ module.exports = {
     client: 'pg',
     connection: process.env.DATABASE_URL,
     migrations: {
-      directory: `${__dirname}/db/migrations`
+      directory: `${__dirname}/src/db/migrations`
     },
     seeds: {
-      directory: `${__dirname}/db/seeds`
+      directory: `${__dirname}/src/db/seeds`
     }
   }
 

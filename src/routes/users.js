@@ -12,7 +12,7 @@ const request = require('request-promise');
 
 // apd-example
 // router.get('/me', (req, res) => {
-//   User.getJoey()
+//   IUserController.getJoey()
 //     .then((data) => {
 //       res.json(data);
 //     })
@@ -21,7 +21,7 @@ const request = require('request-promise');
 
 // router.get('/me', async (req, res) => {
 //   let response;
-//   response = await User.getTest();
+//   response = await IUserController.getTest();
 //   !response ? res.status(500).send() : res.json(response);
 // });
 
@@ -97,7 +97,7 @@ router.get('/yo', (req, res) => {
  *       },
  *       message: "success"
  *     }
- * @apiError UserNotFound The id of the User was not found.
+ * @apiError UserNotFound The id of the IUserController was not found.
  * @apiErrorExample Error-Response:
  *     HTTP/1.1 404 Not Found
  *     {

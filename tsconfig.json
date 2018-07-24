@@ -7,6 +7,9 @@
     "outDir": "dist",
     "allowJs": true,
     "lib": ["dom", "es6"],
+    "types": ["reflect-metadata"],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "baseUrl": "./src",
     "paths": {
       "@/*": [

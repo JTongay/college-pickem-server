@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router({
   mergeParams: true
 });
-// const User = require('../models/User');
+// const IUserController = require('../models/IUserController');
 // const Session = require('../models/Session');
 const knex = require('../../db/conf');
 

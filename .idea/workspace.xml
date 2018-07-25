@@ -3,7 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="339694e6-c83e-436c-b0fa-49883069b422" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/routes/baseRoute.ts" afterPath="$PROJECT_DIR$/src/routes/baseRoute.ts" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" afterPath="$PROJECT_DIR$/package-lock.json" />
+      <change beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change beforePath="$PROJECT_DIR$/test/matchups.spec.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/test/mocha.opts" afterPath="$PROJECT_DIR$/test/mocha.opts" />
+      <change beforePath="$PROJECT_DIR$/test/seasons.spec.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/test/sessions.spec.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/test/users.spec.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" afterPath="$PROJECT_DIR$/tsconfig.json" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -20,14 +27,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="inversify.config.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/inversify.config.ts">
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#38#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="195">
+              <caret line="10" column="43" lean-forward="false" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -55,38 +60,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="User.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/models/User.ts">
+      <file leaf-file-name="tsconfig.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tsconfig.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="142" column="20" lean-forward="true" selection-start-line="142" selection-start-column="20" selection-end-line="142" selection-end-column="20" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="User.controller.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/controllers/User.controller.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-15">
-              <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#45#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="logger.service.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/services/logger.service.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-259">
-              <caret line="7" column="46" lean-forward="true" selection-start-line="7" selection-start-column="46" selection-end-line="7" selection-end-column="46" />
-              <folding>
-                <element signature="e#0#31#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="327">
+              <caret line="25" column="17" lean-forward="false" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -95,7 +74,7 @@
         <entry file="file://$PROJECT_DIR$/src/routes/index.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-147">
-              <caret line="28" column="30" lean-forward="true" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="30" />
+              <caret line="28" column="30" lean-forward="false" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="30" />
               <folding>
                 <element signature="e#0#66#0" expanded="true" />
               </folding>
@@ -103,14 +82,36 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user.routes.ts" pinned="false" current-in-tab="true">
+      <file leaf-file-name="user.routes.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/routes/user.routes.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="224">
-              <caret line="26" column="3" lean-forward="true" selection-start-line="26" selection-start-column="3" selection-end-line="26" selection-end-column="3" />
+              <caret line="26" column="3" lean-forward="false" selection-start-line="26" selection-start-column="3" selection-end-line="26" selection-end-column="3" />
               <folding>
                 <element signature="e#0#47#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="User.controller.spec.ts" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/test/User.controller.spec.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="355">
+              <caret line="18" column="37" lean-forward="true" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="37" />
+              <folding>
+                <element signature="e#0#53#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mocha.opts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/mocha.opts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="46">
+              <caret line="2" column="15" lean-forward="false" selection-start-line="2" selection-start-column="15" selection-end-line="2" selection-end-column="15" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -146,8 +147,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/routes/picks.js" />
-        <option value="$PROJECT_DIR$/test/users.spec.js" />
         <option value="$PROJECT_DIR$/test/sessions.spec.js" />
         <option value="$PROJECT_DIR$/test/seasons.spec.js" />
         <option value="$PROJECT_DIR$/.travis.yml" />
@@ -169,16 +168,13 @@
         <option value="$PROJECT_DIR$/models/User.js" />
         <option value="$PROJECT_DIR$/test/matchups.spec.js" />
         <option value="$PROJECT_DIR$/mocha.opts" />
-        <option value="$PROJECT_DIR$/test/mocha.opts" />
         <option value="$PROJECT_DIR$/models/User.spec.js" />
         <option value="$PROJECT_DIR$/webpack.config.js" />
         <option value="$PROJECT_DIR$/nodemon.json" />
         <option value="$PROJECT_DIR$/src/server.js" />
         <option value="$PROJECT_DIR$/src/services/index.ts" />
         <option value="$PROJECT_DIR$/src/services/logger.service.ts" />
-        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/config/default.json" />
-        <option value="$PROJECT_DIR$/tsconfig.json" />
         <option value="$PROJECT_DIR$/src/knexfile.ts" />
         <option value="$PROJECT_DIR$/src/models/User.js" />
         <option value="$PROJECT_DIR$/src/models/index.ts" />
@@ -197,6 +193,11 @@
         <option value="$PROJECT_DIR$/src/controllers/IUser.controller.ts" />
         <option value="$PROJECT_DIR$/src/routes/baseRoute.ts" />
         <option value="$PROJECT_DIR$/src/routes/user.routes.ts" />
+        <option value="$PROJECT_DIR$/test/unit/controllers/User.controller.spec.ts" />
+        <option value="$PROJECT_DIR$/test/mocha.opts" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/tsconfig.json" />
+        <option value="$PROJECT_DIR$/test/User.controller.spec.ts" />
       </list>
     </option>
   </component>
@@ -244,25 +245,7 @@
             <path>
               <item name="football-pickem-be" type="b2602c69:ProjectViewProjectNode" />
               <item name="football-pickem-be" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="football-pickem-be" type="b2602c69:ProjectViewProjectNode" />
-              <item name="football-pickem-be" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="controllers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="football-pickem-be" type="b2602c69:ProjectViewProjectNode" />
-              <item name="football-pickem-be" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="football-pickem-be" type="b2602c69:ProjectViewProjectNode" />
-              <item name="football-pickem-be" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -284,11 +267,13 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.tslint" value="$PROJECT_DIR$/node_modules/tslint" />
+    <property name="nodejs.jest.jest_package" value="$PROJECT_DIR$/node_modules/jest" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/test" />
+      <recent name="$PROJECT_DIR$/test/unit" />
+      <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -303,50 +288,36 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Mocha.User model">
+  <component name="RunManager" selected="Mocha.User Controller.should have the findJoey method">
     <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" node-parameters="--inspect" path-to-js-file="$PROJECT_DIR$/college-crawler.js" />
-    <configuration name="User model" type="mocha-javascript-test-runner" factoryName="Mocha" temporary="true" nameIsGenerated="true">
+    <configuration name="User Controller.should have the findJoey method" type="mocha-javascript-test-runner" factoryName="Mocha" temporary="true" nameIsGenerated="true">
       <node-interpreter>project</node-interpreter>
       <node-options />
       <working-directory>$PROJECT_DIR$</working-directory>
       <pass-parent-env>true</pass-parent-env>
       <envs />
-      <ui>bdd</ui>
-      <extra-mocha-options>--exit</extra-mocha-options>
-      <test-kind>SUITE</test-kind>
-      <test-file>$PROJECT_DIR$/models/User.spec.js</test-file>
+      <ui>mocha-typescript</ui>
+      <extra-mocha-options>-r ts-node/register src/**/*.spec.ts</extra-mocha-options>
+      <test-kind>TEST</test-kind>
+      <test-file>$PROJECT_DIR$/test/User.controller.spec.ts</test-file>
       <test-names>
-        <name value="User model" />
+        <name value="User Controller" />
+        <name value="should have the findJoey method" />
       </test-names>
     </configuration>
-    <configuration name="User model.should getUser() with a valid id" type="mocha-javascript-test-runner" factoryName="Mocha" temporary="true" nameIsGenerated="true">
+    <configuration name="User Controller.should pass the test" type="mocha-javascript-test-runner" factoryName="Mocha" temporary="true" nameIsGenerated="true">
       <node-interpreter>project</node-interpreter>
       <node-options />
       <working-directory>$PROJECT_DIR$</working-directory>
       <pass-parent-env>true</pass-parent-env>
       <envs />
-      <ui>bdd</ui>
-      <extra-mocha-options>--exit</extra-mocha-options>
+      <ui>mocha-typescript</ui>
+      <extra-mocha-options>-r ts-node/register src/**/*.spec.ts</extra-mocha-options>
       <test-kind>TEST</test-kind>
-      <test-file>$PROJECT_DIR$/models/User.spec.js</test-file>
+      <test-file>$PROJECT_DIR$/test/User.controller.spec.ts</test-file>
       <test-names>
-        <name value="User model" />
-        <name value="should getUser() with a valid id" />
-      </test-names>
-    </configuration>
-    <configuration name="User model.should not getUser() with an invalid id" type="mocha-javascript-test-runner" factoryName="Mocha" temporary="true" nameIsGenerated="true">
-      <node-interpreter>project</node-interpreter>
-      <node-options />
-      <working-directory>$PROJECT_DIR$</working-directory>
-      <pass-parent-env>true</pass-parent-env>
-      <envs />
-      <ui>bdd</ui>
-      <extra-mocha-options>--exit</extra-mocha-options>
-      <test-kind>TEST</test-kind>
-      <test-file>$PROJECT_DIR$/models/User.spec.js</test-file>
-      <test-names>
-        <name value="User model" />
-        <name value="should not getUser() with an invalid id" />
+        <name value="User Controller" />
+        <name value="should pass the test" />
       </test-names>
     </configuration>
     <configuration default="true" type="mocha-javascript-test-runner" factoryName="Mocha">
@@ -355,22 +326,20 @@
       <working-directory />
       <pass-parent-env>true</pass-parent-env>
       <envs />
-      <ui />
-      <extra-mocha-options>--exit</extra-mocha-options>
+      <ui>mocha-typescript</ui>
+      <extra-mocha-options>-r ts-node/register src/**/*.spec.ts</extra-mocha-options>
       <test-kind>DIRECTORY</test-kind>
       <test-directory />
       <recursive>false</recursive>
     </configuration>
-    <list size="3">
-      <item index="0" class="java.lang.String" itemvalue="Mocha.User model.should getUser() with a valid id" />
-      <item index="1" class="java.lang.String" itemvalue="Mocha.User model.should not getUser() with an invalid id" />
-      <item index="2" class="java.lang.String" itemvalue="Mocha.User model" />
+    <list size="2">
+      <item index="0" class="java.lang.String" itemvalue="Mocha.User Controller.should pass the test" />
+      <item index="1" class="java.lang.String" itemvalue="Mocha.User Controller.should have the findJoey method" />
     </list>
     <recent_temporary>
-      <list size="3">
-        <item index="0" class="java.lang.String" itemvalue="Mocha.User model" />
-        <item index="1" class="java.lang.String" itemvalue="Mocha.User model.should not getUser() with an invalid id" />
-        <item index="2" class="java.lang.String" itemvalue="Mocha.User model.should getUser() with a valid id" />
+      <list size="2">
+        <item index="0" class="java.lang.String" itemvalue="Mocha.User Controller.should have the findJoey method" />
+        <item index="1" class="java.lang.String" itemvalue="Mocha.User Controller.should pass the test" />
       </list>
     </recent_temporary>
   </component>
@@ -398,44 +367,44 @@
       <workItem from="1527792181779" duration="1487000" />
       <workItem from="1531098196623" duration="14623000" />
       <workItem from="1532033057931" duration="11629000" />
-      <workItem from="1532297589385" duration="9117000" />
+      <workItem from="1532297589385" duration="12885000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="User_model - 2018.07.15 at 17h 34m 48s.xml">
-      <configuration name="User model" configurationId="mocha-javascript-test-runner" />
+    <history-entry file="User_Controller - 2018.07.24 at 20h 24m 23s.xml">
+      <configuration name="User Controller" configurationId="mocha-javascript-test-runner" />
     </history-entry>
-    <history-entry file="User_model - 2018.07.15 at 17h 35m 02s.xml">
-      <configuration name="User model" configurationId="mocha-javascript-test-runner" />
+    <history-entry file="User_Controller - 2018.07.24 at 20h 24m 32s.xml">
+      <configuration name="User Controller" configurationId="mocha-javascript-test-runner" />
     </history-entry>
-    <history-entry file="User_model - 2018.07.15 at 17h 40m 26s.xml">
-      <configuration name="User model" configurationId="mocha-javascript-test-runner" />
+    <history-entry file="User_Controller - 2018.07.24 at 20h 24m 39s.xml">
+      <configuration name="User Controller" configurationId="mocha-javascript-test-runner" />
     </history-entry>
-    <history-entry file="User_model - 2018.07.15 at 17h 42m 34s.xml">
-      <configuration name="User model" configurationId="mocha-javascript-test-runner" />
+    <history-entry file="User_Controller - 2018.07.24 at 20h 24m 55s.xml">
+      <configuration name="User Controller" configurationId="JavaScriptTestRunnerJest" />
     </history-entry>
-    <history-entry file="User_model - 2018.07.15 at 17h 43m 34s.xml">
-      <configuration name="User model" configurationId="mocha-javascript-test-runner" />
+    <history-entry file="User_Controller_should_have_the_findJoey_method - 2018.07.24 at 21h 01m 08s.xml">
+      <configuration name="User Controller.should have the findJoey method" configurationId="mocha-javascript-test-runner" />
     </history-entry>
-    <history-entry file="User_model - 2018.07.15 at 17h 44m 58s.xml">
-      <configuration name="User model" configurationId="mocha-javascript-test-runner" />
+    <history-entry file="User_Controller_should_pass_the_test - 2018.07.24 at 20h 31m 32s.xml">
+      <configuration name="User Controller.should pass the test" configurationId="mocha-javascript-test-runner" />
     </history-entry>
-    <history-entry file="User_model - 2018.07.15 at 17h 46m 49s.xml">
-      <configuration name="User model" configurationId="mocha-javascript-test-runner" />
+    <history-entry file="User_Controller_should_pass_the_test - 2018.07.24 at 20h 32m 56s.xml">
+      <configuration name="User Controller.should pass the test" configurationId="mocha-javascript-test-runner" />
     </history-entry>
-    <history-entry file="User_model - 2018.07.15 at 17h 48m 38s.xml">
-      <configuration name="User model" configurationId="mocha-javascript-test-runner" />
+    <history-entry file="User_Controller_should_pass_the_test - 2018.07.24 at 20h 33m 00s.xml">
+      <configuration name="User Controller.should pass the test" configurationId="mocha-javascript-test-runner" />
     </history-entry>
-    <history-entry file="User_model - 2018.07.15 at 17h 54m 27s.xml">
-      <configuration name="User model" configurationId="mocha-javascript-test-runner" />
+    <history-entry file="User_Controller_should_pass_the_test - 2018.07.24 at 20h 33m 38s.xml">
+      <configuration name="User Controller.should pass the test" configurationId="mocha-javascript-test-runner" />
     </history-entry>
     <history-entry file="User_model_should_not_getUser()_with_an_invalid_id - 2018.07.15 at 17h 34m 32s.xml">
       <configuration name="User model.should not getUser() with an invalid id" configurationId="mocha-javascript-test-runner" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="70814000" />
+    <option name="totallyTimeSpent" value="74582000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -448,13 +417,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1280" height="778" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298351" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289855" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298351" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298351" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30284858" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30284858" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27886057" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15965052" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -483,44 +453,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/test/mocha.opts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="1" column="12" lean-forward="false" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/scripts/insertTeams.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2530">
-          <caret line="110" column="44" lean-forward="false" selection-start-line="110" selection-start-column="44" selection-end-line="110" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/matchups.spec.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="11" column="10" lean-forward="false" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/routes/users.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="14" column="12" lean-forward="false" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/seasons.spec.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-367">
-          <caret line="28" column="1" lean-forward="false" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/knex/lib/dialects/websql/transaction.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="134">
@@ -711,22 +643,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tsconfig.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="9" column="34" lean-forward="true" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-461">
-          <caret line="8" column="4" lean-forward="false" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/logs/_error.log">
       <provider selected="true" editor-type-id="LogFileEditorProvider">
         <state relative-caret-position="-5218">
@@ -761,7 +677,7 @@
         <state relative-caret-position="46">
           <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
           <folding>
-            <element signature="e#0#33#0" expanded="true" />
+            <element signature="e#0#33#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -813,25 +729,17 @@
         <state relative-caret-position="102">
           <caret line="142" column="20" lean-forward="true" selection-start-line="142" selection-start-column="20" selection-end-line="142" selection-end-column="20" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/controllers/IUser.controller.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="3" column="27" lean-forward="false" selection-start-line="3" selection-start-column="27" selection-end-line="3" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/controllers/User.controller.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-15">
-          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding>
-            <element signature="e#0#45#0" expanded="true" />
+            <element signature="e#0#45#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -839,9 +747,9 @@
     <entry file="file://$PROJECT_DIR$/src/inversify.config.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="184">
-          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding>
-            <element signature="e#0#38#0" expanded="true" />
+            <element signature="e#0#38#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -865,9 +773,9 @@
     <entry file="file://$PROJECT_DIR$/src/services/logger.service.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-259">
-          <caret line="7" column="46" lean-forward="true" selection-start-line="7" selection-start-column="46" selection-end-line="7" selection-end-column="46" />
+          <caret line="7" column="46" lean-forward="false" selection-start-line="7" selection-start-column="46" selection-end-line="7" selection-end-column="46" />
           <folding>
-            <element signature="e#0#31#0" expanded="true" />
+            <element signature="e#0#31#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -883,22 +791,88 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/routes/index.ts">
+    <entry file="file://$PROJECT_DIR$/node_modules/ts-jest/dist/index.d.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-147">
-          <caret line="28" column="30" lean-forward="true" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#66#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controllers/IUser.controller.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="3" column="27" lean-forward="false" selection-start-line="3" selection-start-column="27" selection-end-line="3" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/matchups.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="11" column="10" lean-forward="false" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/routes/user.routes.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="224">
-          <caret line="26" column="3" lean-forward="true" selection-start-line="26" selection-start-column="3" selection-end-line="26" selection-end-column="3" />
+          <caret line="26" column="3" lean-forward="false" selection-start-line="26" selection-start-column="3" selection-end-line="26" selection-end-column="3" />
           <folding>
             <element signature="e#0#47#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/mocha.opts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="2" column="15" lean-forward="false" selection-start-line="2" selection-start-column="15" selection-end-line="2" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes/index.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-147">
+          <caret line="28" column="30" lean-forward="false" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#66#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/users.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="307">
+          <caret line="62" column="22" lean-forward="false" selection-start-line="62" selection-start-column="22" selection-end-line="62" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="10" column="43" lean-forward="false" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tsconfig.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="25" column="17" lean-forward="false" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/User.controller.spec.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="355">
+          <caret line="18" column="37" lean-forward="true" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#53#0" expanded="true" />
           </folding>
         </state>
       </provider>

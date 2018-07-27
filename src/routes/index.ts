@@ -4,6 +4,7 @@ import { BaseRoute } from './baseRoute';
 import { IUserController } from '@/controllers';
 import { TYPES } from '@/types.classes';
 import { container } from '@/inversify.config';
+import { UserRoutes } from '@/routes/user.routes';
 
 export class ApiRoutes extends BaseRoute {
   public static path: string = '/api';
@@ -16,7 +17,6 @@ export class ApiRoutes extends BaseRoute {
     super();
     this._userController = userController;
     this.get = this.get.bind(this);
-    this.getJoey = this.getJoey.bind(this);
     this.init();
   }
 
@@ -36,15 +36,10 @@ export class ApiRoutes extends BaseRoute {
     logger.info('Creating Api routes');
 
     this.router.get('/', this.get);
-    this.router.get('/joey', this.getJoey);
+    this.router.use('/user', UserRoutes.router);
   }
 
   private async get (req: Request, res: Response, next: NextFunction) {
     res.status(200).json({ online: true });
-  }
-
-  private async getJoey (req: Request, res: Response, next: NextFunction) {
-    const response = await this._userController.getJoey();
-    res.json(response);
   }
 }

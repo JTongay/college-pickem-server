@@ -22,4 +22,28 @@ export class UserController extends Connection implements IUserController {
     }
   }
 
+  public async getUserById (id: string): Promise<User> {
+    let response: User;
+    try {
+      response = await this.knex().table('users').where('id', id).first();
+      return response;
+    } catch (e) {
+      throw new Error(e);
+    }
+  }
+
+  public async getUsers (): Promise<User[]> {
+    let response: User[];
+    try {
+      response = await this.knex().table('users');
+      return response;
+    } catch (e) {
+      throw new Error(e);
+    }
+  }
+
+  public async createUser (): Promise<void> {
+    console.log('booyah');
+  }
+
 }

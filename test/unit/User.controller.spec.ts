@@ -1,11 +1,11 @@
-import { IUserController } from '../src/controllers';
+import { IUserController } from '../../src/controllers/index';
 import { assert } from 'chai';
 import * as sinon from 'sinon';
 import 'mocha';
 
 describe('User Controller', () => {
 
-  const UserController: IUserController;
+  let UserController: IUserController;
 
   beforeEach(() => {
     // UserController = sinon.mock(UserController);

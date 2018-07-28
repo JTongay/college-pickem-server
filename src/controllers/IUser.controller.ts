@@ -1,8 +1,8 @@
-import { User } from '@/models';
+import { User, UserRequest } from '@/models';
 
 export interface IUserController {
   getJoey (): Promise<User>;
   getUserById (id: string): Promise<User>;
   getUsers (): Promise<User[]>;
-  createUser (): Promise<void>;
+  createUser (requestedUser: UserRequest): Promise<User>;
 }

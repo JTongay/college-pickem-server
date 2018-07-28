@@ -6,6 +6,7 @@ import 'reflect-metadata';
 
 @injectable()
 export class AuthService implements IAuthService {
+  constructor () {}
   /**
    *
    * @param {string} userId

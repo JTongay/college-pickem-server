@@ -1,29 +1,34 @@
 import { BaseRoute } from '@/routes/baseRoute';
-import { logger } from '@/services';
+import { IAuthService, AuthService, logger } from '@/services';
 import { Router, Request, Response, NextFunction } from 'express';
 import { IUserController } from '@/controllers';
 import { container } from '@/inversify.config';
 import { TYPES } from '@/types.classes';
-import { User } from '@/models';
+import { User, UserRequest } from '@/models';
 
 export class UserRoutes extends BaseRoute {
   private static instance: UserRoutes;
   private _userController: IUserController;
+  private _authService: IAuthService;
 
   constructor (
-    private UserController: IUserController
+    private UserController: IUserController,
+    private AuthService: IAuthService
   ) {
     super();
     this._userController = UserController;
+    this._authService = AuthService;
     this.getUser = this.getUser.bind(this);
     this.getUsers = this.getUsers.bind(this);
+    this.createUser = this.createUser.bind(this);
     this.init();
   }
 
   static get router (): Router {
     if (!UserRoutes.instance) {
       UserRoutes.instance = new UserRoutes(
-        container.get<IUserController>(TYPES.IUserController)
+        container.get<IUserController>(TYPES.IUserController),
+        container.get<IAuthService>(TYPES.IAuthService)
       );
     }
     return UserRoutes.instance.router;
@@ -34,6 +39,7 @@ export class UserRoutes extends BaseRoute {
 
     this.router.get('/', this.getUsers);
     this.router.get('/:id', this.getUser);
+    this.router.post('/', this.createUser);
   }
 
   /**
@@ -70,6 +76,26 @@ export class UserRoutes extends BaseRoute {
       users = await this._userController.getUsers();
       res.status(200).json(users);
     } catch (e) {
+      next(e);
+    }
+  }
+
+  private async createUser (req: Request, res: Response, next: NextFunction): Promise<void> {
+    let createdUser: User;
+    let token: string;
+    const requestedUser: UserRequest = new UserRequest(
+      req.body.userName,
+      req.body.password,
+      req.body.firstName,
+      req.body.lastName,
+      req.body.email
+    );
+    try {
+      createdUser = await this._userController.createUser(requestedUser);
+      token = this._authService.generateToken(createdUser.id.toString());
+      res.json(token);
+    } catch (e) {
+      res.status(404);
       next(e);
     }
   }

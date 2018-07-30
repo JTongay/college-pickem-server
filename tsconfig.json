@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "esnext",
+    "target": "es2017",
     "moduleResolution": "node",
     "sourceMap": true,
     "outDir": "dist",
@@ -19,11 +19,11 @@
   },
   "exclude": [
     "node_modules",
-    "dist",
-    "./test/**/*.spec.ts"
+    "dist"
   ],
   "include": [
-    "src/**/*.ts"
+    "src/**/*.ts",
+    "test/**/*.spec.ts"
   ],
   "files": [
     "src/index.ts"

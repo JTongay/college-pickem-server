@@ -1,5 +1,5 @@
 import * as knex from 'knex';
-import * as knexConfig from '../knexfile';
+import * as knexConfig from '../../knexfile';
 import { Config } from 'knex';
 import { injectable } from 'inversify';
 import 'reflect-metadata';

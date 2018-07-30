@@ -21,7 +21,7 @@ const environment = process.env.NODE_ENV || 'development';
 require('dotenv').config();
 
 import { logger } from './services';
-import { ApiRoutes } from '@/routes';
+import { ApiRoutes } from './routes';
 
 // Middleware
 // const bodyParser = require('body-parser');

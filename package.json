@@ -8,12 +8,14 @@
     "npm": "5.0.0"
   },
   "scripts": {
-    "test": "mocha -r ts-node/register test/**/*.spec.ts",
+    "test": "npm run unit && npm run integration",
     "start": "node server.js",
     "deploy": "git push heroku master",
     "development": "nodemon server.js",
     "build": "npm run build:dev",
     "build:dev": "webpack --config ./webpack.config.js --progress --profile --color --display-error-details --display-cached && npm run copy-files",
+    "integration": "node_modules/.bin/jest",
+    "unit": "mocha -r ts-node/register test/unit/*.ts",
     "dev": "webpack --watch",
     "doc": "apidoc -i routes/ -o apidoc/"
   },
@@ -66,6 +68,7 @@
     "@types/errorhandler": "0.0.32",
     "@types/express": "^4.16.0",
     "@types/helmet": "0.0.38",
+    "@types/jest": "^23.3.1",
     "@types/jsonwebtoken": "^7.2.8",
     "@types/mocha": "^5.2.5",
     "@types/morgan": "^1.7.35",
@@ -79,12 +82,15 @@
     "eslint": "^5.1.0",
     "eslint-config-airbnb": "^17.0.0",
     "eslint-plugin-import": "^2.13.0",
+    "jest": "^23.4.2",
     "mocha": "^4.1.0",
     "nodemon": "^1.18.3",
     "nodemon-webpack-plugin": "^3.0.1",
     "sinon": "^6.1.4",
     "supertest": "^3.1.0",
+    "ts-jest": "^23.0.1",
     "ts-loader": "^4.4.2",
+    "ts-mocha": "^1.2.0",
     "ts-mockito": "^2.3.0",
     "ts-node": "^7.0.0",
     "tslint": "^5.11.0",
@@ -93,5 +99,22 @@
     "webpack": "^4.16.1",
     "webpack-cli": "^3.1.0",
     "webpack-merge": "^4.1.3"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "js",
+      "json"
+    ],
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/src/$1"
+    },
+    "transform": {
+      "^.+\\.(ts|js)x?$": "ts-jest"
+    },
+    "testMatch": [
+      "<rootDir>/test/integration/*.spec.(ts|js)"
+    ],
+    "testEnvironment": "node"
   }
 }

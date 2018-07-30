@@ -1,5 +1,5 @@
 // Update with your config settings.
-import { Config } from 'knex';
+const path = require('path');
 
 module.exports = {
 
@@ -10,10 +10,10 @@ module.exports = {
       host: 'localhost',
     },
     migrations: {
-      directory: `${__dirname}/src/db/migrations`
+      directory: path.join('src', 'db', 'migrations')
     },
     seeds: {
-      directory: `${__dirname}/src/db/seeds`
+      directory: path.join('src', 'db', 'seeds')
     }
   },
 

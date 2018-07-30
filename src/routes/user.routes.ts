@@ -21,6 +21,7 @@ export class UserRoutes extends BaseRoute {
     this.getUser = this.getUser.bind(this);
     this.getUsers = this.getUsers.bind(this);
     this.createUser = this.createUser.bind(this);
+    this.validateForm = this.validateForm.bind(this);
     this.init();
   }
 
@@ -90,6 +91,9 @@ export class UserRoutes extends BaseRoute {
       req.body.lastName,
       req.body.email
     );
+    if (!this.validateForm(requestedUser)) {
+      res.status(404).json({ error_code: 'form.invalid' });
+    }
     try {
       createdUser = await this._userController.createUser(requestedUser);
       token = this._authService.generateToken(createdUser.id.toString());
@@ -98,6 +102,15 @@ export class UserRoutes extends BaseRoute {
       res.status(404);
       next(e);
     }
+  }
+
+  private validateForm (requestedUser: UserRequest): boolean {
+    for (const val in requestedUser) {
+      if (!requestedUser[val]) {
+        return false;
+      }
+    }
+    return true;
   }
 
 }

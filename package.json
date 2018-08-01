@@ -14,7 +14,7 @@
     "development": "nodemon server.js",
     "build": "npm run build:dev",
     "build:dev": "webpack --config ./webpack.config.js --progress --profile --color --display-error-details --display-cached && npm run copy-files",
-    "integration": "node_modules/.bin/jest",
+    "integration": "node_modules/.bin/jest --forceExit",
     "unit": "mocha -r ts-node/register test/unit/*.ts",
     "dev": "webpack --watch",
     "doc": "apidoc -i routes/ -o apidoc/"

@@ -94,6 +94,14 @@ export class UserController extends Connection implements IUserController {
       throw new Error(e);
     }
   }
+
+  // private async editUser (userName: string): Promise<any> {
+  //   let response: any;
+  //   let user: User;
+  //   try {
+  //     user = await this.getUserByUsername(userName);
+  //   }
+  // }
 }
 
 

@@ -5,6 +5,7 @@ import { IUserController } from '@/controllers';
 import { container } from '@/inversify.config';
 import { TYPES } from '@/types.classes';
 import { User, UserRequest } from '@/models';
+import { interfaces } from 'inversify';
 
 export class UserRoutes extends BaseRoute {
   private static instance: UserRoutes;
@@ -81,6 +82,13 @@ export class UserRoutes extends BaseRoute {
     }
   }
 
+  /**
+   *
+   * @param {Request} req: The incoming request new UserRequest
+   * @param {Response} res: The response to send
+   * @param {e.NextFunction} next
+   * @returns {Promise<void>}
+   */
   private async createUser (req: Request, res: Response, next: NextFunction): Promise<void> {
     let createdUser: User;
     let token: string;
@@ -103,6 +111,14 @@ export class UserRoutes extends BaseRoute {
       next(e);
     }
   }
+
+  // private async editUser (req: Request, res: Response, next: NextFunction): Promise<any> {
+  //   const userName: string = req.body.userName;
+  //   let response: any;
+  //   try {
+  //     response = await this._userController
+  //   }
+  // }
 
   private validateForm (requestedUser: UserRequest): boolean {
     for (const val in requestedUser) {

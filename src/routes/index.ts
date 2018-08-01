@@ -5,6 +5,7 @@ import { IUserController } from '@/controllers';
 import { TYPES } from '@/types.classes';
 import { container } from '@/inversify.config';
 import { UserRoutes } from '@/routes/user.routes';
+import { SeasonsRoutes } from '@/routes/seasons.routes';
 
 export class ApiRoutes extends BaseRoute {
   public static path: string = '/api';
@@ -37,6 +38,7 @@ export class ApiRoutes extends BaseRoute {
 
     this.router.get('/', this.get);
     this.router.use('/user', UserRoutes.router);
+    this.router.use('/seasons', SeasonsRoutes.router);
   }
 
   private async get (req: Request, res: Response, next: NextFunction) {

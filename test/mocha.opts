@@ -1,2 +1,1 @@
-models/**/*.js
-test/**/*.js
+test/unit/*.ts

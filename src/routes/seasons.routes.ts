@@ -41,7 +41,7 @@ export class SeasonsRoutes extends BaseRoute {
         container.get<ISeasonController>(TYPES.ISeasonController)
       );
     }
-    return SeasonsRoutes.router;
+    return SeasonsRoutes.instance.router;
   }
 
   private async getSeason (req: Request, res: Response, next: NextFunction): Promise<void> {

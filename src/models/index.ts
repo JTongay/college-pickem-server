@@ -3,3 +3,5 @@ export * from './UserRequest';
 
 export * from './Season';
 export * from './SeasonRequest';
+
+export * from './Matchup';

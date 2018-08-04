@@ -16,6 +16,8 @@
     "build:dev": "webpack --config ./webpack.config.js --progress --profile --color --display-error-details --display-cached && npm run copy-files",
     "integration": "node_modules/.bin/jest --forceExit",
     "unit": "mocha -r ts-node/register test/unit/*.ts",
+    "db-test": "knex migrate:latest --env test && knex seed:run --env test",
+    "db-dev": "knex migrate:latest && knex:seed run",
     "dev": "webpack --watch",
     "doc": "apidoc -i routes/ -o apidoc/"
   },

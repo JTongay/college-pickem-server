@@ -3,7 +3,7 @@ import { IScoreController, IUserController, UserController } from '@/controllers
 import { injectable } from 'inversify';
 import 'reflect-metadata';
 import { User } from '@/models';
-import {logger} from '@/services';
+import { logger } from '@/services';
 
 @injectable()
 export class ScoreController extends Connection implements IScoreController {

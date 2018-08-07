@@ -40,7 +40,7 @@ export class ApiRoutes extends BaseRoute {
     this.router.get('/', this.get);
     this.router.use('/user', UserRoutes.router);
     this.router.use('/season', SeasonsRoutes.router);
-    this.router.use('/season/:season_id/user/:user_id/score', ScoresRoutes.router);
+    // this.router.use('/season/:season_id/user/:user_id/score', ScoresRoutes.router);
   }
 
   private async get (req: Request, res: Response, next: NextFunction) {

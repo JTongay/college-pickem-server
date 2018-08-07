@@ -6,6 +6,13 @@ import { container } from '@/inversify.config';
 import { TYPES } from '@/types.classes';
 import { Season, SeasonRequest } from '@/models';
 import { interfaces } from 'inversify';
+import { ErrorResponse,
+  ErrorResponseBuilder,
+  SuccessResponse,
+  SuccessResponseBuilder,
+  SeasonResponse,
+  SeasonResponseBuilder
+} from '@/builders/response';
 
 export class SeasonsRoutes extends BaseRoute {
   private static instance: SeasonsRoutes;
@@ -47,12 +54,28 @@ export class SeasonsRoutes extends BaseRoute {
   private async getSeason (req: Request, res: Response, next: NextFunction): Promise<void> {
     const seasonId: string = req.params.id;
     let season: Season;
+    let seasonResponse: SeasonResponse;
+    let successResponse: SuccessResponse;
+    let errorResponse: ErrorResponse;
     try {
       season = await this._seasonController.getSeasonById(seasonId);
       if (!season) {
-        res.status(404).json({});
+        errorResponse = new ErrorResponseBuilder(404)
+          .setErrorCode('season_not_found')
+          .build();
+        res.status(404).json(errorResponse);
       }
-      res.status(200).json(season);
+      seasonResponse = new SeasonResponseBuilder(season.id)
+        .setStartDate(season.start_date)
+        .setEndDate(season.end_date)
+        .setActiveSeason(season.active_season)
+        .setLeague(season.league)
+        .build();
+      successResponse = new SuccessResponseBuilder(200)
+        .setData(seasonResponse)
+        .setMessage('Successfully retrieved all seasons')
+        .build();
+      res.status(200).json(successResponse);
     } catch (e) {
       logger.error(`error accessing route season/:id with error: ${e}`);
       next(e);

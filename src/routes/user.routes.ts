@@ -6,6 +6,7 @@ import { container } from '@/inversify.config';
 import { TYPES } from '@/types.classes';
 import { User, UserRequest } from '@/models';
 import { interfaces } from 'inversify';
+import { UserResponse, UserResponseBuilder, SuccessResponse, SuccessResponseBuilder } from '@/builders/response';
 
 export class UserRoutes extends BaseRoute {
   private static instance: UserRoutes;
@@ -54,12 +55,24 @@ export class UserRoutes extends BaseRoute {
   private async getUser (req: Request, res: Response, next: NextFunction): Promise<void> {
     const userId: string = req.params.id;
     let user: User;
+    let userResponse: UserResponse;
+    let response: SuccessResponse;
     try {
       user = await this._userController.getUserById(userId);
       if (!user) {
         res.status(400).json({});
       }
-      res.status(200).json(user);
+      userResponse = new UserResponseBuilder(user.username)
+        .setFirstName(user.first_name)
+        .setLastName(user.last_name)
+        .setEmail(user.email)
+        .setCreatedDate(user.created_at)
+        .build();
+      response = new SuccessResponseBuilder(200)
+        .setData(userResponse)
+        .setMessage('Succesfully retrieved user')
+        .build();
+      res.status(200).json(response);
     } catch (e) {
       next(e);
     }
@@ -74,9 +87,26 @@ export class UserRoutes extends BaseRoute {
    */
   private async getUsers (req: Request, res: Response, next: NextFunction): Promise<void> {
     let users: User[];
+    let successResponse: SuccessResponse;
+    const usersResponse: UserResponse[] = [];
+
     try {
       users = await this._userController.getUsers();
-      res.status(200).json(users);
+      users.forEach((user: User) => {
+        const userResponseBuilder = new UserResponseBuilder(user.username)
+          .setFirstName(user.first_name)
+          .setLastName(user.last_name)
+          .setEmail(user.email)
+          .setCreatedDate(user.created_at)
+          .setUpdatedDate(user.updated_at)
+          .build();
+        usersResponse.push(userResponseBuilder);
+      });
+      successResponse = new SuccessResponseBuilder(200)
+        .setData(usersResponse)
+        .setMessage('Successfully retrieved all users')
+        .build();
+      res.status(200).json(successResponse);
     } catch (e) {
       next(e);
     }
@@ -92,6 +122,7 @@ export class UserRoutes extends BaseRoute {
   private async createUser (req: Request, res: Response, next: NextFunction): Promise<void> {
     let createdUser: User;
     let token: string;
+    let userResponse: UserResponse;
     const requestedUser: UserRequest = new UserRequest(
       req.body.userName,
       req.body.password,
@@ -105,7 +136,13 @@ export class UserRoutes extends BaseRoute {
     try {
       createdUser = await this._userController.createUser(requestedUser);
       token = this._authService.generateToken(createdUser.id.toString());
-      res.json(token);
+      userResponse = new UserResponseBuilder(createdUser.username)
+        .setToken(token)
+        .setFirstName(createdUser.first_name)
+        .setLastName(createdUser.last_name)
+        .setEmail(createdUser.email)
+        .build();
+      res.status(200).json(userResponse);
     } catch (e) {
       res.status(404);
       next(e);

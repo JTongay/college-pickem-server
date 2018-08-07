@@ -143,7 +143,7 @@ export interface User {
   last_name: string;
   username: string;
   email: string;
-  password: string;
+  password?: string;
   created_at: Date;
   updated_at: Date;
 }

@@ -1,7 +1,7 @@
 import { BaseRoute } from '@/routes/baseRoute';
 import { logger } from '@/services';
 import { NextFunction, Request, Router, Response } from 'express';
-import {IScoreController, ISeasonController, IUserController} from '@/controllers';
+import { IScoreController, ISeasonController, IUserController } from '@/controllers';
 import { container } from '@/inversify.config';
 import { TYPES } from '@/types.classes';
 
@@ -11,11 +11,9 @@ export class ScoresRoutes extends BaseRoute {
   private _scoreController: IScoreController;
 
   constructor (
-    private UserController: IUserController,
     private ScoreController: IScoreController
   ) {
     super();
-    this._userController = UserController;
     this._scoreController = ScoreController;
     this.init();
   }
@@ -23,7 +21,6 @@ export class ScoresRoutes extends BaseRoute {
   static get router (): Router {
     if (!ScoresRoutes.instance) {
       ScoresRoutes.instance = new ScoresRoutes(
-        container.get<IUserController>(TYPES.IUserController),
         container.get<IScoreController>(TYPES.IScoreController)
       );
     }
@@ -37,6 +34,6 @@ export class ScoresRoutes extends BaseRoute {
   private async getAllScoresBySeasonAndUser (req: Request, res: Response, next: NextFunction): Promise<void> {
     const userId: string = req.params.user_id;
     const seasonId: string = req.params.season_id;
-    let response: any;
+    // const response: any;
   }
 }

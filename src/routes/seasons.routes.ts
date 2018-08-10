@@ -13,6 +13,7 @@ import { ErrorResponse,
   SeasonResponse,
   SeasonResponseBuilder
 } from '@/builders/response';
+import { ErrorCodes } from '@/utils';
 
 export class SeasonsRoutes extends BaseRoute {
   private static instance: SeasonsRoutes;
@@ -38,7 +39,7 @@ export class SeasonsRoutes extends BaseRoute {
     this.router.put('/:id/activate', this.activateSeason);
     this.router.put('/:id/deactivate', this.deactivateSeason);
     this.router.delete('/:id', this.deleteSeason);
-    this.router.post('/create', this.createSeason);
+    this.router.post('/', this.createSeason);
   }
 
   static get router (): Router {
@@ -61,7 +62,7 @@ export class SeasonsRoutes extends BaseRoute {
       season = await this._seasonController.getSeasonById(seasonId);
       if (!season) {
         errorResponse = new ErrorResponseBuilder(404)
-          .setErrorCode('season_not_found')
+          .setErrorCode(ErrorCodes.seasonNotFound)
           .build();
         res.status(404).json(errorResponse);
       }
@@ -73,7 +74,7 @@ export class SeasonsRoutes extends BaseRoute {
         .build();
       successResponse = new SuccessResponseBuilder(200)
         .setData(seasonResponse)
-        .setMessage('Successfully retrieved all seasons')
+        .setMessage(`Successfully retrieved season with id: ${seasonId}`)
         .build();
       res.status(200).json(successResponse);
     } catch (e) {
@@ -84,13 +85,28 @@ export class SeasonsRoutes extends BaseRoute {
 
   private async activateSeason (req: Request, res: Response, next: NextFunction): Promise<void> {
     const seasonId: string = req.params.id;
-    const season: Season = await this._seasonController.getSeasonById(seasonId);
+    let season: Season = await this._seasonController.getSeasonById(seasonId);
+    let seasonResponse: SeasonResponse;
+    let successResponse: SuccessResponse;
+    let errorResponse: ErrorResponse;
     if (!season) {
-      res.status(404).json({});
+      errorResponse = new ErrorResponseBuilder(404)
+        .setErrorCode(ErrorCodes.seasonNotFound)
+        .build();
+      res.status(404).json(errorResponse);
     }
     try {
       await this._seasonController.toggleSeason(seasonId, true);
-      res.status(200).json(season);
+      season = await this._seasonController.getSeasonById(seasonId);
+      seasonResponse = new SeasonResponseBuilder(season.id)
+        .setActiveSeason(season.active_season)
+        .setLeague(season.league)
+        .build();
+      successResponse = new SuccessResponseBuilder(200)
+        .setData(seasonResponse)
+        .setMessage('Season activated')
+        .build();
+      res.status(200).json(successResponse);
     } catch (e) {
       logger.error(`Cannot activate PUT /${seasonId}/activate with error ${e}`);
       next(e);
@@ -99,25 +115,56 @@ export class SeasonsRoutes extends BaseRoute {
 
   private async deactivateSeason (req: Request, res: Response, next: NextFunction): Promise<void> {
     const seasonId: string = req.params.id;
-    const season: Season = await this._seasonController.getSeasonById(seasonId);
+    let season: Season = await this._seasonController.getSeasonById(seasonId);
+    let seasonResponse: SeasonResponse;
+    let successResponse: SuccessResponse;
+    let errorResponse: ErrorResponse;
     if (!season) {
-      res.status(404).json({});
+      errorResponse = new ErrorResponseBuilder(404)
+        .setErrorCode(ErrorCodes.seasonNotFound)
+        .build();
+      res.status(404).json(errorResponse);
     }
     try {
       await this._seasonController.toggleSeason(seasonId, false);
-      res.status(200).json(season);
+      season = await this._seasonController.getSeasonById(seasonId);
+      seasonResponse = new SeasonResponseBuilder(season.id)
+        .setActiveSeason(season.active_season)
+        .setLeague(season.league)
+        .build();
+      successResponse = new SuccessResponseBuilder(200)
+        .setData(seasonResponse)
+        .setMessage('Season deactivated')
+        .build();
+      res.status(200).json(successResponse);
     } catch (e) {
-      logger.error(`Cannot activate PUT season/${seasonId}/deactivate with error ${e}`);
+      logger.error(`Cannot deactivate PUT season/${seasonId}/deactivate with error ${e}`);
       next(e);
     }
   }
 
   private async createSeason (req: Request, res: Response, next: NextFunction): Promise<void> {
     const seasonRequest: SeasonRequest = new SeasonRequest(req.body);
+    let createdSeason: Season;
+    let seasonResponse: SeasonResponse;
+    let successResponse: SuccessResponse;
+    let errorResponse: ErrorResponse;
     try {
-      await this._seasonController.createNewSeason(seasonRequest);
+      createdSeason = await this._seasonController.createNewSeason(seasonRequest);
+      console.log(createdSeason)
+      seasonResponse = new SeasonResponseBuilder(createdSeason.id)
+        .setLeague(createdSeason.league)
+        .setStartDate(createdSeason.start_date)
+        .setEndDate(createdSeason.end_date)
+        .setActiveSeason(createdSeason.active_season)
+        .build();
+      console.log(seasonResponse)
+      successResponse = new SuccessResponseBuilder(200)
+        .setData(seasonResponse)
+        .setMessage('Successfully created season')
+        .build();
       logger.info(`Success POST season/create`);
-      res.status(200).json({});
+      res.status(200).json(successResponse);
     } catch (e) {
       logger.error(`Cannot add season POST season/create with error ${e}`);
       next(e);
@@ -126,10 +173,14 @@ export class SeasonsRoutes extends BaseRoute {
 
   private async deleteSeason (req: Request, res: Response, next: NextFunction): Promise<void> {
     const seasonId: string = req.params.id;
+    let successResponse: SuccessResponse;
     try {
       await this._seasonController.deleteSeason(seasonId);
+      successResponse = new SuccessResponseBuilder(200)
+        .setMessage(`Successfully deleted season with id: ${seasonId}`)
+        .build();
       logger.info(`Success DELETE season/${seasonId}`);
-      res.status(200).json({});
+      res.status(200).json(successResponse);
     } catch (e) {
       logger.error(`Cannot DELETE season/${seasonId} with error ${e}`);
       next(e);

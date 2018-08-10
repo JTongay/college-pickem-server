@@ -46,10 +46,10 @@ export class SeasonController extends Connection implements ISeasonController {
   }
 
   public async createNewSeason (season: SeasonRequest): Promise<Season> {
-    let response: Season;
+    let response: Season[];
     try {
       response = await this.knex().table('seasons').insert(season).returning('*');
-      return response;
+      return response[0];
     } catch (e) {
       logger.error(`Error inserting season ${season} with error: ${e}`);
       throw new Error(e);
@@ -72,6 +72,24 @@ export class SeasonController extends Connection implements ISeasonController {
       logger.info(`Successfully deleted season with id: ${id}`);
     } catch (e) {
       logger.error(`Cannot delete season with ${id} with error: ${e}`);
+      throw new Error(e);
+    }
+  }
+
+  /**
+   *
+   * @param {string} league - NFL or NCAA
+   * @returns {Promise<boolean>}
+   */
+  public async checkForActiveSeason (league: string): Promise<boolean> {
+    let season: Season[];
+    try {
+      season = await this.knex().table('seasons').where('league', league).andWhere('active_season', true);
+      if (!season.length) {
+        return false;
+      }
+      return true;
+    } catch (e) {
       throw new Error(e);
     }
   }

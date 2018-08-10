@@ -60,7 +60,7 @@ export class UserRoutes extends BaseRoute {
     try {
       user = await this._userController.getUserById(userId);
       if (!user) {
-        res.status(400).json({});
+        res.status(404).json({});
       }
       userResponse = new UserResponseBuilder(user.username)
         .setFirstName(user.first_name)

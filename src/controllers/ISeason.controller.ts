@@ -7,4 +7,5 @@ export interface ISeasonController {
   createNewSeason (season: SeasonRequest): Promise<Season>;
   toggleSeason (id: string, active: boolean): Promise<void>;
   deleteSeason (id: string): Promise<void>;
+  checkForActiveSeason (league: string): Promise<boolean>;
 }

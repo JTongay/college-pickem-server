@@ -7,8 +7,8 @@ import { app, server } from '@/index';
 describe('Season Routes', () => {
 
   describe('Get /:id', () => {
-    afterEach(async () => {
-      await server.close();
+    afterEach(() => {
+      server.close();
     });
     it('should get a single season', (done) => {
       supertest(app)
@@ -20,8 +20,8 @@ describe('Season Routes', () => {
           }
           expect(res.status).to.equal(200);
           expect(res.body.data).to.be.an('object');
-          done();
         });
+      done();
     });
   });
 

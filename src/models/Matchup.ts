@@ -4,10 +4,8 @@ export interface Matchup {
   home_team_id: number;
   away_team_id: number;
   week: number;
-  match: number;
   location: string;
-  score: string;
-  winner: number;
+  league: string;
   created_at: Date;
   updated_at: Date;
 }

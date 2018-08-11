@@ -7,6 +7,7 @@ import { container } from '@/inversify.config';
 import { UserRoutes } from '@/routes/user.routes';
 import { SeasonsRoutes } from '@/routes/seasons.routes';
 import { ScoresRoutes } from '@/routes/scores.routes';
+import { MatchupsRoutes } from '@/routes/matchups.routes';
 
 export class ApiRoutes extends BaseRoute {
   public static path: string = '/api';
@@ -40,6 +41,7 @@ export class ApiRoutes extends BaseRoute {
     this.router.get('/', this.get);
     this.router.use('/user', UserRoutes.router);
     this.router.use('/season', SeasonsRoutes.router);
+    this.router.use('/season/:season_id/matchup', MatchupsRoutes.router);
     // this.router.use('/season/:season_id/user/:user_id/score', ScoresRoutes.router);
   }
 

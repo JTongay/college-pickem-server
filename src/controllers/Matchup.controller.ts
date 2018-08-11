@@ -23,7 +23,17 @@ export class MatchupController extends Connection implements IMatchupController 
       response = await this.knex()
         .table('matchups')
         .where('season_id', seasonId)
-        .join('seasons', 'matchups.season_id', 'seasons.id');
+        .join('seasons', 'matchups.season_id', '=', 'seasons.id')
+        .select(
+          'matchups.id',
+          'matchups.season_id',
+          'matchups.home_team_id',
+          'matchups.away_team_id',
+          'matchups.week',
+          'matchups.match',
+          'matchups.location',
+          'seasons.league'
+        );
       return response;
     } catch (e) {
       logger.error(`Error retrieving matchups for season: ${seasonId} with error ${e}`);
@@ -45,7 +55,17 @@ export class MatchupController extends Connection implements IMatchupController 
         .where('season_id', seasonId)
         .andWhere('week', week)
         .orderBy('match', 'asc')
-        .join('seasons', 'matchups.season_id', 'seasons.id');
+        .join('seasons', 'matchups.season_id', '=', 'seasons.id')
+        .select(
+          'matchups.id',
+          'matchups.season_id',
+          'matchups.home_team_id',
+          'matchups.away_team_id',
+          'matchups.week',
+          'matchups.match',
+          'matchups.location',
+          'seasons.league'
+        );
       return response;
     } catch (e) {
       logger.error(`Error retrieving matchups for season: ${seasonId} and week ${week} with error ${e}`);

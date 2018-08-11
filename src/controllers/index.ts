@@ -9,3 +9,6 @@ export * from './IScore.controller';
 
 export * from './Matchup.controller';
 export * from './IMatchup.controller';
+
+export * from './Team.controller';
+export * from './ITeam.controller';

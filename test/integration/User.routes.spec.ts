@@ -7,7 +7,7 @@ import { Connection } from '@/db/connection';
 import { UserRequest } from '@/models';
 import * as knexConfig from '../../knexfile';
 
-// import 'mocha';
+import 'mocha';
 
 describe('User Routes', () => {
 
@@ -87,6 +87,7 @@ describe('User Routes', () => {
             done();
           }
           expect(res.status).to.equal(200);
+          done();
         });
       done();
     });

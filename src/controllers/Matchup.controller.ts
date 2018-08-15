@@ -54,7 +54,6 @@ export class MatchupController extends Connection implements IMatchupController 
         .table('matchups')
         .where('season_id', seasonId)
         .andWhere('week', week)
-        .orderBy('match', 'asc')
         .join('seasons', 'matchups.season_id', '=', 'seasons.id')
         .select(
           'matchups.id',

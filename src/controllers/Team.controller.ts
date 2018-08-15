@@ -15,12 +15,12 @@ export class TeamController extends Connection implements ITeamController {
    *
    * @param {string} teamId - Id of a team
    * @param {string} seasonId - Id of the season
-   * @returns {Promise<any>}
+   * @returns {Promise<Team>} - Returns the Team object
    *
    * College teams ranking changes every week,
    * and we want to archive past and current seasons' team data
    */
-  public async getTeam (teamId: string, seasonId: string): Promise<any> {
+  public async getTeam (teamId: string, seasonId: string): Promise<Team> {
     let response: Team;
     try {
       response = await this.knex()
@@ -37,7 +37,8 @@ export class TeamController extends Connection implements ITeamController {
           'team_season.record',
           'team_season.rank',
           'team_season.season_id'
-        );
+        )
+        .first();
       return response;
     } catch (e) {
       throw new Error(e);

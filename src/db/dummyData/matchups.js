@@ -1,7 +1,7 @@
 const matchups = [
   {
     week: 1,
-    season_id: 1,
+    season_id: 2,
     away_team_id: 2,
     home_team_id: 1,
     match: 1,
@@ -9,7 +9,7 @@ const matchups = [
   },
   {
     week: 1,
-    season_id: 1,
+    season_id: 2,
     away_team_id: 3,
     home_team_id: 4,
     match: 2,
@@ -17,7 +17,7 @@ const matchups = [
   },
   {
     week: 1,
-    season_id: 1,
+    season_id: 2,
     away_team_id: 5,
     home_team_id: 6,
     match: 3,
@@ -29,11 +29,11 @@ const matchups = [
     away_team_id: 7,
     home_team_id: 8,
     match: 4,
-    location: 'College Town'
+    location: 'Nfl Town'
   },
   {
     week: 1,
-    season_id: 2,
+    season_id: 1,
     away_team_id: 9,
     home_team_id: 10,
     match: 5,
@@ -41,7 +41,7 @@ const matchups = [
   },
   {
     week: 1,
-    season_id: 2,
+    season_id: 1,
     away_team_id: 11,
     home_team_id: 12,
     match: 6,
@@ -49,7 +49,7 @@ const matchups = [
   },
   {
     week: 1,
-    season_id: 2,
+    season_id: 1,
     away_team_id: 13,
     home_team_id: 14,
     match: 7,

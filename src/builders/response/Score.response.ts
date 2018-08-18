@@ -1,4 +1,6 @@
 import { GenericBuilder } from '@/builders';
+import { UserResponse, UserResponseBuilder } from '@/builders/response/User.response';
+import { User } from '@/models';
 
 export class ScoreResponseBuilder extends GenericBuilder {
   private id: number;
@@ -9,6 +11,7 @@ export class ScoreResponseBuilder extends GenericBuilder {
   private total_score: number;
   private created_at: Date;
   private updated_at: Date;
+  private user: UserResponse;
 
   constructor (id: number) {
     super();
@@ -82,6 +85,20 @@ export class ScoreResponseBuilder extends GenericBuilder {
     return this.updated_at;
   }
 
+  public setUser (val: User): ScoreResponseBuilder {
+    this.user = new UserResponseBuilder(val.username)
+      .setFirstName(val.first_name)
+      .setLastName(val.last_name)
+      .setEmail(val.email)
+      .setCreatedDate(val.created_at)
+      .build();
+    return this;
+  }
+
+  public User (): UserResponse {
+    return this.user;
+  }
+
   public build (): ScoreResponse {
     return new ScoreResponse(this);
   }
@@ -91,6 +108,7 @@ export class ScoreResponse {
   private id: number;
   private score: number;
   private user_id: number;
+  private user: UserResponse;
   private season_id: number;
   private week: number;
   private total_score: number;
@@ -101,6 +119,7 @@ export class ScoreResponse {
     this.id = builder.Id;
     this.score = builder.Score;
     this.user_id = builder.UserId;
+    this.user = builder.User;
     this.season_id = builder.SeasonId;
     this.week = builder.Week;
     this.total_score = builder.TotalScore;

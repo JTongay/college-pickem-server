@@ -16,8 +16,12 @@ export class ScoresRoutes extends BaseRoute {
   ) {
     super();
     this._scoreController = ScoreController;
+    // need to bind the context of this to the class
     this.getFullWeeklyScoreByUserSeason = this.getFullWeeklyScoreByUserSeason.bind(this);
     this.getLatestScoreByUserSeason = this.getLatestScoreByUserSeason.bind(this);
+    this.getUserScoreByWeek = this.getUserScoreByWeek.bind(this);
+    this.getAllScoresByWeek = this.getAllScoresByWeek.bind(this);
+    this.getLeaderboard = this.getLeaderboard.bind(this);
     this.init();
   }
 
@@ -35,6 +39,9 @@ export class ScoresRoutes extends BaseRoute {
 
     this.router.get('/user/:user_id', this.getFullWeeklyScoreByUserSeason);
     this.router.get('/user/:user_id/latest', this.getLatestScoreByUserSeason);
+    this.router.get('/:week/user/:user_id', this.getUserScoreByWeek);
+    this.router.get('/:week', this.getAllScoresByWeek);
+    this.router.get('/:week/leaderboard', this.getLeaderboard);
   }
 
   /**
@@ -54,6 +61,7 @@ export class ScoresRoutes extends BaseRoute {
     try {
       // get the list of scores for a given user and season week by week
       result = await this._scoreController.getFullWeeklyUserScore(userId, seasonId);
+      // loop through the list and create a new ScoreResponse Object
       for (let i = 0; i < result.length; i++) {
         scoreResponse = new ScoreResponseBuilder(result[i].id)
           .setScore(result[i].score)
@@ -64,6 +72,7 @@ export class ScoresRoutes extends BaseRoute {
           .setCreatedAt(result[i].created_at)
           .setUpdatedAt(result[i].updated_at)
           .build();
+        // Push each new object into the full score response Array
         fullScoreResponse.push(scoreResponse);
       }
       successResponse = new SuccessResponseBuilder(200)
@@ -108,4 +117,97 @@ export class ScoresRoutes extends BaseRoute {
       next(e);
     }
   }
+
+  public async getUserScoreByWeek (req: Request, res: Response, next: NextFunction): Promise<void> {
+    const userId: string = req.params.user_id;
+    const seasonId: string = req.params.season_id;
+    const week: string = req.params.week;
+    let result: Score;
+    let scoreResponse: ScoreResponse;
+    let successResponse: SuccessResponse;
+    try {
+      result = await this._scoreController.getSingleUserScore(userId, seasonId, week);
+      scoreResponse = new ScoreResponseBuilder(result.id)
+        .setUserId(result.user_id)
+        .setWeek(result.week)
+        .setSeasonId(result.season_id)
+        .setScore(result.score)
+        .setTotalScore(result.total_score)
+        .setCreatedAt(result.created_at)
+        .setUpdatedAt(result.updated_at)
+        .build();
+      successResponse = new SuccessResponseBuilder(200)
+        .setData(scoreResponse)
+        .setMessage('Got Score by week')
+        .build();
+      res.status(200).json(successResponse);
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  public async getAllScoresByWeek (req: Request, res: Response, next: NextFunction): Promise<void> {
+    const seasonId: string = req.params.season_id;
+    const week: string = req.params.week;
+    let result: Score[];
+    let scoreResponse: ScoreResponse;
+    const fullScoreResponse: ScoreResponse[] = [];
+    let successResponse: SuccessResponse;
+    try {
+      result = await this._scoreController.getWeeklyScores(seasonId, week);
+      for (let i = 0; i < result.length; i++) {
+        scoreResponse = new ScoreResponseBuilder(result[i].id)
+          .setScore(result[i].score)
+          .setTotalScore(result[i].total_score)
+          .setSeasonId(result[i].season_id)
+          .setWeek(result[i].week)
+          .setUserId(result[i].user_id)
+          .setCreatedAt(result[i].created_at)
+          .setUpdatedAt(result[i].updated_at)
+          .build();
+        // Push each new object into the full score response Array
+        fullScoreResponse.push(scoreResponse);
+      }
+      successResponse = new SuccessResponseBuilder(200)
+        .setData(fullScoreResponse)
+        .setMessage('All scores for a given week')
+        .build();
+      res.status(200).json(successResponse);
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  public async getLeaderboard (req: Request, res: Response, next: NextFunction): Promise<void> {
+    const seasonId: string = req.params.season_id;
+    const week: string = req.params.week;
+    let result: Score[];
+    let scoreResponse: ScoreResponse;
+    const fullScoreResponse: ScoreResponse[] = [];
+    let successResponse: SuccessResponse;
+    try {
+      result = await this._scoreController.getLeaderboard(seasonId, week);
+      for (let i = 0; i < result.length; i++) {
+        scoreResponse = new ScoreResponseBuilder(result[i].id)
+          .setScore(result[i].score)
+          .setTotalScore(result[i].total_score)
+          .setSeasonId(result[i].season_id)
+          .setWeek(result[i].week)
+          .setUserId(result[i].user_id)
+          .setCreatedAt(result[i].created_at)
+          .setUpdatedAt(result[i].updated_at)
+          .build();
+        // Push each new object into the full score response Array
+        fullScoreResponse.push(scoreResponse);
+      }
+      successResponse = new SuccessResponseBuilder(200)
+        .setData(fullScoreResponse)
+        .setMessage('All scores for a given week')
+        .build();
+      res.status(200).json(successResponse);
+    } catch (e) {
+      next(e);
+    }
+  }
+
 }

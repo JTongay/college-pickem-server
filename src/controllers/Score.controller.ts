@@ -34,8 +34,8 @@ export class ScoreController extends Connection implements IScoreController {
     }
   }
 
-  public async getSingleUserScore (userId: string, seasonId: string, week: string): Promise<any> {
-    let score: any;
+  public async getSingleUserScore (userId: string, seasonId: string, week: string): Promise<Score> {
+    let score: Score;
     try {
       score = await this.knex().table('user_score')
         .where('user_id', userId)
@@ -72,6 +72,33 @@ export class ScoreController extends Connection implements IScoreController {
       return score;
     } catch (e) {
       logger.error(`Cannot retrieve latest User score with ${e}`);
+      throw new Error(e);
+    }
+  }
+
+  public async getWeeklyScores (seasonId: string, week: string): Promise<Score[]> {
+    let score: Score[];
+    try {
+      score = await this.knex()
+        .table('user_score')
+        .where('season_id', seasonId)
+        .andWhere('week', week);
+      return score;
+    } catch (e) {
+      throw new Error(e);
+    }
+  }
+
+  public async getLeaderboard (seasonId: string, week: string): Promise<Score[]> {
+    let score: Score[];
+    try {
+      score = await this.knex()
+        .table('user_score')
+        .where('season_id', seasonId)
+        .andWhere('week', week)
+        .orderBy('total_score', 'desc');
+      return score;
+    } catch (e) {
       throw new Error(e);
     }
   }

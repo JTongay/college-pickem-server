@@ -5,7 +5,11 @@ import { IMatchupController, ITeamController } from '@/controllers';
 import { container } from '@/inversify.config';
 import { TYPES } from '@/types.classes';
 import { Matchup, Team } from '@/models';
-import { MatchupResponse, MatchupResponseBuilder, SuccessResponse, SuccessResponseBuilder } from '@/builders/response';
+import {
+  ErrorResponse, ErrorResponseBuilder, MatchupResponse, MatchupResponseBuilder, SuccessResponse,
+  SuccessResponseBuilder
+} from '@/builders/response';
+import { ErrorCodes } from '@/utils';
 
 export class MatchupsRoutes extends BaseRoute {
   private static instance: MatchupsRoutes;
@@ -59,18 +63,26 @@ export class MatchupsRoutes extends BaseRoute {
     let homeTeamData: Team;
     let awayTeamData: Team;
     let successResponse: SuccessResponse;
+    let errorResponse: ErrorResponse;
     const fullSchedule: MatchupResponse[] = [];
     try {
       fullMatchups = await this._matchupController.getMatchupsByWeek(seasonId, week);
       if (!fullMatchups.length) {
-        res.status(404).json([]);
+        errorResponse = new ErrorResponseBuilder(404)
+          .setErrorCode(ErrorCodes.matchupsNotFound)
+          .build();
+        res.status(404).json(errorResponse);
+        return;
       }
       for (let i = 0; i < fullMatchups.length; i++) {
         let matchup: any;
+        // get the home and away team for each matchup
         homeTeamData = await this._teamController.getTeam(fullMatchups[i].home_team_id.toString(), seasonId);
         awayTeamData = await this._teamController.getTeam(fullMatchups[i].away_team_id.toString(), seasonId);
+        // assign the team to the home or away property
         fullMatchups[i]['home'] = homeTeamData;
         fullMatchups[i]['away'] = awayTeamData;
+        // Build a matchup object
         matchup = new MatchupResponseBuilder(fullMatchups[i].id)
           .setSeasonId(fullMatchups[i].season_id)
           .setMatch(fullMatchups[i].match)
@@ -80,12 +92,15 @@ export class MatchupsRoutes extends BaseRoute {
           .setHome(homeTeamData)
           .setAway(awayTeamData)
           .build();
+        // Push to the Full Matchup Schedule array
         fullSchedule.push(matchup);
       }
+      // build the successful response
       successResponse = new SuccessResponseBuilder(200)
         .setMessage('Got all matchups')
         .setData(fullSchedule)
         .build();
+      // send it out
       res.status(200).json(successResponse);
     } catch (e) {
       next(e);

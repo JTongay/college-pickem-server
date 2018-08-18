@@ -1,24 +1,32 @@
 import { Connection } from '@/db/connection';
 import { IScoreController, IUserController, UserController } from '@/controllers';
-import { injectable } from 'inversify';
+import { inject, injectable } from 'inversify';
 import 'reflect-metadata';
 import { User } from '@/models';
-import { logger } from '@/services';
+import { IAuthService, logger } from '@/services';
+import { TYPES } from '@/types.classes';
+import { Score } from '@/models/Score';
 
 @injectable()
 export class ScoreController extends Connection implements IScoreController {
   private _userController: IUserController;
 
-  constructor (private UserController: UserController) {
+  constructor (
+    @inject(TYPES.IUserController) UserController: IUserController
+  ) {
     super();
     this._userController = UserController;
   }
 
-  public async getWeeklyUserScore (userId: string, seasonId: string): Promise<any> {
-    let score: any;
+  public async getFullWeeklyUserScore (userId: string, seasonId: string): Promise<Score[]> {
+    let score: Score[];
     try {
-      score = await this.knex().table('user_score').where('user_id', userId).andWhere('season_id', seasonId);
-      logger.info(`Grabbing FullUserScore with user_id ${userId}, and season_id ${seasonId}`);
+      score = await this.knex()
+        .table('user_score')
+        .where('user_id', userId)
+        .andWhere('season_id', seasonId)
+        .orderBy('week', 'asc');
+      logger.info(`Grabbing WeeklyUserScore with user_id ${userId}, and season_id ${seasonId}`);
       return score;
     } catch (e) {
       logger.error(`Cannot retrieve WeeklyUserScore with error ${e}`);
@@ -47,6 +55,23 @@ export class ScoreController extends Connection implements IScoreController {
       score = await true;
       return score;
     } catch (e) {
+      throw new Error(e);
+    }
+  }
+
+  public async getLatestUserScore (userId: string, seasonId: string): Promise<Score> {
+    let score: Score;
+    try {
+      score = await this.knex()
+        .table('user_score')
+        .where('season_id', seasonId)
+        .andWhere('user_id', userId)
+        .orderBy('week', 'desc')
+        .limit(1)
+        .first();
+      return score;
+    } catch (e) {
+      logger.error(`Cannot retrieve latest User score with ${e}`);
       throw new Error(e);
     }
   }

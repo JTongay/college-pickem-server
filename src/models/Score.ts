@@ -1,5 +1,6 @@
 export interface Score {
   id: number;
+  score: number;
   user_id: number;
   season_id: number;
   week: number;

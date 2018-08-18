@@ -28,6 +28,34 @@ const userScores = [
     total_score: 25
   },
   {
+    score: 50,
+    user_id: 1,
+    season_id: 1,
+    week: 2,
+    total_score: 100
+  },
+  {
+    score: 24,
+    user_id: 2,
+    season_id: 1,
+    week: 2,
+    total_score: 29
+  },
+  {
+    score: 15,
+    user_id: 3,
+    season_id: 1,
+    week: 2,
+    total_score: 15
+  },
+  {
+    score: 5,
+    user_id: 4,
+    season_id: 1,
+    week: 2,
+    total_score: 30
+  },
+  {
     score: 3,
     user_id: 1,
     season_id: 2,

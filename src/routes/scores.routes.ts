@@ -9,16 +9,20 @@ import {
   UserResponseBuilder
 } from '@/builders/response';
 import { Score } from '@/models/Score';
+import { User } from '@/models';
 
 export class ScoresRoutes extends BaseRoute {
   private static instance: ScoresRoutes;
   private _scoreController: IScoreController;
+  private _userController: IUserController;
 
   constructor (
-    private ScoreController: IScoreController
+    private ScoreController: IScoreController,
+    private UserController: IUserController
   ) {
     super();
     this._scoreController = ScoreController;
+    this._userController = UserController;
     // need to bind the context of this to the class
     this.getFullWeeklyScoreByUserSeason = this.getFullWeeklyScoreByUserSeason.bind(this);
     this.getLatestScoreByUserSeason = this.getLatestScoreByUserSeason.bind(this);
@@ -31,7 +35,8 @@ export class ScoresRoutes extends BaseRoute {
   static get router (): Router {
     if (!ScoresRoutes.instance) {
       ScoresRoutes.instance = new ScoresRoutes(
-        container.get<IScoreController>(TYPES.IScoreController)
+        container.get<IScoreController>(TYPES.IScoreController),
+        container.get<IUserController>(TYPES.IUserController)
       );
     }
     return ScoresRoutes.instance.router;
@@ -185,18 +190,20 @@ export class ScoresRoutes extends BaseRoute {
     const seasonId: string = req.params.season_id;
     const week: string = req.params.week;
     let result: Score[];
+    let user: User;
     let scoreResponse: ScoreResponse;
     const fullScoreResponse: ScoreResponse[] = [];
     let successResponse: SuccessResponse;
     try {
       result = await this._scoreController.getLeaderboard(seasonId, week);
       for (let i = 0; i < result.length; i++) {
+        user = await this._userController.getUserById(result[i].user_id.toString());
         scoreResponse = new ScoreResponseBuilder(result[i].id)
           .setScore(result[i].score)
           .setTotalScore(result[i].total_score)
           .setSeasonId(result[i].season_id)
           .setWeek(result[i].week)
-          .setUserId(result[i].user_id)
+          .setUser(user)
           .setCreatedAt(result[i].created_at)
           .setUpdatedAt(result[i].updated_at)
           .build();

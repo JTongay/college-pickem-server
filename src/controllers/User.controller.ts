@@ -85,7 +85,7 @@ export class UserController extends Connection implements IUserController {
    * @param {string} username: the requested username from the form
    * @returns {Promise<User>}
    */
-  private async getUserByUsername (username: string): Promise<User> {
+  public async getUserByUsername (username: string): Promise<User> {
     let response: User;
     try {
       response = await this.knex().table('users').where('username', username).first();

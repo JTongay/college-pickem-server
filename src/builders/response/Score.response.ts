@@ -95,7 +95,7 @@ export class ScoreResponseBuilder extends GenericBuilder {
     return this;
   }
 
-  public User (): UserResponse {
+  get User (): UserResponse {
     return this.user;
   }
 

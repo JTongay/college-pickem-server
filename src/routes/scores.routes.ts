@@ -4,7 +4,10 @@ import { NextFunction, Request, Router, Response } from 'express';
 import { IScoreController, ISeasonController, IUserController } from '@/controllers';
 import { container } from '@/inversify.config';
 import { TYPES } from '@/types.classes';
-import { ScoreResponse, ScoreResponseBuilder, SuccessResponse, SuccessResponseBuilder } from '@/builders/response';
+import {
+  ScoreResponse, ScoreResponseBuilder, SuccessResponse, SuccessResponseBuilder,
+  UserResponseBuilder
+} from '@/builders/response';
 import { Score } from '@/models/Score';
 
 export class ScoresRoutes extends BaseRoute {

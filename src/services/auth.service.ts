@@ -27,11 +27,11 @@ export class AuthService implements IAuthService {
 
   /**
    *
-   * @param {string} password
-   * @returns {Promise<string>}
+   * @param {string} password - The password to hash
+   * @returns {Promise<string>} - The hashed password
    */
-  public async hashPassword (password: string): Promise<string> {
-    return await bcrypt.hashSync(password, 12);
+  public hashPassword (password: string): string {
+    return bcrypt.hashSync(password, 12);
   }
 
   /**
@@ -40,7 +40,7 @@ export class AuthService implements IAuthService {
    * @param {string} passwordResponse
    * @returns {Promise<boolean>}
    */
-  public async verifyPassword (passwordRequest: string, passwordResponse: string): Promise<boolean> {
-    return await bcrypt.compareSync(passwordRequest, passwordResponse);
+  public verifyPassword (passwordRequest: string, passwordResponse: string): boolean {
+    return bcrypt.compareSync(passwordRequest, passwordResponse);
   }
 }

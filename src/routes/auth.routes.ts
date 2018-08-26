@@ -5,7 +5,8 @@ import { container } from '@/inversify.config';
 import { TYPES } from '@/types.classes';
 import { User } from '@/models';
 import { IUserController } from '@/controllers';
-import { SuccessResponse, SuccessResponseBuilder } from '@/builders/response';
+import { ErrorResponse, ErrorResponseBuilder, SuccessResponse, SuccessResponseBuilder } from '@/builders/response';
+import { ErrorCodes } from '@/utils';
 
 export class AuthRoutes extends BaseRoute {
   private static instance: AuthRoutes;
@@ -44,17 +45,23 @@ export class AuthRoutes extends BaseRoute {
     let user: User;
     let passwordMatch: boolean;
     let successResponse: SuccessResponse;
+    let errorResponse: ErrorResponse;
     if (!username || !password) {
-      // TODO: build a validation error response
-      res.status(400);
+      errorResponse = new ErrorResponseBuilder(400)
+        .setErrorCode(ErrorCodes.userPassRequired)
+        .build();
+      res.status(400).json(errorResponse);
       return;
     }
     try {
       user = await this._userController.getUserByUsername(username);
-      passwordMatch = await this._authService.verifyPassword(password, user.password);
-      if (!user || !passwordMatch) {
-        // TODO: Build an error response for invalid username/password
-        res.status(404);
+      if (!user) {
+        res.status(404).json(ErrorCodes.userPassMismatch);
+        return;
+      }
+      passwordMatch = this._authService.verifyPassword(password, user.password);
+      if (!passwordMatch) {
+        res.status(404).json(ErrorCodes.userPassMismatch);
         return;
       }
 

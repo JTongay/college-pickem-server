@@ -64,7 +64,7 @@ export class UserController extends Connection implements IUserController {
       let newUser: User;
       try {
         // hash the password
-        hashedPassword = await this._authService.hashPassword(requestedUser.password);
+        hashedPassword = this._authService.hashPassword(requestedUser.password);
         // replace the requested password with the hashed password
         requestedUser.password = hashedPassword;
         // insert the requestedUser
